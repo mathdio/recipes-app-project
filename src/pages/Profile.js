@@ -2,20 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
-function Recipes({ title }) {
+function Profile({ title }) {
   return (
     <div>
       <Header
         title={ title }
         profile
-        search
+        search={ false }
       />
     </div>
   );
 }
 
-Recipes.propTypes = {
+Profile.propTypes = {
   title: PropTypes.string,
 }.isRequired;
 
-export default Recipes;
+export default Profile;
