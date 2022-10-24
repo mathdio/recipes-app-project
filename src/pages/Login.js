@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Context from '../context/Context';
 
 function Login() {
-  const { email, setEmail, password, setPassword } = useContext(Context);
+  const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
   return (
     <form>
       <label htmlFor="email">
@@ -28,6 +28,7 @@ function Login() {
       <button
         type="button"
         data-testid="login-submit-btn"
+        disabled={ submitDisabled }
       >
         Enter
       </button>
