@@ -3,6 +3,12 @@ import Context from '../context/Context';
 
 function Login() {
   const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
+
+  const handleClickSubmit = () => {
+    const user = { email };
+    localStorage.setItem('user', JSON.stringify(user));
+  };
+
   return (
     <form>
       <label htmlFor="email">
@@ -29,6 +35,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ submitDisabled }
+        onClick={ handleClickSubmit }
       >
         Enter
       </button>
