@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
 function SearchBar() {
   const { searchRecipe, setSearchRecipe, filterValue,
-    setFilterValue } = useContext(Context);
+    setFilterValue, setResultsData, resultKey, setResultKey } = useContext(Context);
 
   const [prefixEndpoint, setPrefixEndpoint] = useState('');
   const [foodAPI, setFoodAPI] = useState('');
@@ -13,8 +12,10 @@ function SearchBar() {
     const { pathname } = window.location;
     if (pathname === '/meals') {
       setFoodAPI('themealdb');
+      setResultKey(['meals', 'idMeal']);
     } else if (pathname === '/drinks') {
       setFoodAPI('thecocktaildb');
+      setResultKey(['drinks', 'idDrink']);
     }
   }, []);
 
@@ -32,7 +33,9 @@ function SearchBar() {
     if (filterValue === 'first-letter' && searchRecipe.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      await fetch(`${prefixEndpoint}${searchRecipe}`);
+      const resolve = await fetch(`${prefixEndpoint}${searchRecipe}`);
+      const data = await resolve.json();
+      setResultsData(data[resultKey[0]]);
     }
   };
 
@@ -89,9 +92,5 @@ function SearchBar() {
     </form>
   );
 }
-
-// SearchBar.propTypes = {
-//   history: PropTypes.func,
-// }.isRequired;
 
 export default SearchBar;
