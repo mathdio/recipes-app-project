@@ -1,21 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+// import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
 function SearchBar() {
   const { searchRecipe, setSearchRecipe, filterValue,
     setFilterValue } = useContext(Context);
 
-  const handleFetchAPI = async () => {
+  const [prefixEndpoint, setPrefixEndpoint] = useState('');
+  const [foodAPI, setFoodAPI] = useState('');
+
+  useEffect(() => {
+    const { pathname } = window.location;
+    if (pathname === '/meals') {
+      setFoodAPI('themealdb');
+    } else if (pathname === '/drinks') {
+      setFoodAPI('thecocktaildb');
+    }
+  }, []);
+
+  useEffect(() => {
     if (filterValue === 'ingredient') {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchRecipe}`);
+      setPrefixEndpoint(`https://www.${foodAPI}.com/api/json/v1/1/filter.php?i=`);
     } else if (filterValue === 'name') {
-      await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchRecipe}`);
+      setPrefixEndpoint(`https://www.${foodAPI}.com/api/json/v1/1/search.php?s=`);
     } else if (filterValue === 'first-letter') {
-      if (searchRecipe.length > 1) {
-        global.alert('Your search must have only 1 (one) character');
-      } else {
-        await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchRecipe}`);
-      }
+      setPrefixEndpoint(`https://www.${foodAPI}.com/api/json/v1/1/search.php?f=`);
+    }
+  }, [filterValue, foodAPI]);
+
+  const handleFetchAPI = async () => {
+    if (filterValue === 'first-letter' && searchRecipe.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      await fetch(`${prefixEndpoint}${searchRecipe}`);
     }
   };
 
@@ -72,5 +89,9 @@ function SearchBar() {
     </form>
   );
 }
+
+// SearchBar.propTypes = {
+//   history: PropTypes.func,
+// }.isRequired;
 
 export default SearchBar;
