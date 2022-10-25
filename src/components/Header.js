@@ -30,14 +30,14 @@ function Header({ title, profile, search }) {
         data-testid="search-top-btn"
         onClick={ handleSearchClick }
       />}
-      {searchInput && (
-        <SearchBar />
-      )}
       <h1
         data-testid="page-title"
       >
         {title}
       </h1>
+      {searchInput && (
+        <SearchBar />
+      )}
     </header>
   );
 }
