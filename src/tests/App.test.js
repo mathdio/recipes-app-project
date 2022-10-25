@@ -39,3 +39,19 @@ describe('testes da página de Login', () => {
     userEvent.click(buttonSubmit);
   });
 });
+
+describe('testes do component Header', () => {
+  it('testa se a barra de pesquisa aparece após clicar no ícone de pesquisa', () => {
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+
+    const searchIcon = screen.getByTestId('search-top-btn');
+    userEvent.click(searchIcon);
+
+    const searchBar = screen.getByRole('textbox', { name: /search bar/i });
+    expect(searchBar).toBeInTheDocument();
+  });
+});
