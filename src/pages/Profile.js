@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function Profile({ title }) {
   return (
@@ -9,6 +10,11 @@ function Profile({ title }) {
         title={ title }
         profile
         search={ false }
+      />
+      <Footer
+        title={ title }
+        drink
+        meal
       />
     </div>
   );
