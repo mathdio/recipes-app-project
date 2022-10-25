@@ -51,7 +51,27 @@ describe('testes do component Header', () => {
     const searchIcon = screen.getByTestId('search-top-btn');
     userEvent.click(searchIcon);
 
-    const searchBar = screen.getByRole('textbox', { name: /search bar/i });
+    const searchBar = screen.getByRole('textbox');
     expect(searchBar).toBeInTheDocument();
+  });
+});
+
+describe('testes do component SearchBar', () => {
+  it('testa se é a API é chamada corretamente com o filtro de ingredientes', () => {
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    const searchIcon = screen.getByTestId('search-top-btn');
+    userEvent.click(searchIcon);
+
+    const ingredientButton = screen.getByRole('radio', { name: /ingredient/i });
+    const searchBar = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    userEvent.click(ingredientButton);
+    userEvent.type(searchBar, 'chicken breast');
+    userEvent.click(searchButton);
   });
 });
