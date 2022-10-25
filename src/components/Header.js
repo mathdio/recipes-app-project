@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -6,11 +7,14 @@ import searchIcon from '../images/searchIcon.svg';
 function Header({ title, profile, search }) {
   return (
     <header>
-      {profile && <img
-        src={ profileIcon }
-        alt=""
-        data-testid="profile-top-btn"
-      />}
+      {profile && (
+        <Link to="/profile">
+          <img
+            src={ profileIcon }
+            alt=""
+            data-testid="profile-top-btn"
+          />
+        </Link>)}
       {search && <img
         src={ searchIcon }
         alt=""
