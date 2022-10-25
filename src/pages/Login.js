@@ -1,8 +1,16 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
-function Login() {
+function Login({ history }) {
   const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
+
+  const handleClickSubmit = () => {
+    const user = { email };
+    localStorage.setItem('user', JSON.stringify(user));
+    history.push('/meals');
+  };
+
   return (
     <form>
       <label htmlFor="email">
@@ -29,11 +37,16 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ submitDisabled }
+        onClick={ handleClickSubmit }
       >
         Enter
       </button>
     </form>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.func,
+}.isRequired;
 
 export default Login;
