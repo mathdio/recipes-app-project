@@ -8,6 +8,8 @@ function Provider({ children }) {
   const [submitDisabled, setSubmitDisabled] = useState('true');
   const [searchRecipe, setSearchRecipe] = useState('');
   const [filterValue, setFilterValue] = useState('');
+  const [resultKey, setResultKey] = useState([]);
+  const [resultsData, setResultsData] = useState([]);
 
   const contextValue = useMemo(() => ({
     email,
@@ -20,7 +22,12 @@ function Provider({ children }) {
     setSearchRecipe,
     filterValue,
     setFilterValue,
-  }), [email, password, submitDisabled, searchRecipe, filterValue]);
+    resultKey,
+    setResultKey,
+    resultsData,
+    setResultsData,
+  }), [email, password, submitDisabled,
+    searchRecipe, filterValue, resultKey, resultsData]);
 
   useEffect(() => {
     const RegEx = /\S+@\S+\.\S+/;
