@@ -15,19 +15,19 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route
           path="/meals"
-          render={ (props) => <Recipes { ...props } title="Meals" header /> }
+          render={ (props) => <Recipes { ...props } title="Meals" header footer /> }
         />
         <Route
           path="/drinks"
-          render={ (props) => <Recipes { ...props } title="Drinks" header /> }
+          render={ (props) => <Recipes { ...props } title="Drinks" header footer /> }
         />
         <Route
           path="/meals/:id-da-receita/in-progress"
-          render={ (props) => <Recipes { ...props } header={ false } /> }
+          render={ (props) => <Recipes { ...props } header={ false } footer={ false } /> }
         />
         <Route
           path="/drinks/:id-da-receita/in-progress"
-          render={ (props) => <Recipes { ...props } header={ false } /> }
+          render={ (props) => <Recipes { ...props } header={ false } footer={ false } /> }
         />
         <Route
           path="/profile"
