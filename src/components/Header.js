@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header({ title, profile, search }) {
   const [searchInput, setSearchInput] = useState(false);
@@ -30,13 +31,8 @@ function Header({ title, profile, search }) {
         onClick={ handleSearchClick }
       />}
       {searchInput && (
-        <label htmlFor="search-input">
-          Search Bar
-          <input
-            data-testid="search-input"
-            id="search-input"
-          />
-        </label>)}
+        <SearchBar />
+      )}
       <h1
         data-testid="page-title"
       >
