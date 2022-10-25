@@ -18,11 +18,14 @@ function Profile({ title }) {
         drink
         meal
       />
-      <p>
+      <p data-testid="profile-email">
         Email:
         {' '}
         {email}
       </p>
+      <button type="button" data-testid="profile-done-btn">Done Recipes</button>
+      <button type="button" data-testid="profile-favorite-btn">Favorite Recipes</button>
+      <button type="button" data-testid="profile-logout-btn">Logout</button>
     </div>
   );
 }
