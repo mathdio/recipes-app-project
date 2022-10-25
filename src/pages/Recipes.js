@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
-function Recipes({ title }) {
+function Recipes({ title, header }) {
   return (
     <div>
-      <Header
+      {header && <Header
         title={ title }
         profile
         search
-      />
+      />}
     </div>
   );
 }

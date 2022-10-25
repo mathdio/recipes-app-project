@@ -15,11 +15,19 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route
           path="/meals"
-          render={ (props) => <Recipes { ...props } title="Meals" /> }
+          render={ (props) => <Recipes { ...props } title="Meals" header /> }
         />
         <Route
           path="/drinks"
-          render={ (props) => <Recipes { ...props } title="Drinks" /> }
+          render={ (props) => <Recipes { ...props } title="Drinks" header /> }
+        />
+        <Route
+          path="/meals/:id-da-receita/in-progress"
+          render={ (props) => <Recipes { ...props } header={ false } /> }
+        />
+        <Route
+          path="/drinks/:id-da-receita/in-progress"
+          render={ (props) => <Recipes { ...props } header={ false } /> }
         />
         <Route
           path="/profile"
@@ -30,17 +38,11 @@ function App() {
         />
         <Route
           path="/done-recipes"
-          component={ DoneRecipes }
-          title="Done Recipes"
-          profile
-          search={ false }
+          render={ (props) => <DoneRecipes { ...props } title="Done Recipes" /> }
         />
         <Route
           path="/favorite-recipes"
-          component={ FavoriteRecipes }
-          title="Favorite Recipes"
-          profile
-          search={ false }
+          render={ (props) => <FavoriteRecipes { ...props } title="Favorite Recipes" /> }
         />
       </Switch>
     </BrowserRouter>
