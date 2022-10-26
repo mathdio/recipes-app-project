@@ -8,7 +8,9 @@ import CardRecipes from '../components/CardRecipes';
 import CardCategory from '../components/CardCategory';
 
 function Recipes({ title, header, history, footer }) {
-  const { resultKey, resultsData, dataDrinks, dataMeals, mealsCategories,
+  const { resultKey, resultsData, dataDrinks, dataMeals,
+    getDataMeals, getDataDrinks, getDrinksCatogories,
+    getMealsCatogories, mealsCategories,
     drinksCategories } = useContext(Context);
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
@@ -24,6 +26,15 @@ function Recipes({ title, header, history, footer }) {
       setFirstRender(false);
     }
   }, [history, resultKey, resultsData]);
+
+  useEffect(() => {
+    getDataMeals();
+    getDataDrinks();
+    getDrinksCatogories();
+    getMealsCatogories();
+    // console.log(dataMeals);
+    // console.log(dataDrinks);
+  }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories]);
 
   return (
     <div>

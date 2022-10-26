@@ -90,10 +90,6 @@ function Provider({ children }) {
     } else {
       setSubmitDisabled(true);
     }
-    getDataMeals();
-    getDataDrinks();
-    getDrinksCatogories();
-    getMealsCatogories();
   }, [email, password]);
 
   return (
