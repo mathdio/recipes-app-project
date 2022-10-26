@@ -25,11 +25,13 @@ function App() {
           />
           <Route
             path="/meals/:id-da-receita/in-progress"
-            render={ (props) => <Recipes { ...props } header={ false } footer={ false } /> }
+            render={ (props) => (
+              <Recipes { ...props } header={ false } footer={ false } />) }
           />
           <Route
             path="/drinks/:id-da-receita/in-progress"
-            render={ (props) => <Recipes { ...props } header={ false } footer={ false } /> }
+            render={ (props) => (
+              <Recipes { ...props } header={ false } footer={ false } />) }
           />
           <Route
             path="/profile"
@@ -44,7 +46,8 @@ function App() {
           />
           <Route
             path="/favorite-recipes"
-            render={ (props) => <FavoriteRecipes { ...props } title="Favorite Recipes" /> }
+            render={ (props) => (
+              <FavoriteRecipes { ...props } title="Favorite Recipes" />) }
           />
         </Switch>
       </BrowserRouter>
