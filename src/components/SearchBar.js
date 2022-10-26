@@ -12,10 +12,10 @@ function SearchBar() {
     const { pathname } = window.location;
     if (pathname === '/meals') {
       setFoodAPI('themealdb');
-      setResultKey(['meals', 'idMeal']);
+      setResultKey(['meals', 'idMeal', 'Meal']);
     } else if (pathname === '/drinks') {
       setFoodAPI('thecocktaildb');
-      setResultKey(['drinks', 'idDrink']);
+      setResultKey(['drinks', 'idDrink', 'Drink']);
     }
   }, []);
 
