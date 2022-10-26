@@ -7,7 +7,11 @@ import Context from '../context/Context';
 import CardRecipes from '../components/CardRecipes';
 
 function Recipes({ title, header, history, footer }) {
-  const { resultKey, resultsData, dataDrinks, dataMeals } = useContext(Context);
+  const { resultKey, resultsData, dataDrinks, dataMeals,
+    getDataMeals, getDataDrinks } = useContext(Context);
+
+  const [firstRecipes, setfirstRecipes] = useState([]);
+  const [firstRender, setFirstRender] = useState(true);
 
   const [firstRecipes, setfirstRecipes] = useState([]);
 
@@ -19,8 +23,16 @@ function Recipes({ title, header, history, footer }) {
       const recipesLimit = 12;
       const twelveRecipes = resultsData.filter((recipe, index) => index < recipesLimit);
       setfirstRecipes(twelveRecipes);
+      setFirstRender(false);
     }
   }, [history, resultKey, resultsData]);
+
+  useEffect(() => {
+    getDataMeals();
+    getDataDrinks();
+    // console.log(dataMeals);
+    // console.log(dataDrinks);
+  }, []);
 
   return (
     <div>
@@ -43,6 +55,8 @@ function Recipes({ title, header, history, footer }) {
           </div>
         ))}
       </div>
+      {firstRender
+        && (title === 'Meals' ? (
       {
         title === 'Meals' ? (
           <CardRecipes
@@ -55,8 +69,7 @@ function Recipes({ title, header, history, footer }) {
               dataDrinks={ dataDrinks }
               header
             />
-          )
-      }
+          ))}
       {footer && <Footer
         drink
         meal

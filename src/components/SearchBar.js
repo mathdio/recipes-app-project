@@ -35,7 +35,11 @@ function SearchBar() {
     } else {
       const resolve = await fetch(`${prefixEndpoint}${searchRecipe}`);
       const data = await resolve.json();
-      setResultsData(data[resultKey[0]]);
+      if (data[resultKey[0]] === null) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      } else {
+        setResultsData(data[resultKey[0]]);
+      }
     }
   };
 
