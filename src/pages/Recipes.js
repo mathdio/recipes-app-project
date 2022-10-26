@@ -13,6 +13,8 @@ function Recipes({ title, header, history, footer }) {
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
 
+  const [firstRecipes, setfirstRecipes] = useState([]);
+
   useEffect(() => {
     if (resultsData.length === 1) {
       const url = `/${resultKey[0]}/${resultsData[0][resultKey[1]]}`;
@@ -55,6 +57,8 @@ function Recipes({ title, header, history, footer }) {
       </div>
       {firstRender
         && (title === 'Meals' ? (
+      {
+        title === 'Meals' ? (
           <CardRecipes
             dataMeals={ dataMeals }
             header
