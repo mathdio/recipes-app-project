@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
@@ -14,8 +13,8 @@ function Recipes({ title, header, history, footer }) {
       const url = `/${resultKey[0]}/${resultsData[0][resultKey[1]]}`;
       history.push(url);
     }
-  }, [resultsData]);
-  
+  }, [history, resultKey, resultsData]);
+
   return (
     <div>
       {header && <Header

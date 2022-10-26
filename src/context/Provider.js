@@ -33,9 +33,9 @@ function Provider({ children }) {
     resultsData,
     setResultsData,
   }), [dataDrinks, dataMeals, email, isLoading,
-  password, submitDisabled,
-  searchRecipe, filterValue,
-  resultKey, resultsData]);
+    password, submitDisabled,
+    searchRecipe, filterValue,
+    resultKey, resultsData]);
 
   const getDataMeals = async () => {
     const DOZE = 12;
