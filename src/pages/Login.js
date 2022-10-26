@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Context from '../context/Context';
 
 function Login({ history }) {
-  const { email, setEmail, password, setPassword, submitDisabled,
-    getDataMeals, getDataDrinks } = useContext(Context);
+  const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
 
   const handleClickSubmit = async () => {
     const user = { email };
     localStorage.setItem('user', JSON.stringify(user));
-    await getDataMeals();
-    await getDataDrinks();
+    // await getDataMeals();
+    // await getDataDrinks();
     history.push('/meals');
   };
 

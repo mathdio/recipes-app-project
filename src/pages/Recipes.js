@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../context/Context';
@@ -8,8 +9,9 @@ import CardRecipes from '../components/CardRecipes';
 
 function Recipes({ title, header, history, footer }) {
   const { resultKey, resultsData, dataDrinks, dataMeals,
-    getDataMeals, getDataDrinks } = useContext(Context);
+    setIsLoading, setDataMeals, setDataDrinks } = useContext(Context);
 
+  const { pathname } = useLocation();
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
 
@@ -26,11 +28,29 @@ function Recipes({ title, header, history, footer }) {
   }, [history, resultKey, resultsData]);
 
   useEffect(() => {
-    getDataMeals();
-    getDataDrinks();
-    // console.log(dataMeals);
-    // console.log(dataDrinks);
-  }, []);
+    if (pathname === '/meals') {
+      const getDataMeals = async () => {
+        const DOZE = 12;
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        const data = await response.json();
+        const newdata = data.meals;
+        const filter = newdata.filter((meal, index) => index < DOZE);
+        setDataMeals(filter);
+      };
+      getDataMeals();
+    } else if (pathname === '/drinks') {
+      const getDataDrinks = async () => {
+        const DOZE = 12;
+        const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        const data = await response.json();
+        const newdata = data.drinks;
+        const filter = newdata.filter((drink, index) => index < DOZE);
+        setIsLoading(true);
+        setDataDrinks(filter);
+      };
+      getDataDrinks();
+    }
+  }, [pathname]);
 
   return (
     <div>
