@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataMeals, setDataMeals] = useState();
+  const [dataDrinks, setDataDrinks] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState('true');
@@ -12,6 +15,9 @@ function Provider({ children }) {
   const [resultsData, setResultsData] = useState([]);
 
   const contextValue = useMemo(() => ({
+    isLoading,
+    dataMeals,
+    dataDrinks,
     email,
     setEmail,
     password,
@@ -26,8 +32,29 @@ function Provider({ children }) {
     setResultKey,
     resultsData,
     setResultsData,
-  }), [email, password, submitDisabled,
-    searchRecipe, filterValue, resultKey, resultsData]);
+  }), [dataDrinks, dataMeals, email, isLoading,
+    password, submitDisabled,
+    searchRecipe, filterValue,
+    resultKey, resultsData]);
+
+  const getDataMeals = async () => {
+    const DOZE = 12;
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    const newdata = data.meals;
+    const filter = newdata.filter((meal, index) => (index < DOZE ? meal : false));
+    setDataMeals(filter);
+  };
+
+  const getDataDrinks = async () => {
+    const DOZE = 12;
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    const newdata = data.drinks;
+    const filter = newdata.filter((meal, index) => (index < DOZE ? meal : false));
+    setIsLoading(true);
+    setDataDrinks(filter);
+  };
 
   useEffect(() => {
     const RegEx = /\S+@\S+\.\S+/;
@@ -38,6 +65,8 @@ function Provider({ children }) {
     } else {
       setSubmitDisabled(true);
     }
+    getDataMeals();
+    getDataDrinks();
   }, [email, password]);
 
   return (
