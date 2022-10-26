@@ -51,25 +51,6 @@ function Provider({ children }) {
     setDrinksCategories(filter);
   };
 
-  const getDataMeals = async () => {
-    const DOZE = 12;
-    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-    const data = await response.json();
-    const newdata = data.meals;
-    const filter = newdata.filter((meal, index) => index < DOZE);
-    setDataMeals(filter);
-  };
-
-  const getDataDrinks = async () => {
-    const DOZE = 12;
-    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-    const data = await response.json();
-    const newdata = data.drinks;
-    const filter = newdata.filter((drink, index) => index < DOZE);
-    setIsLoading(true);
-    setDataDrinks(filter);
-  };
-
   const contextValue = useMemo(() => ({
     mealsCategories,
     drinksCategories,
@@ -109,6 +90,10 @@ function Provider({ children }) {
     } else {
       setSubmitDisabled(true);
     }
+    getDataMeals();
+    getDataDrinks();
+    getDrinksCatogories();
+    getMealsCatogories();
   }, [email, password]);
 
   return (
