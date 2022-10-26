@@ -109,7 +109,6 @@ it('', () => {
     history.push('/');
   });
   // const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
-
   // const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
   // const corbaHeading = screen.findByRole('heading', { name: /corba/i });
   // expect(mealsHeading && corbaHeading).toBeDefined();
