@@ -3,7 +3,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import Provider from '../context/Provider';
+import firstLetterDrinks from './mocks/firstLetterDrinks';
+import firstLetterMeals from './mocks/firstLetterMeals';
+import notFoundMeal from './mocks/notFoundMeal';
 
+const SEARCH_TOP_BTN = 'search-top-btn';
 describe('testes da página de Login', () => {
   it('testa se a botão de login renderiza desabilitado e se torna habilitado depois de digitar e-mail e senha válidos', () => {
     render(
@@ -40,7 +44,7 @@ describe('testes da página de Login', () => {
   });
 });
 
-describe('testes do component Header', () => {
+describe('testes do componente Header', () => {
   it('testa se a barra de pesquisa aparece após clicar no ícone de pesquisa', () => {
     render(
       <Provider>
@@ -48,7 +52,7 @@ describe('testes do component Header', () => {
       </Provider>,
     );
 
-    const searchIcon = screen.getByTestId('search-top-btn');
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
     userEvent.click(searchIcon);
 
     const searchBar = screen.getByRole('textbox');
@@ -56,14 +60,14 @@ describe('testes do component Header', () => {
   });
 });
 
-describe('testes do component SearchBar', () => {
+describe('testes do componente SearchBar', () => {
   it('testa se é a API é chamada corretamente com o filtro de ingredientes', () => {
     render(
       <Provider>
         <App />
       </Provider>,
     );
-    const searchIcon = screen.getByTestId('search-top-btn');
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
     userEvent.click(searchIcon);
 
     const ingredientButton = screen.getByRole('radio', { name: /ingredient/i });
@@ -72,6 +76,119 @@ describe('testes do component SearchBar', () => {
 
     userEvent.click(ingredientButton);
     userEvent.type(searchBar, 'chicken breast');
+    userEvent.click(searchButton);
+  });
+
+  it('testa se é a API é chamada corretamente com o filtro de nome', () => {
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
+    userEvent.click(searchIcon);
+
+    const nameButton = screen.getByRole('radio', { name: /name/i });
+    const searchBar = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    userEvent.click(nameButton);
+    userEvent.type(searchBar, 'a');
+    userEvent.click(searchButton);
+  });
+
+  it('testa se é a API é chamada corretamente com o filtro de primeira letra', () => {
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(firstLetterMeals),
+    }));
+
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
+    userEvent.click(searchIcon);
+
+    const firstLetterButton = screen.getByRole('radio', { name: /first letter/i });
+    const searchBar = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    userEvent.click(firstLetterButton);
+    userEvent.type(searchBar, 'a');
+    userEvent.click(searchButton);
+  });
+
+  it('testa se um alerta é chamado ao tentar chamar a API com o filtro de primeira letra e digitando duas letras', () => {
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
+    userEvent.click(searchIcon);
+
+    const firstLetterButton = screen.getByRole('radio', { name: /first letter/i });
+    const searchBar = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    userEvent.click(firstLetterButton);
+    userEvent.type(searchBar, 'aa');
+    userEvent.click(searchButton);
+  });
+
+  it('testa se um alerta é chamado caso a API não encontre resultado', () => {
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(notFoundMeal),
+    }));
+
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
+    userEvent.click(searchIcon);
+
+    const nameButton = screen.getByRole('radio', { name: /name/i });
+    const searchBar = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    userEvent.click(nameButton);
+    userEvent.type(searchBar, 'feijoada');
+    userEvent.click(searchButton);
+  });
+});
+
+describe('testes da página Recipes com o caminho "/drinks"', () => {
+  it('testa se a página Drinks é renderizada após clicar no ícone de drinks', () => {
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(firstLetterDrinks),
+    }));
+
+    render(
+      <Provider>
+        <App />
+      </Provider>,
+    );
+
+    const drinksIcon = screen.getByTestId('drinks-bottom-btn');
+    userEvent.click(drinksIcon);
+    expect(drinksIcon).toBeInTheDocument();
+
+    const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
+    expect(drinksHeading).toBeInTheDocument();
+
+    const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
+    userEvent.click(searchIcon);
+
+    const nameButton = screen.getByRole('radio', { name: /name/i });
+    const searchBar = screen.getByRole('textbox');
+    const searchButton = screen.getByRole('button', { name: /search/i });
+
+    userEvent.click(nameButton);
+    userEvent.type(searchBar, 'a');
     userEvent.click(searchButton);
   });
 });
