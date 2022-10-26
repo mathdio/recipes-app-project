@@ -19,7 +19,7 @@ function Provider({ children }) {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
     const newdata = data.meals;
-    const filter = newdata.filter((meal, index) => (index < DOZE ? meal : false));
+    const filter = newdata.filter((meal, index) => index < DOZE);
     setDataMeals(filter);
   };
 
@@ -28,7 +28,7 @@ function Provider({ children }) {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
     const newdata = data.drinks;
-    const filter = newdata.filter((meal, index) => (index < DOZE ? meal : false));
+    const filter = newdata.filter((drink, index) => index < DOZE);
     setIsLoading(true);
     setDataDrinks(filter);
   };

@@ -7,7 +7,8 @@ import Context from '../context/Context';
 import CardRecipes from '../components/CardRecipes';
 
 function Recipes({ title, header, history, footer }) {
-  const { resultKey, resultsData, dataDrinks, dataMeals } = useContext(Context);
+  const { resultKey, resultsData, dataDrinks, dataMeals,
+    getDataMeals, getDataDrinks } = useContext(Context);
 
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
@@ -23,6 +24,13 @@ function Recipes({ title, header, history, footer }) {
       setFirstRender(false);
     }
   }, [history, resultKey, resultsData]);
+
+  useEffect(() => {
+    getDataMeals();
+    getDataDrinks();
+    // console.log(dataMeals);
+    // console.log(dataDrinks);
+  }, []);
 
   return (
     <div>
