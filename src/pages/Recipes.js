@@ -1,11 +1,13 @@
+
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../context/Context';
+import CardRecipes from '../components/CardRecipes';
 
 function Recipes({ title, header, history, footer }) {
-  const { resultKey, resultsData } = useContext(Context);
+  const { resultKey, resultsData, dataDrinks, dataMeals } = useContext(Context);
 
   useEffect(() => {
     if (resultsData.length === 1) {
@@ -13,7 +15,7 @@ function Recipes({ title, header, history, footer }) {
       history.push(url);
     }
   }, [resultsData]);
-
+  
   return (
     <div>
       {header && <Header
@@ -21,6 +23,20 @@ function Recipes({ title, header, history, footer }) {
         profile
         search
       />}
+      {
+        title === 'Meals' ? (
+          <CardRecipes
+            dataMeals={ dataMeals }
+            header
+          />
+        )
+          : (
+            <CardRecipes
+              dataDrinks={ dataDrinks }
+              header
+            />
+          )
+      }
       {footer && <Footer
         drink
         meal
