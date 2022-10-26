@@ -19,7 +19,7 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
             <h3 data-testid={ `${index}-card-name` }>{meal.strMeal}</h3>
             <p>
               Pais:
-              {meal.srtArea}
+              {meal.strArea}
             </p>
           </span>
         ))}

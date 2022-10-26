@@ -5,15 +5,15 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../context/Context';
 import CardRecipes from '../components/CardRecipes';
+import CardCategory from '../components/CardCategory';
 
 function Recipes({ title, header, history, footer }) {
   const { resultKey, resultsData, dataDrinks, dataMeals,
-    getDataMeals, getDataDrinks } = useContext(Context);
-
+    getDataMeals, getDataDrinks, getDrinksCatogories,
+    getMealsCatogories, mealsCategories,
+    drinksCategories } = useContext(Context);
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
-
-  const [firstRecipes, setfirstRecipes] = useState([]);
 
   useEffect(() => {
     if (resultsData.length === 1) {
@@ -21,7 +21,7 @@ function Recipes({ title, header, history, footer }) {
       history.push(url);
     } else if (resultsData.length > 1) {
       const recipesLimit = 12;
-      const twelveRecipes = resultsData.filter((recipe, index) => index < recipesLimit);
+      const twelveRecipes = resultsData.filter((_recipe, index) => index < recipesLimit);
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
@@ -30,6 +30,8 @@ function Recipes({ title, header, history, footer }) {
   useEffect(() => {
     getDataMeals();
     getDataDrinks();
+    getDrinksCatogories();
+    getMealsCatogories();
     // console.log(dataMeals);
     // console.log(dataDrinks);
   }, []);
@@ -57,18 +59,24 @@ function Recipes({ title, header, history, footer }) {
       </div>
       {firstRender
         && (title === 'Meals' ? (
-      {
-        title === 'Meals' ? (
-          <CardRecipes
-            dataMeals={ dataMeals }
-            header
-          />
+          <div>
+            <CardCategory
+              mealsCategories={ mealsCategories }
+            />
+            <CardRecipes
+              dataMeals={ dataMeals }
+            />
+          </div>
         )
           : (
-            <CardRecipes
-              dataDrinks={ dataDrinks }
-              header
-            />
+            <div>
+              <CardCategory
+                drinksCategories={ drinksCategories }
+              />
+              <CardRecipes
+                dataDrinks={ dataDrinks }
+              />
+            </div>
           ))}
       {footer && <Footer
         drink
