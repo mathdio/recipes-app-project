@@ -9,6 +9,10 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitDisabled, setSubmitDisabled] = useState('true');
+  const [searchRecipe, setSearchRecipe] = useState('');
+  const [filterValue, setFilterValue] = useState('');
+  const [resultKey, setResultKey] = useState([]);
+  const [resultsData, setResultsData] = useState([]);
 
   const contextValue = useMemo(() => ({
     isLoading,
@@ -20,7 +24,18 @@ function Provider({ children }) {
     setPassword,
     submitDisabled,
     setSubmitDisabled,
-  }), [dataDrinks, dataMeals, email, isLoading, password, submitDisabled]);
+    searchRecipe,
+    setSearchRecipe,
+    filterValue,
+    setFilterValue,
+    resultKey,
+    setResultKey,
+    resultsData,
+    setResultsData,
+  }), [dataDrinks, dataMeals, email, isLoading,
+  password, submitDisabled,
+  searchRecipe, filterValue,
+  resultKey, resultsData]);
 
   const getDataMeals = async () => {
     const DOZE = 12;
