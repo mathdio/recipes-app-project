@@ -14,29 +14,6 @@ function Provider({ children }) {
   const [resultKey, setResultKey] = useState([]);
   const [resultsData, setResultsData] = useState([]);
 
-  const contextValue = useMemo(() => ({
-    isLoading,
-    dataMeals,
-    dataDrinks,
-    email,
-    setEmail,
-    password,
-    setPassword,
-    submitDisabled,
-    setSubmitDisabled,
-    searchRecipe,
-    setSearchRecipe,
-    filterValue,
-    setFilterValue,
-    resultKey,
-    setResultKey,
-    resultsData,
-    setResultsData,
-  }), [dataDrinks, dataMeals, email, isLoading,
-    password, submitDisabled,
-    searchRecipe, filterValue,
-    resultKey, resultsData]);
-
   const getDataMeals = async () => {
     const DOZE = 12;
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -56,6 +33,31 @@ function Provider({ children }) {
     setDataDrinks(filter);
   };
 
+  const contextValue = useMemo(() => ({
+    isLoading,
+    dataMeals,
+    dataDrinks,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    submitDisabled,
+    setSubmitDisabled,
+    searchRecipe,
+    setSearchRecipe,
+    filterValue,
+    setFilterValue,
+    resultKey,
+    setResultKey,
+    resultsData,
+    setResultsData,
+    getDataMeals,
+    getDataDrinks,
+  }), [dataDrinks, dataMeals, email, isLoading,
+    password, submitDisabled,
+    searchRecipe, filterValue,
+    resultKey, resultsData]);
+
   useEffect(() => {
     const RegEx = /\S+@\S+\.\S+/;
 
@@ -65,8 +67,6 @@ function Provider({ children }) {
     } else {
       setSubmitDisabled(true);
     }
-    getDataMeals();
-    getDataDrinks();
   }, [email, password]);
 
   return (
