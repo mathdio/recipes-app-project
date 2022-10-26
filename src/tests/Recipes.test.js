@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, act } from '@testing-library/react';
+import { screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import firstLetterMeals from './mocks/firstLetterMeals';
@@ -103,13 +103,15 @@ it('testa se um alerta é chamado caso não seja encontrada nenhuma receita', ()
   userEvent.click(searchButton);
 });
 
-it('', () => {
+it('testa se os estados são atualizados quando o caminho é "/drinks"', async () => {
   const { history } = renderWithRouter(<App />);
   act(() => {
-    history.push('/');
+    history.push('/drinks');
   });
-  // const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
+  await waitFor(() => {
+    expect(history.location.pathname).toBe('/drinks');
+  });
+  console.log(history);
+
   // const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
-  // const corbaHeading = screen.findByRole('heading', { name: /corba/i });
-  // expect(mealsHeading && corbaHeading).toBeDefined();
 });

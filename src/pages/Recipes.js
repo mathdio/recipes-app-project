@@ -25,7 +25,7 @@ function Recipes({ title, header, history, footer }) {
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
-  }, [history, resultKey, resultsData]);
+  }, [pathname, resultKey, resultsData]);
 
   useEffect(() => {
     if (pathname === '/meals') {
