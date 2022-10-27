@@ -8,3 +8,8 @@
   margin: 5px;
   width: 50%;
 }
+
+.start-recipe-button {
+  bottom: 0;
+  position: fixed;
+}
