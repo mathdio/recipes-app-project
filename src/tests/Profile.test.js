@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { cleanup, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 // import { act } from 'react-dom/test-utils';
@@ -6,6 +7,8 @@ import App from '../App';
 import Provider from '../context/Provider';
 import renderWithRouter from './helper/renderWithRouter';
 
+=======
+>>>>>>> 2591de0ca89a1874bc00a93705b0c561136e5ad5
 describe('Testa a tela do componente Profile', () => {
   afterEach(cleanup);
   test('testa se os botoẽs renderizam na pagina', () => {
