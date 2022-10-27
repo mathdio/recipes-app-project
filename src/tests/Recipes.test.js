@@ -111,7 +111,9 @@ it('testa se os estados são atualizados quando o caminho é "/drinks"', async (
   await waitFor(() => {
     expect(history.location.pathname).toBe('/drinks');
   });
-  console.log(history);
+  // console.log(history);
 
-  // const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
+  // const mealsHeading = screen.getByRole('heading', { name: /meals/i });
+  // console.log(mealsHeading);
+  // const drinksHeading = screen.findByRole('heading', { name: /drinks/i });
 });

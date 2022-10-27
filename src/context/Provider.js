@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [dataMeals, setDataMeals] = useState([]);
+  const [dataMeals, setDataMeals] = useState();
   const [dataDrinks, setDataDrinks] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,10 +12,50 @@ function Provider({ children }) {
   const [filterValue, setFilterValue] = useState('');
   const [resultKey, setResultKey] = useState([]);
   const [resultsData, setResultsData] = useState([]);
+  const [mealsCategories, setMealsCategories] = useState();
+  const [drinksCategories, setDrinksCategories] = useState();
+
+  const getDataMeals = async () => {
+    const DOZE = 12;
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    const newdata = data.meals;
+    const filter = newdata.filter((_meal, index) => index < DOZE);
+    setDataMeals(filter);
+  };
+
+  const getDataDrinks = async () => {
+    const DOZE = 12;
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const data = await response.json();
+    const newdata = data.drinks;
+    const filter = newdata.filter((_drink, index) => index < DOZE);
+    setDataDrinks(filter);
+  };
+
+  const getMealsCatogories = async () => {
+    const CINCO = 5;
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    const newdata = data.meals;
+    const filter = newdata.filter((_meals, index) => index < CINCO);
+    setMealsCategories(filter);
+  };
+
+  const getDrinksCatogories = async () => {
+    const CINCO = 5;
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const data = await response.json();
+    const newdata = data.drinks;
+    const filter = newdata.filter((_drinks, index) => index < CINCO);
+    setDrinksCategories(filter);
+  };
 
   const contextValue = useMemo(() => ({
-    isLoading,
-    setIsLoading,
+    mealsCategories,
+    drinksCategories,
+    getDrinksCatogories,
+    getMealsCatogories,
     dataMeals,
     dataDrinks,
     email,
@@ -33,15 +72,15 @@ function Provider({ children }) {
     setResultKey,
     resultsData,
     setResultsData,
-    setDataMeals,
-    setDataDrinks,
-    // getDataMeals,
-    // getDataDrinks,
-  }), [dataDrinks, dataMeals, email, isLoading,
-    password, submitDisabled,
-    searchRecipe, filterValue,
-    resultKey, resultsData]);
-
+    getDataMeals,
+    getDataDrinks,
+  }), [mealsCategories, drinksCategories,
+    dataMeals, dataDrinks,
+    email, password,
+    submitDisabled, searchRecipe,
+    filterValue, resultKey,
+    resultsData]);
+  
   useEffect(() => {
     const RegEx = /\S+@\S+\.\S+/;
 
