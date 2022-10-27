@@ -6,11 +6,14 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../context/Context';
 import CardRecipes from '../components/CardRecipes';
+import CardCategory from '../components/CardCategory';
 
 function Recipes({ title, header, history, footer }) {
   const { resultKey, resultsData, dataDrinks, dataMeals,
-    setIsLoading, setDataMeals, setDataDrinks } = useContext(Context);
-
+    getDataMeals, getDataDrinks, getDrinksCatogories,
+    getMealsCatogories, mealsCategories,
+    drinksCategories } = useContext(Context);
+    
   const { pathname } = useLocation();
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
@@ -21,36 +24,18 @@ function Recipes({ title, header, history, footer }) {
       history.push(url);
     } else if (resultsData.length > 1) {
       const recipesLimit = 12;
-      const twelveRecipes = resultsData.filter((recipe, index) => index < recipesLimit);
+      const twelveRecipes = resultsData.filter((_recipe, index) => index < recipesLimit);
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
   }, [pathname, resultKey, resultsData]);
 
   useEffect(() => {
-    if (pathname === '/meals') {
-      const getDataMeals = async () => {
-        const DOZE = 12;
-        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-        const data = await response.json();
-        const newdata = data.meals;
-        const filter = newdata.filter((meal, index) => index < DOZE);
-        setDataMeals(filter);
-      };
-      getDataMeals();
-    } else if (pathname === '/drinks') {
-      const getDataDrinks = async () => {
-        const DOZE = 12;
-        const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-        const data = await response.json();
-        const newdata = data.drinks;
-        const filter = newdata.filter((drink, index) => index < DOZE);
-        setIsLoading(true);
-        setDataDrinks(filter);
-      };
-      getDataDrinks();
-    }
-  }, [pathname]);
+    getDataMeals();
+    getDataDrinks();
+    getDrinksCatogories();
+    getMealsCatogories();
+  }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories]);
 
   return (
     <div>
@@ -75,16 +60,24 @@ function Recipes({ title, header, history, footer }) {
       </div>
       {firstRender
         && (title === 'Meals' ? (
-          <CardRecipes
-            dataMeals={ dataMeals }
-            header
-          />
+          <div>
+            <CardCategory
+              mealsCategories={ mealsCategories }
+            />
+            <CardRecipes
+              dataMeals={ dataMeals }
+            />
+          </div>
         )
           : (
-            <CardRecipes
-              dataDrinks={ dataDrinks }
-              header
-            />
+            <div>
+              <CardCategory
+                drinksCategories={ drinksCategories }
+              />
+              <CardRecipes
+                dataDrinks={ dataDrinks }
+              />
+            </div>
           ))}
       {footer && <Footer
         drink
