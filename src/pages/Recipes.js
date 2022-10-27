@@ -13,7 +13,7 @@ function Recipes({ title, header, history, footer }) {
     getDataMeals, getDataDrinks, getDrinksCatogories,
     getMealsCatogories, mealsCategories,
     drinksCategories } = useContext(Context);
-    
+
   const { pathname } = useLocation();
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);

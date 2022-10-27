@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function CardCategory({ drinksCategories, mealsCategories }) {
-  console.log(drinksCategories);
-  console.log(mealsCategories);
   return (
     <div>
       {mealsCategories && mealsCategories.map((categorie, index) => (
