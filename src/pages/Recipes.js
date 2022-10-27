@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Context from '../context/Context';
@@ -12,6 +13,8 @@ function Recipes({ title, header, history, footer }) {
     getDataMeals, getDataDrinks, getDrinksCatogories,
     getMealsCatogories, mealsCategories,
     drinksCategories } = useContext(Context);
+    
+  const { pathname } = useLocation();
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
 
@@ -25,15 +28,13 @@ function Recipes({ title, header, history, footer }) {
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
-  }, [history, resultKey, resultsData]);
+  }, [pathname, resultKey, resultsData]);
 
   useEffect(() => {
     getDataMeals();
     getDataDrinks();
     getDrinksCatogories();
     getMealsCatogories();
-    // console.log(dataMeals);
-    // console.log(dataDrinks);
   }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories]);
 
   return (
