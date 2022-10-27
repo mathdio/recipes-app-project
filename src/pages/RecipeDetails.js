@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import './RecipeDetails.css';
 
 function RecipeDetails({ match }) {
   const { params: { id } } = match;
@@ -11,6 +12,8 @@ function RecipeDetails({ match }) {
   const [foodKeys, setFoodKeys] = useState([]);
   const [ingredientsArray, setIngredientsArray] = useState([]);
   const [measuresArray, setMeasuresArray] = useState([]);
+  const [recomendations, setRecomendations] = useState([]);
+  const [recomendKey, setRecomendKey] = useState([]);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -18,8 +21,6 @@ function RecipeDetails({ match }) {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
       const data = await response.json();
       setFood(data.meals[0]);
-
-      const responseRecomendations = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
 
       const entries = Object.entries(data.meals[0]);
       const ingredients = entries
@@ -40,8 +41,6 @@ function RecipeDetails({ match }) {
       const data = await response.json();
       setFood(data.drinks[0]);
 
-      const responseRecomendations = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-
       const entries = Object.entries(data.drinks[0]);
       const ingredients = entries
         .filter((key) => key[0].includes('strIngredient'))
@@ -61,7 +60,37 @@ function RecipeDetails({ match }) {
     } else if (pathname.includes('drinks')) {
       fetchDrink();
     }
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    const fetchRecomendationsMeals = async () => {
+      const responseRecomendations = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      const dataRecomendation = await responseRecomendations.json();
+
+      const recomendationsLimit = 6;
+      const sixRecomendations = dataRecomendation.meals
+        .filter((meal, index) => index < recomendationsLimit);
+      setRecomendations(sixRecomendations);
+      setRecomendKey('strMeal');
+    };
+
+    const fetchRecomendationsDrinks = async () => {
+      const responseRecomendations = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      const dataRecomendation = await responseRecomendations.json();
+
+      const recomendationsLimit = 6;
+      const sixRecomendations = dataRecomendation.drinks
+        .filter((drink, index) => index < recomendationsLimit);
+      setRecomendations(sixRecomendations);
+      setRecomendKey('strDrink');
+    };
+
+    if (pathname.includes('/meals')) {
+      fetchRecomendationsDrinks();
+    } else if (pathname.includes('drinks')) {
+      fetchRecomendationsMeals();
+    }
+  }, [pathname]);
 
   return (
     <div>
@@ -120,6 +149,23 @@ function RecipeDetails({ match }) {
               src={ food[foodKeys[4]] }
             />
           )}
+          <div className="recomendations-scroll">
+            <p>Recomendations:</p>
+            {' '}
+            {recomendations.map((recomendation, index) => (
+              <div
+                key={ uuid() }
+                data-testid={ `${index}-recommendation-card` }
+                className="recomendation-card"
+              >
+                <p
+                  data-testid={ `${index}-recommendation-title` }
+                >
+                  {recomendation[recomendKey]}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
