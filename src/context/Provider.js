@@ -80,7 +80,7 @@ function Provider({ children }) {
     submitDisabled, searchRecipe,
     filterValue, resultKey,
     resultsData]);
-  
+
   useEffect(() => {
     const RegEx = /\S+@\S+\.\S+/;
 
