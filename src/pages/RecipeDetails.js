@@ -98,8 +98,8 @@ function RecipeDetails({ match }) {
         <div>
           <img
             data-testid="recipe-photo"
-            src={ food.strMealThumb }
-            alt={ food.strMeal }
+            src={ food[foodKeys[1]] }
+            alt={ food[foodKeys[0]] }
           />
           <h1
             data-testid="recipe-title"
