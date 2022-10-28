@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
 import { Link } from 'react-router-dom';
+import shareIcon from '../images/shareIcon.svg';
+
+const copy = require('clipboard-copy');
 
 function RecipeDetails({ match }) {
   const { params: { id } } = match;
@@ -17,6 +20,7 @@ function RecipeDetails({ match }) {
   const [recomendKey, setRecomendKey] = useState([]);
   const [ready, setReady] = useState(false);
   const [inProgress, setInProgress] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   useEffect(() => {
     const fetchMeal = async () => {
@@ -108,6 +112,11 @@ function RecipeDetails({ match }) {
     }
   }, []);
 
+  const handleShare = () => {
+    setLinkCopied(true);
+    copy(`${window.location.href}`);
+  };
+
   return (
     <div>
       {ready && (
@@ -191,18 +200,20 @@ function RecipeDetails({ match }) {
               {inProgress ? 'Continue Recipe' : 'Start Recipe'}
             </button>
           </Link>
-          <button
-            type="button"
+          <input
+            type="image"
+            alt=""
             data-testid="share-btn"
-          >
-            Share
-          </button>
+            src={ shareIcon }
+            onClick={ handleShare }
+          />
           <button
             type="button"
             data-testid="favorite-btn"
           >
             Favorite
           </button>
+          {linkCopied && <h3>Link copied!</h3>}
         </div>
       )}
     </div>
