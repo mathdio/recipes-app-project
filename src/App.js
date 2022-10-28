@@ -20,28 +20,28 @@ function App() {
 
           <Route
             exact
-            path="/meals/:id-da-receita/in-progress"
-            render={ (props) => (
-              <RecipeInProgress { ...props } header={ false } footer={ false } />) }
-          />
-
-          <Route
-            exact
-            path="/drinks/:id-da-receita/in-progress"
-            render={ (props) => (
-              <RecipeInProgress { ...props } header={ false } footer={ false } />) }
-          />
-
-          <Route
             path="/meals/:id"
             render={ (props) => (
               <RecipeDetails { ...props } APItype="meals" />) }
           />
 
           <Route
+            exact
             path="/drinks/:id"
             render={ (props) => (
               <RecipeDetails { ...props } APItype="drinks" />) }
+          />
+
+          <Route
+            path="/meals/:id-da-receita/in-progress"
+            render={ (props) => (
+              <RecipeInProgress { ...props } header={ false } footer={ false } />) }
+          />
+
+          <Route
+            path="/drinks/:id-da-receita/in-progress"
+            render={ (props) => (
+              <RecipeInProgress { ...props } header={ false } footer={ false } />) }
           />
 
           <Route

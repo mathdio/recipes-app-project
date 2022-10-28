@@ -10,7 +10,6 @@ function RecipeInProgress() {
       <h2 data-testid="recipe-category">Category</h2>
       <p data-testid="instructions">Instructions</p>
       <button data-testid="finish-recipe-btn" type="button">Finish</button>
-
     </div>
   );
 }
