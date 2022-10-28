@@ -125,14 +125,13 @@ function RecipeDetails({ match }) {
     const newFavorite = {
       id,
       type: pathname.includes('/meals') ? 'meal' : 'drink',
-      nationality: '',
-      // nacionalidade-da-receita-ou-texto-vazio,
+      nationality: pathname.includes('/meals') ? food.strArea : '',
       category: food.strCategory,
       alcoholicOrNot: pathname.includes('/drinks') ? food.strAlcoholic : '',
       name: food[foodKeys[0]],
       image: food[foodKeys[1]],
     };
-    favoriteRecipes.concat(newFavorite);
+    favoriteRecipes.push(newFavorite);
     console.log(favoriteRecipes);
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   };
