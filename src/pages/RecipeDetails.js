@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -117,6 +118,21 @@ function RecipeDetails({ match }) {
     copy(`${window.location.href}`);
   };
 
+  // const handleFavorite = () => {
+  //   const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+  //     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+  //   const newFavorite = {
+  //     id,
+  //     type: pahtname.includes('/meals') ? 'meal' : 'drink',
+  //     nationality: '',
+  //     // nacionalidade-da-receita-ou-texto-vazio,
+  //     category: categoria-da-receita-ou-texto-vazio,
+  //     alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
+  //     name: nome-da-receita,
+  //     image: imagem-da-receita
+  //   };
+  // };
+
   return (
     <div>
       {ready && (
@@ -207,12 +223,13 @@ function RecipeDetails({ match }) {
             src={ shareIcon }
             onClick={ handleShare }
           />
-          <button
-            type="button"
+          <input
+            type="image"
+            alt=""
+            src={ whiteHeartIcon }
             data-testid="favorite-btn"
-          >
-            Favorite
-          </button>
+            onClick={ handleFavorite }
+          />
           {linkCopied && <h3>Link copied!</h3>}
         </div>
       )}
