@@ -17,33 +17,30 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
+          <Route
+            path="/meals/:id/in-progress"
+            render={ (props) => (
+              <RecipeInProgress { ...props } />) }
+          />
 
+          <Route
+            path="/drinks/:id/in-progress"
+            render={ (props) => (
+              <RecipeInProgress { ...props } />) }
+          />
           <Route
             exact
             path="/meals/:id"
             render={ (props) => (
-              <RecipeDetails { ...props } APItype="meals" />) }
+              <RecipeDetails { ...props } />) }
           />
 
           <Route
             exact
             path="/drinks/:id"
             render={ (props) => (
-              <RecipeDetails { ...props } APItype="drinks" />) }
+              <RecipeDetails { ...props } />) }
           />
-
-          <Route
-            path="/meals/:id-da-receita/in-progress"
-            render={ (props) => (
-              <RecipeInProgress { ...props } header={ false } footer={ false } />) }
-          />
-
-          <Route
-            path="/drinks/:id-da-receita/in-progress"
-            render={ (props) => (
-              <RecipeInProgress { ...props } header={ false } footer={ false } />) }
-          />
-
           <Route
             path="/meals"
             render={ (props) => <Recipes { ...props } title="Meals" header footer /> }

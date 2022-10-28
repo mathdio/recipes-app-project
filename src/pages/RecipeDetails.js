@@ -3,6 +3,7 @@ import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
+import { Link } from 'react-router-dom';
 
 function RecipeDetails({ match }) {
   const { params: { id } } = match;
@@ -15,13 +16,13 @@ function RecipeDetails({ match }) {
   const [recomendations, setRecomendations] = useState([]);
   const [recomendKey, setRecomendKey] = useState([]);
   const [ready, setReady] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
 
   useEffect(() => {
     const fetchMeal = async () => {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
       const data = await response.json();
       setFood(data.meals[0]);
-
       const entries = Object.entries(data.meals[0]);
       const ingredients = entries
         .filter((key) => key[0].includes('strIngredient'))
@@ -40,7 +41,6 @@ function RecipeDetails({ match }) {
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
       const data = await response.json();
       setFood(data.drinks[0]);
-
       const entries = Object.entries(data.drinks[0]);
       const ingredients = entries
         .filter((key) => key[0].includes('strIngredient'))
@@ -91,6 +91,22 @@ function RecipeDetails({ match }) {
       fetchRecomendationsMeals();
     }
   }, [pathname]);
+
+  useEffect(() => {
+    const inProgressRecipes = localStorage.getItem('inProgressRecipes')
+      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
+    if (pathname.includes('/meals')) {
+      const keysInProgress = Object.keys(inProgressRecipes.meals);
+      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
+        setInProgress(true);
+      }
+    } else {
+      const keysInProgress = Object.keys(inProgressRecipes.drinks);
+      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
+        setInProgress(true);
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -166,13 +182,15 @@ function RecipeDetails({ match }) {
               </div>
             ))}
           </div>
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-recipe-button"
-          >
-            Start Recipe
-          </button>
+          <Link to={ `${pathname}/in-progress` }>
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-recipe-button"
+            >
+              {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+            </button>
+          </Link>
         </div>
       )}
     </div>
