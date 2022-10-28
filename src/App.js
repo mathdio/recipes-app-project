@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Provider from './context/Provider';
+import RecipeInProgress from './pages/RecipeInProgress';
 import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
@@ -19,19 +20,23 @@ function App() {
           <Route
             path="/meals/:id/in-progress"
             render={ (props) => (
-              <Recipes { ...props } header={ false } footer={ false } />) }
+              <RecipeInProgress { ...props } />) }
           />
+
           <Route
             path="/drinks/:id/in-progress"
             render={ (props) => (
-              <Recipes { ...props } header={ false } footer={ false } />) }
+              <RecipeInProgress { ...props } />) }
           />
           <Route
+            exact
             path="/meals/:id"
             render={ (props) => (
               <RecipeDetails { ...props } />) }
           />
+
           <Route
+            exact
             path="/drinks/:id"
             render={ (props) => (
               <RecipeDetails { ...props } />) }
@@ -40,10 +45,12 @@ function App() {
             path="/meals"
             render={ (props) => <Recipes { ...props } title="Meals" header footer /> }
           />
+
           <Route
             path="/drinks"
             render={ (props) => <Recipes { ...props } title="Drinks" header footer /> }
           />
+
           <Route
             path="/profile"
             render={ (props) => (<Profile
@@ -51,15 +58,18 @@ function App() {
               title="Profile"
             />) }
           />
+
           <Route
             path="/done-recipes"
             render={ (props) => <DoneRecipes { ...props } title="Done Recipes" /> }
           />
+
           <Route
             path="/favorite-recipes"
             render={ (props) => (
               <FavoriteRecipes { ...props } title="Favorite Recipes" />) }
           />
+
         </Switch>
       </BrowserRouter>
     </Provider>
