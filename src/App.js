@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Provider from './context/Provider';
+import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
   return (
@@ -16,22 +17,32 @@ function App() {
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route
+            path="/meals/:id/in-progress"
+            render={ (props) => (
+              <Recipes { ...props } header={ false } footer={ false } />) }
+          />
+          <Route
+            path="/drinks/:id/in-progress"
+            render={ (props) => (
+              <Recipes { ...props } header={ false } footer={ false } />) }
+          />
+          <Route
+            path="/meals/:id"
+            render={ (props) => (
+              <RecipeDetails { ...props } APItype="meals" />) }
+          />
+          <Route
+            path="/drinks/:id"
+            render={ (props) => (
+              <RecipeDetails { ...props } APItype="drinks" />) }
+          />
+          <Route
             path="/meals"
             render={ (props) => <Recipes { ...props } title="Meals" header footer /> }
           />
           <Route
             path="/drinks"
             render={ (props) => <Recipes { ...props } title="Drinks" header footer /> }
-          />
-          <Route
-            path="/meals/:id-da-receita/in-progress"
-            render={ (props) => (
-              <Recipes { ...props } header={ false } footer={ false } />) }
-          />
-          <Route
-            path="/drinks/:id-da-receita/in-progress"
-            render={ (props) => (
-              <Recipes { ...props } header={ false } footer={ false } />) }
           />
           <Route
             path="/profile"
