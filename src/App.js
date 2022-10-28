@@ -29,12 +29,12 @@ function App() {
           <Route
             path="/meals/:id"
             render={ (props) => (
-              <RecipeDetails { ...props } APItype="meals" />) }
+              <RecipeDetails { ...props } />) }
           />
           <Route
             path="/drinks/:id"
             render={ (props) => (
-              <RecipeDetails { ...props } APItype="drinks" />) }
+              <RecipeDetails { ...props } />) }
           />
           <Route
             path="/meals"
