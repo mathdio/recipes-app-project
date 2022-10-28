@@ -62,7 +62,7 @@ function RecipeDetails({ match }) {
 
     if (pathname.includes('/meals')) {
       fetchMeal();
-    } else if (pathname.includes('drinks')) {
+    } else if (pathname.includes('/drinks')) {
       fetchDrink();
     }
   }, [pathname]);
@@ -92,7 +92,7 @@ function RecipeDetails({ match }) {
 
     if (pathname.includes('/meals')) {
       fetchRecomendationsDrinks();
-    } else if (pathname.includes('drinks')) {
+    } else if (pathname.includes('/drinks')) {
       fetchRecomendationsMeals();
     }
   }, [pathname]);
@@ -118,20 +118,24 @@ function RecipeDetails({ match }) {
     copy(`${window.location.href}`);
   };
 
-  // const handleFavorite = () => {
-  //   const favoriteRecipes = localStorage.getItem('favoriteRecipes')
-  //     ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
-  //   const newFavorite = {
-  //     id,
-  //     type: pahtname.includes('/meals') ? 'meal' : 'drink',
-  //     nationality: '',
-  //     // nacionalidade-da-receita-ou-texto-vazio,
-  //     category: categoria-da-receita-ou-texto-vazio,
-  //     alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-  //     name: nome-da-receita,
-  //     image: imagem-da-receita
-  //   };
-  // };
+  const handleFavorite = () => {
+    const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+    console.log(favoriteRecipes);
+    const newFavorite = {
+      id,
+      type: pathname.includes('/meals') ? 'meal' : 'drink',
+      nationality: '',
+      // nacionalidade-da-receita-ou-texto-vazio,
+      category: food.strCategory,
+      alcoholicOrNot: pathname.includes('/drinks') ? food.strAlcoholic : '',
+      name: food[foodKeys[0]],
+      image: food[foodKeys[1]],
+    };
+    favoriteRecipes.concat(newFavorite);
+    console.log(favoriteRecipes);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  };
 
   return (
     <div>
