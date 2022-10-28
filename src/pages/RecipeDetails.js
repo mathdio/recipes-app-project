@@ -92,7 +92,8 @@ function RecipeDetails({ match }) {
   }, [pathname]);
 
   useEffect(() => {
-    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const inProgressRecipes = localStorage.getItem('inProgressRecipes')
+      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
     if (pathname.includes('/meals')) {
       const keysInProgress = Object.keys(inProgressRecipes.meals);
       if (keysInProgress.some((idInProgress) => idInProgress === id)) {
