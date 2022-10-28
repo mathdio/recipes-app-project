@@ -15,13 +15,13 @@ function RecipeDetails({ match }) {
   const [recomendations, setRecomendations] = useState([]);
   const [recomendKey, setRecomendKey] = useState([]);
   const [ready, setReady] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
 
   useEffect(() => {
     const fetchMeal = async () => {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
       const data = await response.json();
       setFood(data.meals[0]);
-
       const entries = Object.entries(data.meals[0]);
       const ingredients = entries
         .filter((key) => key[0].includes('strIngredient'))
@@ -40,7 +40,6 @@ function RecipeDetails({ match }) {
       const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
       const data = await response.json();
       setFood(data.drinks[0]);
-
       const entries = Object.entries(data.drinks[0]);
       const ingredients = entries
         .filter((key) => key[0].includes('strIngredient'))
@@ -91,6 +90,21 @@ function RecipeDetails({ match }) {
       fetchRecomendationsMeals();
     }
   }, [pathname]);
+
+  useEffect(() => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (pathname.includes('/meals')) {
+      const keysInProgress = Object.keys(inProgressRecipes.meals);
+      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
+        setInProgress(true);
+      }
+    } else {
+      const keysInProgress = Object.keys(inProgressRecipes.drinks);
+      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
+        setInProgress(true);
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -171,7 +185,7 @@ function RecipeDetails({ match }) {
             data-testid="start-recipe-btn"
             className="start-recipe-button"
           >
-            Start Recipe
+            {inProgress ? 'Continue Recipe' : 'Start Recipe'}
           </button>
         </div>
       )}
