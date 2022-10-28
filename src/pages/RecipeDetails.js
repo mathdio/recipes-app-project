@@ -3,6 +3,7 @@ import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
+import { Link } from 'react-router-dom';
 
 function RecipeDetails({ match }) {
   const { params: { id } } = match;
@@ -181,13 +182,15 @@ function RecipeDetails({ match }) {
               </div>
             ))}
           </div>
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-recipe-button"
-          >
-            {inProgress ? 'Continue Recipe' : 'Start Recipe'}
-          </button>
+          <Link to={ `${pathname}/in-progress` }>
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-recipe-button"
+            >
+              {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+            </button>
+          </Link>
         </div>
       )}
     </div>
