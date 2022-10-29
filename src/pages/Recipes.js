@@ -28,7 +28,7 @@ function Recipes({ title, header, history, footer }) {
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
-  }, [pathname, resultKey, resultsData]);
+  }, [history, pathname, resultKey, resultsData]);
 
   useEffect(() => {
     getDataMeals();
