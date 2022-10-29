@@ -1,29 +1,42 @@
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Context from '../context/Context';
 
 export default function CardCategory({ drinksCategories, mealsCategories, history }) {
   const { setDataMeals, setDataDrinks, getDataMeals,
     getDataDrinks } = useContext(Context);
+  const [toogle, setToogle] = useState(true);
 
   const sendMealsValue = async (search) => {
-    const DOZE = 12;
-    const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${search}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    const newdata = data.meals;
-    const filter = newdata.filter((_meals, index) => index < DOZE);
-    setDataMeals(filter);
+    if (toogle === true) {
+      const DOZE = 12;
+      const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${search}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      const newdata = data.meals;
+      const filter = newdata.filter((_meals, index) => index < DOZE);
+      setDataMeals(filter);
+      setToogle(false);
+    } else {
+      getDataMeals();
+      setToogle(true);
+    }
   };
 
   const sendDrinksValue = async (search) => {
-    const DOZE = 12;
-    const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${search}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    const newdata = data.drinks;
-    const filter = newdata.filter((_drinks, index) => index < DOZE);
-    setDataDrinks(filter);
+    if (toogle === true) {
+      const DOZE = 12;
+      const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${search}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      const newdata = data.drinks;
+      const filter = newdata.filter((_drinks, index) => index < DOZE);
+      setDataDrinks(filter);
+      setToogle(false);
+    } else {
+      getDataDrinks();
+      setToogle(true);
+    }
   };
 
   const removeAllFilters = () => {
@@ -34,7 +47,7 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
       getDataMeals();
     }
   };
-  
+
   return (
     <div>
       <input
