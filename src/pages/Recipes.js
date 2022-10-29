@@ -63,6 +63,7 @@ function Recipes({ title, header, history, footer }) {
           <div>
             <CardCategory
               mealsCategories={ mealsCategories }
+              history={ history }
             />
             <CardRecipes
               dataMeals={ dataMeals }
@@ -73,6 +74,7 @@ function Recipes({ title, header, history, footer }) {
             <div>
               <CardCategory
                 drinksCategories={ drinksCategories }
+                history={ history }
               />
               <CardRecipes
                 dataDrinks={ dataDrinks }
