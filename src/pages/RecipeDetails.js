@@ -4,10 +4,16 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
 import { Link } from 'react-router-dom';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import { fetchMeal, fetchDrink, fetchRecomendationsMeals,
+  fetchRecomendationsDrinks } from '../services/fetchFunctions';
+
+const copy = require('clipboard-copy');
 
 function RecipeDetails({ match }) {
   const { params: { id } } = match;
-
   const { pathname } = useLocation();
   const [food, setFood] = useState();
   const [foodKeys, setFoodKeys] = useState([]);
@@ -17,78 +23,35 @@ function RecipeDetails({ match }) {
   const [recomendKey, setRecomendKey] = useState([]);
   const [ready, setReady] = useState(false);
   const [inProgress, setInProgress] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [favorited, setFavorited] = useState(false);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
-    const fetchMeal = async () => {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-      const data = await response.json();
-      setFood(data.meals[0]);
-      const entries = Object.entries(data.meals[0]);
-      const ingredients = entries
-        .filter((key) => key[0].includes('strIngredient'))
-        .filter((ingredient) => ingredient[1] !== '' && ingredient[1] !== null);
-      const measures = entries
-        .filter((key) => key[0].includes('strMeasure'))
-        .filter((ingredient) => ingredient[1] !== '' && ingredient[1] !== null);
-      setIngredientsArray(ingredients);
-      setMeasuresArray(measures);
-      setFoodKeys(['strMeal', 'strMealThumb', 'strCategory',
-        'strInstructions', 'strYoutube']);
-      setReady(true);
-    };
-
-    const fetchDrink = async () => {
-      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-      const data = await response.json();
-      setFood(data.drinks[0]);
-      const entries = Object.entries(data.drinks[0]);
-      const ingredients = entries
-        .filter((key) => key[0].includes('strIngredient'))
-        .filter((ingredient) => ingredient[1] !== '' && ingredient[1] !== null);
-      const measures = entries
-        .filter((key) => key[0].includes('strMeasure'))
-        .filter((ingredient) => ingredient[1] !== '' && ingredient[1] !== null);
-      setIngredientsArray(ingredients);
-      setMeasuresArray(measures);
-      setFoodKeys(['strDrink', 'strDrinkThumb', 'strCategory',
-        'strInstructions', 'strYoutube']);
-      setReady(true);
-    };
-
     if (pathname.includes('/meals')) {
-      fetchMeal();
-    } else if (pathname.includes('drinks')) {
-      fetchDrink();
+      fetchMeal({
+        id,
+        setFood,
+        setIngredientsArray,
+        setMeasuresArray,
+        setFoodKeys,
+        setReady });
+    } else if (pathname.includes('/drinks')) {
+      fetchDrink({
+        id,
+        setFood,
+        setIngredientsArray,
+        setMeasuresArray,
+        setFoodKeys,
+        setReady });
     }
   }, [pathname]);
 
   useEffect(() => {
-    const fetchRecomendationsMeals = async () => {
-      const responseRecomendations = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      const dataRecomendation = await responseRecomendations.json();
-
-      const recomendationsLimit = 6;
-      const sixRecomendations = dataRecomendation.meals
-        .filter((meal, index) => index < recomendationsLimit);
-      setRecomendations(sixRecomendations);
-      setRecomendKey('strMeal');
-    };
-
-    const fetchRecomendationsDrinks = async () => {
-      const responseRecomendations = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-      const dataRecomendation = await responseRecomendations.json();
-
-      const recomendationsLimit = 6;
-      const sixRecomendations = dataRecomendation.drinks
-        .filter((drink, index) => index < recomendationsLimit);
-      setRecomendations(sixRecomendations);
-      setRecomendKey('strDrink');
-    };
-
     if (pathname.includes('/meals')) {
-      fetchRecomendationsDrinks();
-    } else if (pathname.includes('drinks')) {
-      fetchRecomendationsMeals();
+      fetchRecomendationsDrinks({ setRecomendations, setRecomendKey });
+    } else if (pathname.includes('/drinks')) {
+      fetchRecomendationsMeals({ setRecomendations, setRecomendKey });
     }
   }, [pathname]);
 
@@ -108,6 +71,50 @@ function RecipeDetails({ match }) {
     }
   }, []);
 
+  useEffect(() => {
+    const doneRecipes = localStorage.getItem('doneRecipes')
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
+    const isDone = doneRecipes.some((recipe) => recipe.id === id);
+    if (isDone) {
+      setDone(true);
+    }
+    const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+    const isFavorited = favoriteRecipes.some((recipe) => recipe.id === id);
+    if (isFavorited) {
+      setFavorited(true);
+    }
+  }, []);
+
+  const handleShare = () => {
+    setLinkCopied(true);
+    copy(`${window.location.href}`);
+  };
+
+  const handleFavorite = () => {
+    const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+    const isFavorited = favoriteRecipes.some((recipe) => recipe.id === id);
+    if (isFavorited) {
+      const newFavoriteArray = favoriteRecipes.filter((recipe) => recipe.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteArray));
+      setFavorited(false);
+    } else {
+      const newFavorite = {
+        id,
+        type: pathname.includes('/meals') ? 'meal' : 'drink',
+        nationality: pathname.includes('/meals') ? food.strArea : '',
+        category: food.strCategory,
+        alcoholicOrNot: pathname.includes('/drinks') ? food.strAlcoholic : '',
+        name: food[foodKeys[0]],
+        image: food[foodKeys[1]],
+      };
+      favoriteRecipes.push(newFavorite);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+      setFavorited(true);
+    }
+  };
+
   return (
     <div>
       {ready && (
@@ -117,28 +124,21 @@ function RecipeDetails({ match }) {
             src={ food[foodKeys[1]] }
             alt={ food[foodKeys[0]] }
           />
-          <h1
-            data-testid="recipe-title"
-          >
+          <h1 data-testid="recipe-title">
             {food[foodKeys[0]]}
           </h1>
           {foodKeys[0] === 'strDrink' ? (
-            <p
-              data-testid="recipe-category"
-            >
+            <p data-testid="recipe-category">
               Drink:
               {' '}
               {food.strAlcoholic}
             </p>
           ) : (
-            <p
-              data-testid="recipe-category"
-            >
+            <p data-testid="recipe-category">
               Category:
               {' '}
               { food[foodKeys[2]] }
-            </p>
-          )}
+            </p>)}
           <ul>
             Ingredients:
             {' '}
@@ -149,13 +149,10 @@ function RecipeDetails({ match }) {
               >
                 {ingredient[1]}
                 {' '}
-                {measuresArray[index]}
-              </li>
-            ))}
+                {measuresArray[index] && measuresArray[index][1]}
+              </li>))}
           </ul>
-          <p
-            data-testid="instructions"
-          >
+          <p data-testid="instructions">
             {food[foodKeys[3]]}
           </p>
           {foodKeys[0] === 'strMeal' && (
@@ -163,8 +160,7 @@ function RecipeDetails({ match }) {
               data-testid="video"
               title={ food[foodKeys[0]] }
               src={ food[foodKeys[4]] }
-            />
-          )}
+            />)}
           <div className="recomendations-scroll">
             <p>Recomendations:</p>
             {' '}
@@ -174,43 +170,41 @@ function RecipeDetails({ match }) {
                 data-testid={ `${index}-recommendation-card` }
                 className="recomendation-card"
               >
-                <p
-                  data-testid={ `${index}-recommendation-title` }
-                >
+                <p data-testid={ `${index}-recommendation-title` }>
                   {recomendation[recomendKey]}
                 </p>
-              </div>
-            ))}
+              </div>))}
           </div>
-          <Link to={ `${pathname}/in-progress` }>
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="start-recipe-button"
-            >
-              {inProgress ? 'Continue Recipe' : 'Start Recipe'}
-            </button>
-          </Link>
-          <button
-            type="button"
+          {!done && (
+            <Link to={ `${pathname}/in-progress` }>
+              <button
+                type="button"
+                data-testid="start-recipe-btn"
+                className="start-recipe-button"
+              >
+                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+              </button>
+            </Link>)}
+          <input
+            type="image"
+            alt=""
             data-testid="share-btn"
-          >
-            Share
-          </button>
-          <button
-            type="button"
+            src={ shareIcon }
+            onClick={ handleShare }
+          />
+          <input
+            type="image"
+            alt=""
+            src={ favorited ? blackHeartIcon : whiteHeartIcon }
             data-testid="favorite-btn"
-          >
-            Favorite
-          </button>
-        </div>
-      )}
+            onClick={ handleFavorite }
+          />
+          {linkCopied && <h3>Link copied!</h3>}
+        </div>)}
     </div>
   );
 }
-
 RecipeDetails.propTypes = {
   params: PropTypes.object,
 }.isRequired;
-
 export default RecipeDetails;

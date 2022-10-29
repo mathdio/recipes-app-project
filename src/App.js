@@ -56,6 +56,7 @@ function App() {
             render={ (props) => (<Profile
               { ...props }
               title="Profile"
+              footer
             />) }
           />
 

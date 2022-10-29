@@ -6,7 +6,7 @@ function Login({ history }) {
   const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
 
   const handleClickSubmit = async () => {
-    localStorage.setItem('user', JSON.stringify(email));
+    localStorage.setItem('user', JSON.stringify({ email }));
     history.push('/meals');
   };
 
