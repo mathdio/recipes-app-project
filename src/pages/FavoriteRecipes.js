@@ -10,17 +10,26 @@ const copy = require('clipboard-copy');
 function FavoriteRecipes({ title }) {
   const [favoriteRecipesArray, setFavoriteRecipesArray] = useState([]);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     const favoriteRecipes = localStorage.getItem('favoriteRecipes')
       ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
     setFavoriteRecipesArray(favoriteRecipes);
-  }, []);
+  }, [update]);
 
   const handleShare = (id, type) => {
     setLinkCopied(true);
     const { protocol, hostname, port } = window.location;
     copy(`${protocol}//${hostname}:${port}/${type}s/${id}`);
+  };
+
+  const handleRemoveFavorite = (id) => {
+    const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+    const newFavoriteArray = favoriteRecipes.filter((recipe) => recipe.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteArray));
+    setUpdate(!update);
   };
 
   return (
@@ -73,6 +82,7 @@ function FavoriteRecipes({ title }) {
             alt=""
             src={ blackHeartIcon }
             data-testid={ `${index}-horizontal-favorite-btn` }
+            onClick={ () => handleRemoveFavorite(recipe.id) }
           />
           {linkCopied && <p>Link copied!</p>}
         </div>
