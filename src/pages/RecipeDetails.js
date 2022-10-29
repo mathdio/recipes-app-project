@@ -62,6 +62,8 @@ function RecipeDetails({ match }) {
 
     if (pathname.includes('/meals')) {
       fetchMeal();
+      console.log(ingredientsArray);
+      console.log(measuresArray);
     } else if (pathname.includes('/drinks')) {
       fetchDrink();
     }
@@ -177,7 +179,7 @@ function RecipeDetails({ match }) {
               >
                 {ingredient[1]}
                 {' '}
-                {measuresArray[index]}
+                {measuresArray[index] && measuresArray[index][1]}
               </li>
             ))}
           </ul>
