@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import './FavoriteRecipes.css';
 
 const copy = require('clipboard-copy');
 
@@ -73,12 +75,17 @@ function FavoriteRecipes({ title }) {
       </button>
       {favoriteRecipesArray.map((recipe, index) => (
         <div key={ uuid() }>
-          <img
-            alt={ recipe.name }
-            data-testid={ `${index}-horizontal-image` }
-            src={ recipe.image }
-          />
-          <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <img
+              alt={ recipe.name }
+              data-testid={ `${index}-horizontal-image` }
+              src={ recipe.image }
+              className="favorite-card-img"
+            />
+          </Link>
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+          </Link>
           <p data-testid={ `${index}-horizontal-top-text` }>
             {recipe.type === 'meal'
               ? `${recipe.nationality} - ${recipe.category}`
