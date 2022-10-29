@@ -5,7 +5,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Profile({ title, history }) {
-  const email = JSON.parse(localStorage.getItem('user'));
+  const email = localStorage.getItem('user')
+    ? JSON.parse(localStorage.getItem('user')) : { email: '' };
 
   const handleClickLogout = () => {
     localStorage.setItem('user', null);
@@ -22,7 +23,7 @@ function Profile({ title, history }) {
       <p data-testid="profile-email">
         Email:
         {' '}
-        {email}
+        {email.email}
       </p>
       <Link to="/done-recipes">
         <button type="button" data-testid="profile-done-btn">Done Recipes</button>
