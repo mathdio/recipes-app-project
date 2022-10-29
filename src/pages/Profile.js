@@ -9,7 +9,10 @@ function Profile({ title, history }) {
     ? JSON.parse(localStorage.getItem('user')) : { email: '' };
 
   const handleClickLogout = () => {
-    localStorage.setItem('user', null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('doneRecipes');
+    localStorage.removeItem('favoriteRecipes');
+    localStorage.removeItem('inProgressRecipes');
     history.push('/');
   };
 
