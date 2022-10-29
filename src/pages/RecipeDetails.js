@@ -149,7 +149,7 @@ function RecipeDetails({ match }) {
               >
                 {ingredient[1]}
                 {' '}
-                {measuresArray[index][1]}
+                {measuresArray[index]}
               </li>
             ))}
           </ul>
