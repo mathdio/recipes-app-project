@@ -32,6 +32,17 @@ function FavoriteRecipes({ title }) {
     setUpdate(!update);
   };
 
+  const filterFavorite = (type) => {
+    const favoriteRecipes = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+    if (type) {
+      const filteredFavorite = favoriteRecipes.filter((recipe) => recipe.type === type);
+      setFavoriteRecipesArray(filteredFavorite);
+    } else {
+      setFavoriteRecipesArray(favoriteRecipes);
+    }
+  };
+
   return (
     <div>
       <Header
@@ -42,18 +53,21 @@ function FavoriteRecipes({ title }) {
       <button
         type="button"
         data-testid="filter-by-all-btn"
+        onClick={ () => filterFavorite() }
       >
         All
       </button>
       <button
         type="button"
         data-testid="filter-by-meal-btn"
+        onClick={ () => filterFavorite('meal') }
       >
         Meals
       </button>
       <button
         type="button"
         data-testid="filter-by-drink-btn"
+        onClick={ () => filterFavorite('drink') }
       >
         Drinks
       </button>
