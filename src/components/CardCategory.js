@@ -34,7 +34,7 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
       getDataMeals();
     }
   };
-
+  
   return (
     <div>
       <input

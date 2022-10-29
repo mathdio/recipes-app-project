@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Context from '../context/Context';
 
 function SearchBar() {
   const { searchRecipe, setSearchRecipe, filterValue,
     setFilterValue, setResultsData, resultKey, setResultKey } = useContext(Context);
 
+  const { pathname } = useLocation();
   const [prefixEndpoint, setPrefixEndpoint] = useState('');
   const [foodAPI, setFoodAPI] = useState('');
 
   useEffect(() => {
-    const { pathname } = window.location;
     if (pathname === '/meals') {
       setFoodAPI('themealdb');
       setResultKey(['meals', 'idMeal', 'Meal']);
@@ -17,7 +18,7 @@ function SearchBar() {
       setFoodAPI('thecocktaildb');
       setResultKey(['drinks', 'idDrink', 'Drink']);
     }
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (filterValue === 'ingredient') {
