@@ -32,8 +32,6 @@ function Recipes({ title, header, history, footer }) {
     getDataDrinks();
     getDrinksCatogories();
     getMealsCatogories();
-    // console.log(dataMeals);
-    // console.log(dataDrinks);
   }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories]);
 
   return (
@@ -62,6 +60,7 @@ function Recipes({ title, header, history, footer }) {
           <div>
             <CardCategory
               mealsCategories={ mealsCategories }
+              history={ history }
             />
             <CardRecipes
               dataMeals={ dataMeals }
@@ -72,6 +71,7 @@ function Recipes({ title, header, history, footer }) {
             <div>
               <CardCategory
                 drinksCategories={ drinksCategories }
+                history={ history }
               />
               <CardRecipes
                 dataDrinks={ dataDrinks }
