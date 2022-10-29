@@ -25,6 +25,7 @@ function RecipeDetails({ match }) {
   const [inProgress, setInProgress] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [favorited, setFavorited] = useState(false);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (pathname.includes('/meals')) {
@@ -71,6 +72,12 @@ function RecipeDetails({ match }) {
   }, []);
 
   useEffect(() => {
+    const doneRecipes = localStorage.getItem('doneRecipes')
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
+    const isDone = doneRecipes.some((recipe) => recipe.id === id);
+    if (isDone) {
+      setDone(true);
+    }
     const favoriteRecipes = localStorage.getItem('favoriteRecipes')
       ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
     const isFavorited = favoriteRecipes.some((recipe) => recipe.id === id);
@@ -168,15 +175,16 @@ function RecipeDetails({ match }) {
                 </p>
               </div>))}
           </div>
-          <Link to={ `${pathname}/in-progress` }>
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="start-recipe-button"
-            >
-              {inProgress ? 'Continue Recipe' : 'Start Recipe'}
-            </button>
-          </Link>
+          {!done && (
+            <Link to={ `${pathname}/in-progress` }>
+              <button
+                type="button"
+                data-testid="start-recipe-btn"
+                className="start-recipe-button"
+              >
+                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+              </button>
+            </Link>)}
           <input
             type="image"
             alt=""
