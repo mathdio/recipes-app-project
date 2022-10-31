@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 export default function CardRecipes({ dataMeals, dataDrinks }) {
-  console.log(dataDrinks);
   return (
     <div>
       {dataMeals
