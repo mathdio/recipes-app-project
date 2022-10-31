@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import Context from '../context/Context';
 import CardRecipes from '../components/CardRecipes';
 import CardCategory from '../components/CardCategory';
+import './Recipes.css';
 
 function Recipes({ title, header, history, footer }) {
   const { resultKey, resultsData, dataDrinks, dataMeals,
@@ -51,6 +52,7 @@ function Recipes({ title, header, history, footer }) {
               src={ recipe[`str${resultKey[2]}Thumb`] }
               alt={ recipe[`str${resultKey[2]}`] }
               data-testid={ `${index}-card-img` }
+              className="recipe-img"
             />
             <h4 data-testid={ `${index}-card-name` }>
               {recipe[`str${resultKey[2]}`]}

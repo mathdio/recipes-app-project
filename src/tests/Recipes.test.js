@@ -3,7 +3,6 @@ import { screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import firstLetterMeals from './mocks/firstLetterMeals';
-import notFoundMeal from './mocks/notFoundMeal';
 import renderWithRouter from './helpers/renderWithRouter';
 
 const SEARCH_TOP_BTN = 'search-top-btn';
@@ -68,38 +67,6 @@ it('testa se é a API é chamada corretamente com o filtro de nome', () => {
 
   userEvent.click(nameButton);
   userEvent.type(searchInput, 'Arrabiata');
-  userEvent.click(searchButton);
-});
-
-it('testa se é um alerta é chamado caso a pesquisa com filtro de primeira letra tenha duas letras', () => {
-  renderWithRouter(<App />);
-  const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
-  userEvent.click(searchIcon);
-
-  const firstLetterButton = screen.getByTestId('first-letter-search-radio');
-  const searchInput = screen.getByRole('textbox');
-  const searchButton = screen.getByRole('button', { name: /search/i });
-
-  userEvent.click(firstLetterButton);
-  userEvent.type(searchInput, 'aa');
-  userEvent.click(searchButton);
-});
-
-it('testa se um alerta é chamado caso não seja encontrada nenhuma receita', () => {
-  renderWithRouter(<App />);
-  const searchIcon = screen.getByTestId(SEARCH_TOP_BTN);
-  userEvent.click(searchIcon);
-
-  const nameButton = screen.getByTestId('name-search-radio');
-  const searchInput = screen.getByRole('textbox');
-  const searchButton = screen.getByRole('button', { name: /search/i });
-
-  global.fetch = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve(notFoundMeal),
-  }));
-
-  userEvent.click(nameButton);
-  userEvent.type(searchInput, 'feijoada');
   userEvent.click(searchButton);
 });
 
