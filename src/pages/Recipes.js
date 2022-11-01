@@ -29,7 +29,7 @@ function Recipes({ title, history }) {
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
-  }, [history, pathname, resultKey, resultsData]);
+  }, [resultsData]);
 
   useEffect(() => {
     if (pathname === '/meals') {
@@ -43,7 +43,7 @@ function Recipes({ title, history }) {
       getDataDrinks();
       getDrinksCatogories();
     }
-  }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories, pathname]);
+  }, [pathname]);
 
   return (
     <div>
