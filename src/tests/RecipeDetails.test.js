@@ -40,6 +40,30 @@ it('testa a renderização da página de detalhes de uma receita de meal em prog
   });
 });
 
+it('testa a renderização da página de detalhes de uma receita de meal feita', async () => {
+  global.fetch = jest.fn().mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(corbaMeal),
+  }).mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(recomendationDrinks),
+  });
+  const doneRecipe = {
+    id: '52977',
+    type: 'meal',
+    nationality: 'Turkish',
+    category: 'Side',
+    alcoholicOrNot: '',
+    name: 'Corba',
+    image: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+  };
+  localStorage.setItem('doneRecipes', JSON.stringify([doneRecipe]));
+  renderWithRouterAndContext(<App />, MEAL_DETAIL_PATHNAME);
+
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+});
+
 it('testa se a página detalhada da receita do drink GG renderiza corretamente', async () => {
   global.fetch = jest.fn().mockResolvedValueOnce({
     json: jest.fn().mockResolvedValue(ggDrink),
@@ -61,6 +85,30 @@ it('testa a renderização da página de detalhes de uma receita de drink em pro
     json: jest.fn().mockResolvedValue(recomendationMeals),
   });
   localStorage.setItem('inProgressRecipes', JSON.stringify({ meals: {}, drinks: { 15997: [] } }));
+  renderWithRouterAndContext(<App />, DRINK_DETAIL_PATHNAME);
+
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+});
+
+it('testa a renderização da página de detalhes de uma receita de drink favoritada', async () => {
+  global.fetch = jest.fn().mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(ggDrink),
+  }).mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(recomendationMeals),
+  });
+  const favoriteRecipes = {
+    id: '15997',
+    type: 'drink',
+    nationality: '',
+    category: 'Ordinary Drink',
+    alcoholicOrNot: 'Optional alcohol',
+    name: 'GG',
+    image: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
+  };
+  localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipes]));
   renderWithRouterAndContext(<App />, DRINK_DETAIL_PATHNAME);
 
   await waitFor(() => {
