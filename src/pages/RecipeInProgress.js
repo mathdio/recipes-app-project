@@ -29,7 +29,7 @@ function RecipeInProgress({ match }) {
   const [linkCopied, setLinkCopied] = useState(false);
   const [favorited, setFavorited] = useState(false);
   const [done, setDone] = useState(false);
-  const [ingredientsChecked, setIngredientesChecked] = useState([]);
+  // const [ingredientsChecked, setIngredientesChecked] = useState([]);
 
   useEffect(() => {
     if (pathname.includes('/meals')) {
@@ -125,18 +125,11 @@ function RecipeInProgress({ match }) {
   //   textDecoration: 'line-through solid rgb(0, 0, 0)',
   // };
 
-  const handleChecked = (ingredient) => {
-    setIngredientesChecked((prevState) => (
-      [...prevState, ingredient]
-    ));
-  };
+  // const handleChecked = (ingredient) => {
+  //   setIngredientesChecked((prevState) => (
+  //     [...prevState, ingredient]
+  //   ));
 
-  // const removeChecked = (ingredient) => {
-  //   const check = ingredientsChecked.some((e) => e === ingredient[1]);
-  //   return check;
-  // };
-
-  console.log(ingredientsChecked);
   return (
     <div>
       {ready && (
@@ -174,7 +167,6 @@ function RecipeInProgress({ match }) {
                   type="checkbox"
                   id={ index }
                   key={ uuid() }
-                  onClick={ () => handleChecked(ingredient) }
                 />
                 {ingredient[1]}
                 {' '}
