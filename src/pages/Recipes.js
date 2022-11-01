@@ -32,11 +32,14 @@ function Recipes({ title, header, history, footer }) {
   }, [history, pathname, resultKey, resultsData]);
 
   useEffect(() => {
-    getDataMeals();
-    getDataDrinks();
-    getDrinksCatogories();
-    getMealsCatogories();
-  }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories]);
+    if (pathname === '/meals') {
+      getDataMeals();
+      getMealsCatogories();
+    } else if (pathname === '/drinks') {
+      getDataDrinks();
+      getDrinksCatogories();
+    }
+  }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories, pathname]);
 
   return (
     <div>
