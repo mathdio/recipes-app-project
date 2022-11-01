@@ -6,7 +6,7 @@ import renderWithRouterAndContext from './helpers/renderWithRouterAndContext';
 
 // const FAVORITE_BTN = '1-horizontal-favorite-btn';
 const FAVORITE_PAGE_PATHNAME = '/favorite-recipes';
-const SHARE_BTN = '1-horizontal-share-btn';
+const SHARE_BTN = '0-horizontal-share-btn';
 const favoriteRecipesArray = [
   {
     id: '15997',
@@ -64,4 +64,11 @@ it('testa o clique no botão de compartilhar', async () => {
 
   const shareBtns = await screen.findAllByTestId(SHARE_BTN);
   userEvent.click(shareBtns[0]);
+});
+
+it('testa o clique no botão de compartilhar', () => {
+  renderWithRouterAndContext(<App />, FAVORITE_PAGE_PATHNAME);
+
+  const AllBtn = screen.getByRole('button', { name: /all/i });
+  userEvent.click(AllBtn);
 });

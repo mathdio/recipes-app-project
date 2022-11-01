@@ -13,11 +13,17 @@ function FavoriteRecipes({ title }) {
   const [favoriteRecipesArray, setFavoriteRecipesArray] = useState([]);
   const [linkCopied, setLinkCopied] = useState(false);
   const [update, setUpdate] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
 
   useEffect(() => {
     const favoriteRecipes = localStorage.getItem('favoriteRecipes')
       ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
     setFavoriteRecipesArray(favoriteRecipes);
+    if (favoriteRecipes.length > 0) {
+      setShowButtons(true);
+    } else {
+      setShowButtons(false);
+    }
   }, [update]);
 
   const handleShare = (id, type) => {
@@ -53,27 +59,31 @@ function FavoriteRecipes({ title }) {
         profile
         search={ false }
       />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => filterFavorite() }
-      >
-        All
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-meal-btn"
-        onClick={ () => filterFavorite('meal') }
-      >
-        Meals
-      </button>
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => filterFavorite('drink') }
-      >
-        Drinks
-      </button>
+      {showButtons && (
+        <div>
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ () => filterFavorite() }
+          >
+            All
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-meal-btn"
+            onClick={ () => filterFavorite('meal') }
+          >
+            Meals
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ () => filterFavorite('drink') }
+          >
+            Drinks
+          </button>
+        </div>
+      )}
       {favoriteRecipesArray.map((recipe, index) => (
         <div key={ uuid() }>
           <Link to={ `/${recipe.type}s/${recipe.id}` }>
