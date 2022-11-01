@@ -126,21 +126,16 @@ function RecipeInProgress({ match }) {
   // };
 
   const handleChecked = (ingredient) => {
-    if (ingredientsChecked.includes(ingredient)) {
-      console.log('entrei incluido');
-      const fill = ingredientsChecked.filter((e) => (
-        e !== ingredient
-      ));
-
-      setIngredientesChecked(fill);
-    }
-    if (ingredient) {
-      console.log('entrei adicionado');
-      setIngredientesChecked((prevState) => (
-        [...prevState, ingredient]
-      ));
-    }
+    setIngredientesChecked((prevState) => (
+      [...prevState, ingredient]
+    ));
   };
+
+  const removeChecked = (ingredient) => {
+    const check = ingredientsChecked.some((e) => e === ingredient[1]);
+    return check;
+  };
+
   console.log(ingredientsChecked);
   return (
     <div>
