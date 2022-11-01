@@ -7,7 +7,7 @@ import recomendationDrinks from './mocks/recomendationDrinks';
 import ggDrink from './mocks/ggDrink';
 import recomendationsMeals from './mocks/recomendationMeals';
 
-const SHARE_BTN = 'share-btn';
+// const SHARE_BTN = 'share-btn';
 
 it('testa se a página detalhada da receita de Corba renderiza corretamente', async () => {
   global.fetch = jest.fn().mockResolvedValueOnce({
