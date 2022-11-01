@@ -131,10 +131,10 @@ function RecipeInProgress({ match }) {
     ));
   };
 
-  const removeChecked = (ingredient) => {
-    const check = ingredientsChecked.some((e) => e === ingredient[1]);
-    return check;
-  };
+  // const removeChecked = (ingredient) => {
+  //   const check = ingredientsChecked.some((e) => e === ingredient[1]);
+  //   return check;
+  // };
 
   console.log(ingredientsChecked);
   return (

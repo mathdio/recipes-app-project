@@ -1,5 +1,6 @@
 import React from 'react';
-import { waitFor } from '@testing-library/react';
+import { waitFor, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import App from '../App';
 import corbaMeal from './mocks/corbaMeal';
 import renderWithRouterAndContext from './helpers/renderWithRouterAndContext';
@@ -7,7 +8,8 @@ import recomendationDrinks from './mocks/recomendationDrinks';
 import ggDrink from './mocks/ggDrink';
 import recomendationMeals from './mocks/recomendationMeals';
 
-// const SHARE_BTN = 'share-btn';
+const FAVORITE_BTN = 'favorite-btn';
+const SHARE_BTN = 'share-btn';
 const MEAL_DETAIL_PATHNAME = '/meals/52977';
 const DRINK_DETAIL_PATHNAME = '/drinks/15997';
 
@@ -115,4 +117,39 @@ it('testa a renderização da página de detalhes de uma receita de drink favori
     expect(global.fetch).toHaveBeenCalled();
     expect(global.fetch).toHaveBeenCalledTimes(2);
   });
+});
+
+it('testa se dois cliques no botão de favoritar, adiciona e retira a receita dos favoritos', async () => {
+  global.fetch = jest.fn().mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(ggDrink),
+  }).mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(recomendationMeals),
+  });
+
+  renderWithRouterAndContext(<App />, DRINK_DETAIL_PATHNAME);
+
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+  const favoriteBtn = await screen.findByTestId(FAVORITE_BTN);
+  userEvent.click(favoriteBtn);
+  userEvent.click(favoriteBtn);
+});
+
+it('testa o clique no botão de compartilhar', async () => {
+  global.fetch = jest.fn().mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(ggDrink),
+  }).mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(recomendationMeals),
+  });
+
+  renderWithRouterAndContext(<App />, DRINK_DETAIL_PATHNAME);
+
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+  const shareBtn = await screen.findByTestId(SHARE_BTN);
+  userEvent.click(shareBtn);
 });
