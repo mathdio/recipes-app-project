@@ -14,9 +14,11 @@ function SearchBar() {
     if (pathname === '/meals') {
       setFoodAPI('themealdb');
       setResultKey(['meals', 'idMeal', 'Meal']);
+      setSearchRecipe('');
     } else if (pathname === '/drinks') {
       setFoodAPI('thecocktaildb');
       setResultKey(['drinks', 'idDrink', 'Drink']);
+      setSearchRecipe('');
     }
   }, [pathname]);
 

@@ -9,7 +9,7 @@ import CardRecipes from '../components/CardRecipes';
 import CardCategory from '../components/CardCategory';
 import './Recipes.css';
 
-function Recipes({ title, header, history, footer }) {
+function Recipes({ title, history }) {
   const { resultKey, resultsData, dataDrinks, dataMeals,
     getDataMeals, getDataDrinks, getDrinksCatogories,
     getMealsCatogories, mealsCategories,
@@ -35,19 +35,23 @@ function Recipes({ title, header, history, footer }) {
     if (pathname === '/meals') {
       getDataMeals();
       getMealsCatogories();
+      setFirstRender(true);
+      setfirstRecipes([]);
     } else if (pathname === '/drinks') {
       getDataDrinks();
       getDrinksCatogories();
+      setFirstRender(true);
+      setfirstRecipes([]);
     }
   }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories, pathname]);
 
   return (
     <div>
-      {header && <Header
+      <Header
         title={ title }
         profile
         search
-      />}
+      />
       <div>
         {firstRecipes.map((recipe, index) => (
           <div key={ uuid() } data-testid={ `${index}-recipe-card` }>
@@ -86,10 +90,10 @@ function Recipes({ title, header, history, footer }) {
               />
             </div>
           ))}
-      {footer && <Footer
+      <Footer
         drink
         meal
-      />}
+      />
     </div>
   );
 }
