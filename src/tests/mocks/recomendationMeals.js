@@ -1,4 +1,4 @@
-const recomendationsMeals = {
+const recomendationMeals = {
   meals: [
     {
       idMeal: '52977',
@@ -333,4 +333,4 @@ const recomendationsMeals = {
   ],
 };
 
-export default recomendationsMeals;
+export default recomendationMeals;
