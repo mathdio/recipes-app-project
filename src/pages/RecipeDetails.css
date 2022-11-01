@@ -14,3 +14,7 @@
   left: 50%;
   position: fixed;
 }
+
+.recipe-details-img {
+  height: 15em;
+}

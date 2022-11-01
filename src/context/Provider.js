@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
-  // const [searchMeals, setSearchMeals] = useState('list');
-  // const [searchDrinks, setSearchDrinks] = useState('list');
   const [dataMeals, setDataMeals] = useState();
   const [dataDrinks, setDataDrinks] = useState([]);
   const [email, setEmail] = useState('');

@@ -7,8 +7,9 @@ import Footer from '../components/Footer';
 import Context from '../context/Context';
 import CardRecipes from '../components/CardRecipes';
 import CardCategory from '../components/CardCategory';
+import './Recipes.css';
 
-function Recipes({ title, header, history, footer }) {
+function Recipes({ title, history }) {
   const { resultKey, resultsData, dataDrinks, dataMeals,
     getDataMeals, getDataDrinks, getDrinksCatogories,
     getMealsCatogories, mealsCategories,
@@ -28,22 +29,29 @@ function Recipes({ title, header, history, footer }) {
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
     }
-  }, [history, pathname, resultKey, resultsData]);
+  }, [resultsData]);
 
   useEffect(() => {
-    getDataMeals();
-    getDataDrinks();
-    getDrinksCatogories();
-    getMealsCatogories();
-  }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories]);
+    if (pathname === '/meals') {
+      setfirstRecipes([]);
+      setFirstRender(true);
+      getDataMeals();
+      getMealsCatogories();
+    } else if (pathname === '/drinks') {
+      setfirstRecipes([]);
+      setFirstRender(true);
+      getDataDrinks();
+      getDrinksCatogories();
+    }
+  }, [pathname]);
 
   return (
     <div>
-      {header && <Header
+      <Header
         title={ title }
         profile
         search
-      />}
+      />
       <div>
         {firstRecipes.map((recipe, index) => (
           <div key={ uuid() } data-testid={ `${index}-recipe-card` }>
@@ -51,6 +59,7 @@ function Recipes({ title, header, history, footer }) {
               src={ recipe[`str${resultKey[2]}Thumb`] }
               alt={ recipe[`str${resultKey[2]}`] }
               data-testid={ `${index}-card-img` }
+              className="recipe-img"
             />
             <h4 data-testid={ `${index}-card-name` }>
               {recipe[`str${resultKey[2]}`]}
@@ -81,10 +90,10 @@ function Recipes({ title, header, history, footer }) {
               />
             </div>
           ))}
-      {footer && <Footer
+      <Footer
         drink
         meal
-      />}
+      />
     </div>
   );
 }

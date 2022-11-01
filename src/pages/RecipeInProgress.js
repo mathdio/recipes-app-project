@@ -129,7 +129,6 @@ function RecipeInProgress({ match }) {
   //   setIngredientesChecked((prevState) => (
   //     [...prevState, ingredient]
   //   ));
-  // };
 
   return (
     <div>
