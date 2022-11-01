@@ -40,12 +40,12 @@ function App() {
       />
       <Route
         path="/meals"
-        render={ (props) => <Recipes { ...props } title="Meals" header footer /> }
+        render={ (props) => <Recipes { ...props } title="Meals" /> }
       />
 
       <Route
         path="/drinks"
-        render={ (props) => <Recipes { ...props } title="Drinks" header footer /> }
+        render={ (props) => <Recipes { ...props } title="Drinks" /> }
       />
 
       <Route

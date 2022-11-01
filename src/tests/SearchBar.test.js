@@ -5,9 +5,11 @@ import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter';
 import Provider from '../context/Provider';
 import firstLetterMeals from './mocks/firstLetterMeals';
-import firstLetterDrinks from './mocks/firstLetterDrinks';
+// import firstLetterDrinks from './mocks/firstLetterDrinks';
 
 const SEARCH_TOP_BTN = 'search-top-btn';
+const EMAIL_TEST = 'teste@teste.com';
+const DRINKS_BOTTOM_BTN = 'drinks-bottom-btn';
 
 it('testa a procura de drinks com filtro de nome', () => {
   renderWithRouter(
@@ -19,11 +21,11 @@ it('testa a procura de drinks com filtro de nome', () => {
   const passwordInput = screen.getByRole('textbox', { name: /senha/i });
   const buttonSubmit = screen.getByRole('button', { name: /enter/i });
 
-  userEvent.type(emailInput, 'teste@teste.com');
+  userEvent.type(emailInput, EMAIL_TEST);
   userEvent.type(passwordInput, '1234567');
   userEvent.click(buttonSubmit);
 
-  const drinksIcon = screen.getByTestId('drinks-bottom-btn');
+  const drinksIcon = screen.getByTestId(DRINKS_BOTTOM_BTN);
   expect(drinksIcon).toBeInTheDocument();
   userEvent.click(drinksIcon);
   const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
@@ -56,11 +58,11 @@ it('testa a procura de drinks com filtro de primeira letra', () => {
   const passwordInput = screen.getByRole('textbox', { name: /senha/i });
   const buttonSubmit = screen.getByRole('button', { name: /enter/i });
 
-  userEvent.type(emailInput, 'teste@teste.com');
+  userEvent.type(emailInput, EMAIL_TEST);
   userEvent.type(passwordInput, '1234567');
   userEvent.click(buttonSubmit);
 
-  const drinksIcon = screen.getByTestId('drinks-bottom-btn');
+  const drinksIcon = screen.getByTestId(DRINKS_BOTTOM_BTN);
   expect(drinksIcon).toBeInTheDocument();
   userEvent.click(drinksIcon);
   const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
@@ -87,11 +89,11 @@ it('testa a procura de drinks com filtro de ingrediente', () => {
   const passwordInput = screen.getByRole('textbox', { name: /senha/i });
   const buttonSubmit = screen.getByRole('button', { name: /enter/i });
 
-  userEvent.type(emailInput, 'teste@teste.com');
+  userEvent.type(emailInput, EMAIL_TEST);
   userEvent.type(passwordInput, '1234567');
   userEvent.click(buttonSubmit);
 
-  const drinksIcon = screen.getByTestId('drinks-bottom-btn');
+  const drinksIcon = screen.getByTestId(DRINKS_BOTTOM_BTN);
   expect(drinksIcon).toBeInTheDocument();
   userEvent.click(drinksIcon);
   const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
@@ -118,11 +120,11 @@ it('testa se é um alerta é chamado caso a pesquisa com filtro de primeira letr
   const passwordInput = screen.getByRole('textbox', { name: /senha/i });
   const buttonSubmit = screen.getByRole('button', { name: /enter/i });
 
-  userEvent.type(emailInput, 'teste@teste.com');
+  userEvent.type(emailInput, EMAIL_TEST);
   userEvent.type(passwordInput, '1234567');
   userEvent.click(buttonSubmit);
 
-  const drinksIcon = screen.getByTestId('drinks-bottom-btn');
+  const drinksIcon = screen.getByTestId(DRINKS_BOTTOM_BTN);
   expect(drinksIcon).toBeInTheDocument();
   userEvent.click(drinksIcon);
   const drinksHeading = screen.getByRole('heading', { name: /drinks/i });
@@ -159,7 +161,7 @@ it('testa se um alerta é chamado caso não seja encontrada nenhuma receita', as
   const passwordInput = screen.getByRole('textbox', { name: /senha/i });
   const buttonSubmit = screen.getByRole('button', { name: /enter/i });
 
-  userEvent.type(emailInput, 'teste@teste.com');
+  userEvent.type(emailInput, EMAIL_TEST);
   userEvent.type(passwordInput, '1234567');
   userEvent.click(buttonSubmit);
 
@@ -194,7 +196,7 @@ it('testa se na página /meals a API é chamada após pesquisar com filtro de no
   const passwordInput = screen.getByRole('textbox', { name: /senha/i });
   const buttonSubmit = screen.getByRole('button', { name: /enter/i });
 
-  userEvent.type(emailInput, 'teste@teste.com');
+  userEvent.type(emailInput, EMAIL_TEST);
   userEvent.type(passwordInput, '1234567');
   userEvent.click(buttonSubmit);
 

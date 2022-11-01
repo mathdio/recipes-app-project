@@ -33,15 +33,15 @@ function Recipes({ title, history }) {
 
   useEffect(() => {
     if (pathname === '/meals') {
+      setfirstRecipes([]);
+      setFirstRender(true);
       getDataMeals();
       getMealsCatogories();
-      setFirstRender(true);
-      setfirstRecipes([]);
     } else if (pathname === '/drinks') {
+      setfirstRecipes([]);
+      setFirstRender(true);
       getDataDrinks();
       getDrinksCatogories();
-      setFirstRender(true);
-      setfirstRecipes([]);
     }
   }, [getDataDrinks, getDataMeals, getDrinksCatogories, getMealsCatogories, pathname]);
 
