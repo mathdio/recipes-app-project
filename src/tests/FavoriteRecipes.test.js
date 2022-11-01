@@ -4,8 +4,9 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouterAndContext from './helpers/renderWithRouterAndContext';
 
-const FAVORITE_BTN = '1-horizontal-favorite-btn';
+// const FAVORITE_BTN = '1-horizontal-favorite-btn';
 const FAVORITE_PAGE_PATHNAME = '/favorite-recipes';
+const SHARE_BTN = '1-horizontal-share-btn';
 const favoriteRecipesArray = [
   {
     id: '15997',
@@ -31,8 +32,10 @@ it('testa se ao clicar no botão de desfavoritar, a receita é retirada da lista
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipesArray));
   renderWithRouterAndContext(<App />, FAVORITE_PAGE_PATHNAME);
 
-  const favoriteBtns = await screen.findAllByTestId(FAVORITE_BTN);
-  userEvent.click(favoriteBtns[0]);
+  const favoriteBtnTwo = await screen.findByTestId('1-horizontal-favorite-btn');
+  userEvent.click(favoriteBtnTwo);
+  const favoriteBtnOne = await screen.findByTestId('0-horizontal-favorite-btn');
+  userEvent.click(favoriteBtnOne);
 });
 
 it('testa se as comidas são filtradas ao clicar no botão', () => {
@@ -52,4 +55,13 @@ it('testa se os drinks são filtrados ao clicar no botão', () => {
 
   const AllBtn = screen.getByRole('button', { name: /all/i });
   userEvent.click(AllBtn);
+});
+
+it('testa o clique no botão de compartilhar', async () => {
+  localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipesArray));
+  window.document.execCommand = jest.fn(() => true);
+  renderWithRouterAndContext(<App />, FAVORITE_PAGE_PATHNAME);
+
+  const shareBtns = await screen.findAllByTestId(SHARE_BTN);
+  userEvent.click(shareBtns[0]);
 });

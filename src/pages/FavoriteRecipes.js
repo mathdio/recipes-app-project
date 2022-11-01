@@ -24,6 +24,7 @@ function FavoriteRecipes({ title }) {
     setLinkCopied(true);
     const { protocol, hostname, port } = window.location;
     copy(`${protocol}//${hostname}:${port}/${type}s/${id}`);
+    // navigator.clipboard.writeText(`${protocol}//${hostname}:${port}/${type}s/${id}`);
   };
 
   const handleRemoveFavorite = (id) => {

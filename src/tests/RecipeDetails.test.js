@@ -119,7 +119,7 @@ it('testa a renderização da página de detalhes de uma receita de drink favori
   });
 });
 
-it('testa se dois cliques no botão de favoritar, adiciona e retira a receita dos favoritos', async () => {
+it('testa na página de um drink se dois cliques no botão de favoritar, adiciona e retira a receita dos favoritos', async () => {
   global.fetch = jest.fn().mockResolvedValueOnce({
     json: jest.fn().mockResolvedValue(ggDrink),
   }).mockResolvedValueOnce({
@@ -137,12 +137,31 @@ it('testa se dois cliques no botão de favoritar, adiciona e retira a receita do
   userEvent.click(favoriteBtn);
 });
 
+it('testa na página de um prato se dois cliques no botão de favoritar, adiciona e retira a receita dos favoritos', async () => {
+  global.fetch = jest.fn().mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(corbaMeal),
+  }).mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(recomendationDrinks),
+  });
+
+  renderWithRouterAndContext(<App />, MEAL_DETAIL_PATHNAME);
+
+  await waitFor(() => {
+    expect(global.fetch).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+  });
+  const favoriteBtn = await screen.findByTestId(FAVORITE_BTN);
+  userEvent.click(favoriteBtn);
+  userEvent.click(favoriteBtn);
+});
+
 it('testa o clique no botão de compartilhar', async () => {
   global.fetch = jest.fn().mockResolvedValueOnce({
     json: jest.fn().mockResolvedValue(ggDrink),
   }).mockResolvedValueOnce({
     json: jest.fn().mockResolvedValue(recomendationMeals),
   });
+  window.document.execCommand = jest.fn(() => true);
 
   renderWithRouterAndContext(<App />, DRINK_DETAIL_PATHNAME);
 
