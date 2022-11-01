@@ -89,6 +89,7 @@ function RecipeDetails({ match }) {
   const handleShare = () => {
     setLinkCopied(true);
     copy(`${window.location.href}`);
+    // navigator.clipboard.writeText(`${window.location.href}`);
   };
 
   const handleFavorite = () => {
