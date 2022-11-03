@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
+import './Login.css';
 
 function Login({ history }) {
   const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
