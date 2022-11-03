@@ -1,25 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import './CardRecipes.css';
 
 export default function CardRecipes({ dataMeals, dataDrinks }) {
   return (
-    <div>
+    <div className="cards__container">
       {dataMeals
         && dataMeals.map((meal, index) => (
           <Link key={ index } to={ `/meals/${meal.idMeal}` }>
             <span
               data-testid={ `${index}-recipe-card` }
+              className="cards"
             >
               <img
                 src={ meal.strMealThumb }
                 alt={ meal.strMeal }
                 data-testid={ `${index}-card-img` }
-                width="100px"
               />
               <h3 data-testid={ `${index}-card-name` }>{meal.strMeal}</h3>
               <p>
-                Pais:
+                País:
                 {meal.strArea}
               </p>
             </span>

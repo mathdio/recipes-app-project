@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
 import Context from '../context/Context';
+import './CardCategory.css';
 
 export default function CardCategory({ drinksCategories, mealsCategories, history }) {
   const { setDataMeals, setDataDrinks, getDataMeals,
@@ -49,12 +50,13 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
   };
 
   return (
-    <div>
+    <div className="card_category_container">
       <input
         type="button"
         value="All"
         data-testid="All-category-filter"
         onClick={ removeAllFilters }
+        className="buttons__category"
       />
       {mealsCategories && mealsCategories.map((categorie, index) => (
         <input
@@ -63,6 +65,7 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
           type="button"
           onClick={ () => sendMealsValue(categorie.strCategory) }
           value={ categorie.strCategory }
+          className="buttons__category"
         />
       ))}
       {drinksCategories
@@ -73,6 +76,7 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
             type="button"
             onClick={ () => sendDrinksValue(categorie.strCategory) }
             value={ categorie.strCategory }
+            className="buttons__category"
           />
         ))}
     </div>

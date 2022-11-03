@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import './Header.css';
 
 function Header({ title, profile, search }) {
   const [searchInput, setSearchInput] = useState(false);
@@ -13,32 +14,41 @@ function Header({ title, profile, search }) {
   };
 
   return (
-    <header>
-      {profile && (
-        <Link to="/profile">
-          <input
+    <div className="div_header">
+      <header className="header__container">
+        <h1
+          data-testid="page-title"
+          className="title_container"
+        >
+          {title}
+        </h1>
+        <div className="icons__container">
+          {profile && (
+            <Link to="/profile">
+              <input
+                type="image"
+                src={ profileIcon }
+                alt=""
+                data-testid="profile-top-btn"
+                className="profile__icon"
+                width="30px"
+              />
+            </Link>)}
+          {search && <input
             type="image"
-            src={ profileIcon }
+            src={ searchIcon }
             alt=""
-            data-testid="profile-top-btn"
-          />
-        </Link>)}
-      {search && <input
-        type="image"
-        src={ searchIcon }
-        alt=""
-        data-testid="search-top-btn"
-        onClick={ handleSearchClick }
-      />}
-      <h1
-        data-testid="page-title"
-      >
-        {title}
-      </h1>
+            data-testid="search-top-btn"
+            onClick={ handleSearchClick }
+            className="search__icon"
+            width="30px"
+          />}
+        </div>
+      </header>
       {searchInput && (
         <SearchBar />
       )}
-    </header>
+    </div>
   );
 }
 

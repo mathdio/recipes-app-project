@@ -1,0 +1,42 @@
+@media screen and (min-width: 360px) {
+  .search_container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form__search__bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 338px;
+    height: 88px;
+    background: #316A50;
+    border-radius: 10px;
+    padding-bottom: 33px;
+    gap: 3px;
+    margin-top: 10px;
+  }
+
+  .search__input {
+    width: 338px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #B1B1B1;
+    border-radius: 5px;
+  }
+
+  .radio_buttons_container {
+    display: flex;
+    justify-content: space-around;
+    color: #FFFFFF;
+    gap: 15px;
+  }
+
+  .button__search {
+    width: 208.16px;
+    height: 25px;
+    border-radius: 5px;
+    border: solid white 1px;
+    /* background-color: purple; */
+  }
+}

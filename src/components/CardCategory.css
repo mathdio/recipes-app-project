@@ -1,0 +1,18 @@
+@media screen and (min-width: 360px) {
+  .card_category_container {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
+  }
+
+  .buttons__category {
+    width: 45.28px;
+    height: 45.28px;
+    left: 13px;
+    top: 288px;
+    font-size: 8px;
+    border: 1.81121px solid #316A50;
+    border-radius: 45.2802px;
+  }
+}

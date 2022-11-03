@@ -1,5 +1,51 @@
 /* aplica somente a partir de 360px */
 @media screen and (min-width: 360px) { 
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .span-container {
+    background-color: #316A50;
+    height: 350px;
+    width: 360px;
+    position: absolute;
+    z-index: 1;
+  }
 
+  .form {
+    position: absolute;
+    z-index: 3;
+    top: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    gap: 10px;
+  }
+
+  .logo-login {
+    width: 300px;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .input__box {
+    width: 276px;
+    height: 40px;
+    left: 42px;
+    top: 564px;
+    border-radius: 5px;
+    border: solid white 1px;
+  }
+
+  .login__button {
+    width: 276px;
+    height: 40px;
+    left: 42px;
+    top: 662px;
+    background: #487f5f;
+    border-radius: 5px
+  }
 }
