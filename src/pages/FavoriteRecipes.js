@@ -60,7 +60,7 @@ function FavoriteRecipes({ title }) {
         search={ false }
       />
       {showButtons && (
-        <div>
+        <div className="buttons__container">
           <button
             type="button"
             data-testid="filter-by-all-btn"
@@ -84,41 +84,47 @@ function FavoriteRecipes({ title }) {
           </button>
         </div>
       )}
-      {favoriteRecipesArray.map((recipe, index) => (
-        <div key={ uuid() }>
-          <Link to={ `/${recipe.type}s/${recipe.id}` }>
-            <img
-              alt={ recipe.name }
-              data-testid={ `${index}-horizontal-image` }
-              src={ recipe.image }
-              className="favorite-card-img"
-            />
-          </Link>
-          <Link to={ `/${recipe.type}s/${recipe.id}` }>
-            <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
-          </Link>
-          <p data-testid={ `${index}-horizontal-top-text` }>
-            {recipe.type === 'meal'
-              ? `${recipe.nationality} - ${recipe.category}`
-              : `${recipe.alcoholicOrNot}`}
-          </p>
-          <input
-            type="image"
-            alt=""
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            onClick={ () => handleShare(recipe.id, recipe.type) }
-          />
-          <input
-            type="image"
-            alt=""
-            src={ blackHeartIcon }
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            onClick={ () => handleRemoveFavorite(recipe.id) }
-          />
-          {linkCopied && <p>Link copied!</p>}
-        </div>
-      ))}
+      <div className="favorite__container">
+        {favoriteRecipesArray.map((recipe, index) => (
+          <div key={ uuid() } className="cards">
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
+              <img
+                alt={ recipe.name }
+                data-testid={ `${index}-horizontal-image` }
+                src={ recipe.image }
+                className="favorite-card-img"
+              />
+            </Link>
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
+              <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
+            </Link>
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              {recipe.type === 'meal'
+                ? `${recipe.nationality} - ${recipe.category}`
+                : `${recipe.alcoholicOrNot}`}
+            </p>
+            <div className="icons__container">
+              <input
+                type="image"
+                alt=""
+                data-testid={ `${index}-horizontal-share-btn` }
+                src={ shareIcon }
+                onClick={ () => handleShare(recipe.id, recipe.type) }
+                width="20px"
+              />
+              <input
+                type="image"
+                alt=""
+                src={ blackHeartIcon }
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                onClick={ () => handleRemoveFavorite(recipe.id) }
+                width="20px"
+              />
+            </div>
+            {linkCopied && <p>Link copied!</p>}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
