@@ -34,7 +34,7 @@
 }
 
 .start-recipe-button {
-  position: fixed;
+  /* position: fixed; */
   bottom: 3px;
   left: 50%;
   border: white solid 1px;

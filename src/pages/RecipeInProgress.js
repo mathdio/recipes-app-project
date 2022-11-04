@@ -138,6 +138,7 @@ function RecipeInProgress({ match }) {
             data-testid="recipe-photo"
             src={ food[foodKeys[1]] }
             alt={ food[foodKeys[0]] }
+            width="140px"
           />
           <h1 data-testid="recipe-title">
             {food[foodKeys[0]]}
