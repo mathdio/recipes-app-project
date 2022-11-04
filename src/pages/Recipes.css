@@ -1,4 +1,27 @@
-.recipe-img {
-  height: 15em;
-  width: 15em;
+@media screen and (min-width: 360px) {
+  .cards__container_filter {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+    /* margin-top: 105px; */
+  }
+
+  .cards {
+    display: flex;
+    width: 140px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 5px;
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    color: black;
+    -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+    text-align-last: center;
+  }
+
+  .recipe-img {
+    width: 8em;
+  }
 }

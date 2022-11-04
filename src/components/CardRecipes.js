@@ -21,6 +21,7 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
               <h3 data-testid={ `${index}-card-name` }>{meal.strMeal}</h3>
               <p>
                 País:
+                {' '}
                 {meal.strArea}
               </p>
             </span>
@@ -31,6 +32,7 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
           <Link key={ index } to={ `/drinks/${drink.idDrink}` }>
             <span
               data-testid={ `${index}-recipe-card` }
+              className="cards"
             >
               <img
                 src={ drink.strDrinkThumb }
@@ -41,6 +43,7 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
               <h3 data-testid={ `${index}-card-name` }>{drink.strDrink}</h3>
               <p>
                 Copo:
+                {' '}
                 {drink.strGlass}
               </p>
             </span>

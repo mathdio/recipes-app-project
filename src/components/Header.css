@@ -1,10 +1,10 @@
 @media screen and (min-width: 360px) {
   .div_header {
-    position: sticky;
+    /* position: fixed; */
   }
   .header__container {
     background: #316A50;
-    /* position: sticky; */
+    position: fixed;
     width: 100%;
     height: 52px;
     left: 0px;
@@ -12,6 +12,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .search_bar_container {
+    position: fixed;
   }
 
   .title_container {

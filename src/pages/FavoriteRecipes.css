@@ -10,7 +10,7 @@
   }
   .buttons__container button {
     width: 70px;
-    /* padding: 5px; */
+    margin-top: 50px;
     border: white solid 1px;
     background-color: #316A50;
     color: white;

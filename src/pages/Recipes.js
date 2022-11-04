@@ -52,9 +52,9 @@ function Recipes({ title, history }) {
         profile
         search
       />
-      <div>
+      <div className="cards__container_filter">
         {firstRecipes.map((recipe, index) => (
-          <div key={ uuid() } data-testid={ `${index}-recipe-card` }>
+          <div key={ uuid() } data-testid={ `${index}-recipe-card` } className="cards">
             <img
               src={ recipe[`str${resultKey[2]}Thumb`] }
               alt={ recipe[`str${resultKey[2]}`] }

@@ -46,7 +46,7 @@ function Header({ title, profile, search }) {
         </div>
       </header>
       {searchInput && (
-        <SearchBar />
+        <SearchBar className="search_bar_container" />
       )}
     </div>
   );
