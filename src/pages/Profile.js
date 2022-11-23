@@ -28,13 +28,19 @@ function Profile({ title, history }) {
         search={ false }
       />
       <main className="Profile__buttons-container">
-        <p data-testid="profile-email">
+        <p
+          data-testid="profile-email"
+          className="email-container"
+        >
           Email:
           {' '}
           {email.email}
         </p>
         <Link to="/done-recipes">
-          <label htmlFor="profile-done-btn">
+          <label
+            className="Profile__label-button"
+            htmlFor="profile-done-btn"
+          >
             <input
               id="profile-done-btn"
               type="image"
@@ -48,7 +54,10 @@ function Profile({ title, history }) {
           {/* <button type="button" data-testid="profile-done-btn">Done Recipes</button> */}
         </Link>
         <Link to="/favorite-recipes">
-          <label htmlFor="profile-favorite-btn">
+          <label
+            htmlFor="profile-favorite-btn"
+            className="Profile__label-button"
+          >
             <input
               id="profile-favorite-btn"
               type="image"
@@ -63,7 +72,10 @@ function Profile({ title, history }) {
             Favorite Recipes
           </button> */}
         </Link>
-        <label htmlFor="profile-logout-btn">
+        <label
+          htmlFor="profile-logout-btn"
+          className="Profile__label-button"
+        >
           <input
             id="profile-logout-btn"
             type="image"
