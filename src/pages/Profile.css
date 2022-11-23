@@ -1,0 +1,9 @@
+@media screen and (min-width: 360px) {
+  /* .Profile__buttons-container {
+    display: flex;
+  } */
+
+  .profile-page-icons {
+    width: 50px;
+  }
+}
