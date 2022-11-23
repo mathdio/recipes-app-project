@@ -1,4 +1,10 @@
 # :construction: README em construção ! :construction:
+## Project developed in group with:
+[André Gross](https://github.com/andreugross)
+
+[Anderson Reges](https://github.com/Anderson-Reges)
+
+[Gustavo Cunha](https://github.com/llGustavoCunhall)
 <!-- Olá, Tryber!
 Esse é apenas um arquivo inicial para o README do seu projeto.
 É essencial que você preencha esse documento por conta própria, ok?
