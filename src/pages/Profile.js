@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -9,8 +9,15 @@ import logoutIcon from '../images/logoutIcon.svg';
 import './Profile.css';
 
 function Profile({ title, history }) {
-  const email = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user')) : { email: '' };
+  const [userEmail, setUserEmail] = useState();
+
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      history.push('/');
+    } else {
+      setUserEmail(localStorage.getItem('user'));
+    }
+  }, []);
 
   const handleClickLogout = () => {
     localStorage.removeItem('user');
@@ -34,7 +41,7 @@ function Profile({ title, history }) {
         >
           Email:
           {' '}
-          {email.email}
+          {userEmail}
         </p>
         <Link to="/done-recipes">
           <label
