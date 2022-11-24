@@ -2,7 +2,7 @@
   .search_container {
     display: flex;
     justify-content: center;
-    margin-top: 55px;
+    margin-top: 15px;
   }
 
   .form__search__bar {
@@ -15,8 +15,8 @@
     border-radius: 10px;
     padding-bottom: 33px;
     gap: 3px;
-    margin-top: 10px;
-    position: fixed;
+    /* margin-top: 10px; */
+    position: sticky;
   }
 
   .search__input {

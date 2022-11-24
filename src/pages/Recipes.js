@@ -18,6 +18,7 @@ function Recipes({ title, history }) {
   const { pathname } = useLocation();
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
+  const [showFirstRecipes, setShowFirstRecipes] = useState(false);
 
   useEffect(() => {
     if (resultsData.length === 1) {
@@ -28,6 +29,7 @@ function Recipes({ title, history }) {
       const twelveRecipes = resultsData.filter((_recipe, index) => index < recipesLimit);
       setfirstRecipes(twelveRecipes);
       setFirstRender(false);
+      setShowFirstRecipes(true);
     }
   }, [resultsData]);
 
@@ -52,21 +54,26 @@ function Recipes({ title, history }) {
         profile
         search
       />
-      <div className="cards__container_filter">
-        {firstRecipes.map((recipe, index) => (
-          <div key={ uuid() } data-testid={ `${index}-recipe-card` } className="cards">
-            <img
-              src={ recipe[`str${resultKey[2]}Thumb`] }
-              alt={ recipe[`str${resultKey[2]}`] }
-              data-testid={ `${index}-card-img` }
-              className="recipe-img"
-            />
-            <h4 data-testid={ `${index}-card-name` }>
-              {recipe[`str${resultKey[2]}`]}
-            </h4>
-          </div>
-        ))}
-      </div>
+      {showFirstRecipes && (
+        <div className="Recipes__cards-container-filter">
+          {firstRecipes.map((recipe, index) => (
+            <div
+              key={ uuid() }
+              data-testid={ `${index}-recipe-card` }
+              className="Recipes__card"
+            >
+              <img
+                src={ recipe[`str${resultKey[2]}Thumb`] }
+                alt={ recipe[`str${resultKey[2]}`] }
+                data-testid={ `${index}-card-img` }
+                className="Recipes__card-img"
+              />
+              <p data-testid={ `${index}-card-name` }>
+                {recipe[`str${resultKey[2]}`]}
+              </p>
+            </div>
+          ))}
+        </div>)}
       {firstRender
         && (title === 'Meals' ? (
           <div>

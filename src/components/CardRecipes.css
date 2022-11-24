@@ -1,39 +1,45 @@
 @media screen and (min-width: 360px) {
-  .cards__container {
+  .CardRecipes__cards-container {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-around;
+    margin-bottom: 60px;
   }
 
-  .cards {
-    display: flex;
-    width: 140px;
-    flex-direction: column;
+  .CardRecipes__card {
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    gap: 5px;
     background-color: white;
     border-radius: 10px 10px 10px 10px;
     color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    min-height: 262px;
+    text-align: center;
+    width: 160px;
     -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
-    text-align-last: center;
+  }
+
+  .CardRecipes__title {
+    font-weight: 700;
   }
 
   a:link {
     text-decoration: none;
   }
 
-  .cards img {
-    width: 140px;
+  .CardRecipes__card img {
     border-radius: 10px 10px 0px 0px;
-  }
-  body {
-    background-color: #D1D0CE;
+    width: 160px;
   }
 
-  .icons__container {
-    gap: 10px;
-    margin-bottom: 10px;
+  .CardRecipes__card p {
+    margin: 5px;
+  }
+
+  body {
+    background-color: #D1D0CE;
   }
 }
