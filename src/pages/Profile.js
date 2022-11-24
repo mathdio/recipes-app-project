@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
@@ -9,8 +9,15 @@ import logoutIcon from '../images/logoutIcon.svg';
 import './Profile.css';
 
 function Profile({ title, history }) {
-  const email = localStorage.getItem('user')
-    ? JSON.parse(localStorage.getItem('user')) : { email: '' };
+  const [userEmail, setUserEmail] = useState();
+
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      history.push('/');
+    } else {
+      setUserEmail(localStorage.getItem('user'));
+    }
+  }, []);
 
   const handleClickLogout = () => {
     localStorage.removeItem('user');
@@ -28,13 +35,19 @@ function Profile({ title, history }) {
         search={ false }
       />
       <main className="Profile__buttons-container">
-        <p data-testid="profile-email">
+        <p
+          data-testid="profile-email"
+          className="email-container"
+        >
           Email:
           {' '}
-          {email.email}
+          {userEmail}
         </p>
         <Link to="/done-recipes">
-          <label htmlFor="profile-done-btn">
+          <label
+            className="Profile__label-button"
+            htmlFor="profile-done-btn"
+          >
             <input
               id="profile-done-btn"
               type="image"
@@ -48,7 +61,10 @@ function Profile({ title, history }) {
           {/* <button type="button" data-testid="profile-done-btn">Done Recipes</button> */}
         </Link>
         <Link to="/favorite-recipes">
-          <label htmlFor="profile-favorite-btn">
+          <label
+            htmlFor="profile-favorite-btn"
+            className="Profile__label-button"
+          >
             <input
               id="profile-favorite-btn"
               type="image"
@@ -63,7 +79,10 @@ function Profile({ title, history }) {
             Favorite Recipes
           </button> */}
         </Link>
-        <label htmlFor="profile-logout-btn">
+        <label
+          htmlFor="profile-logout-btn"
+          className="Profile__label-button"
+        >
           <input
             id="profile-logout-btn"
             type="image"

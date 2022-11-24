@@ -5,22 +5,27 @@ import './CardRecipes.css';
 
 export default function CardRecipes({ dataMeals, dataDrinks }) {
   return (
-    <div className="cards__container">
+    <div className="CardRecipes__cards-container">
       {dataMeals
         && dataMeals.map((meal, index) => (
           <Link key={ index } to={ `/meals/${meal.idMeal}` }>
             <span
               data-testid={ `${index}-recipe-card` }
-              className="cards"
+              className="CardRecipes__card"
             >
               <img
                 src={ meal.strMealThumb }
                 alt={ meal.strMeal }
                 data-testid={ `${index}-card-img` }
               />
-              <h3 data-testid={ `${index}-card-name` }>{meal.strMeal}</h3>
+              <p
+                data-testid={ `${index}-card-name` }
+                className="CardRecipes__title"
+              >
+                {meal.strMeal}
+              </p>
               <p>
-                País:
+                Nationality:
                 {' '}
                 {meal.strArea}
               </p>
@@ -32,17 +37,21 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
           <Link key={ index } to={ `/drinks/${drink.idDrink}` }>
             <span
               data-testid={ `${index}-recipe-card` }
-              className="cards"
+              className="CardRecipes__card"
             >
               <img
                 src={ drink.strDrinkThumb }
                 alt={ drink.strDrink }
                 data-testid={ `${index}-card-img` }
-                width="100px"
               />
-              <h3 data-testid={ `${index}-card-name` }>{drink.strDrink}</h3>
+              <p
+                data-testid={ `${index}-card-name` }
+                className="CardRecipes__title"
+              >
+                {drink.strDrink}
+              </p>
               <p>
-                Copo:
+                Cup:
                 {' '}
                 {drink.strGlass}
               </p>
