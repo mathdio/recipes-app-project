@@ -1,51 +1,82 @@
-/* aplica somente a partir de 360px */
-@media screen and (min-width: 360px) { 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@media screen and (min-width: 360px) {
+  :root {
+    --box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+    --border-radius: 5px 5px 5px 5px;
+    --green-color: #316a50;
+    --dark-green-color: #273B32;
   }
 
-  .span-container {
-    background-color: #316A50;
-    height: 350px;
-    width: 360px;
-    position: absolute;
-    z-index: 1;
-  }
-
-  .form {
-    position: absolute;
-    z-index: 3;
-    top: 400px;
+  .Login__main-container {
+    align-items: center;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .Login__logo-container {
     align-items: center;
-    margin: 10px;
+    background-color: #316a50;
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+  }
+  .Login__form-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+  }
+
+  .Login__form {
+    background-color: white;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: var(--box-shadow);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    height: 80%;
+    justify-content: center;
+    width: 30%;
+  }
+
+  .Login__label-container {
+    color: var(--green-color);
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .Login__label-container input {
+    background-color: black;
+    border: black;
+    border-radius: 0.3rem;
+    color: white;
+    height: 40px;
+    padding: 10px;
+    width: 276px;
   }
 
   .logo-login {
-    width: 300px;
-    position: absolute;
-    z-index: 2;
+    width: 400px;
   }
 
-  .input__box {
-    width: 276px;
+  .Login__button {
+    background-color: var(--dark-green-color);
+    border: 0;
+    border-radius: var(--border-radius);
+    box-shadow: 0px 2px 10px 0px rgb(0 0 0);
+    color: white;
     height: 40px;
-    left: 42px;
-    top: 564px;
-    border-radius: 5px;
-    border: solid white 1px;
+    margin-top: 15px;
+    width: 276px;
   }
 
-  .login__button {
-    width: 276px;
-    height: 40px;
-    left: 42px;
-    top: 662px;
-    background: #487f5f;
-    border-radius: 5px
+  .Login__button:enabled {
+    background-color: var(--green-color);
   }
 }
