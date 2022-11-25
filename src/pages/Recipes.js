@@ -48,7 +48,7 @@ function Recipes({ title, history }) {
   }, [pathname]);
 
   return (
-    <div>
+    <div className="Recipes__main-container">
       <Header
         title={ title }
         profile
@@ -76,7 +76,7 @@ function Recipes({ title, history }) {
         </div>)}
       {firstRender
         && (title === 'Meals' ? (
-          <div>
+          <div className="Recipes__category-recipes-container">
             <CardCategory
               mealsCategories={ mealsCategories }
               history={ history }
@@ -87,7 +87,7 @@ function Recipes({ title, history }) {
           </div>
         )
           : (
-            <div>
+            <div className="Recipes__category-recipes-container">
               <CardCategory
                 drinksCategories={ drinksCategories }
                 history={ history }

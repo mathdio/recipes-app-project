@@ -18,7 +18,7 @@
     margin-bottom: 10px;
     min-height: 262px;
     text-align: center;
-    width: 160px;
+    width: 140px;
     -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
   }
 
@@ -32,7 +32,7 @@
 
   .CardRecipes__card img {
     border-radius: 10px 10px 0px 0px;
-    width: 160px;
+    width: 140px;
   }
 
   .CardRecipes__card p {

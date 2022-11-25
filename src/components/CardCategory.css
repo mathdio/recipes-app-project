@@ -1,18 +1,19 @@
-@media screen and (min-width: 360px) {
-  .card_category_container {
-    padding-top: 10px;
+/* @media screen and (min-width: 360px) {
+  .CardCategory__container {
+    border: solid red 1px;
     display: flex;
+    flex-wrap: row wrap;
     justify-content: space-around;
-    padding-bottom: 10px;
+    width: 360px;
   }
 
-  .buttons__category {
-    width: 45.28px;
-    height: 45.28px;
+  .CardCategory__button {
+    width: 90px;
+    height: 90px;
     left: 13px;
     top: 288px;
     font-size: 8px;
     border: 1.8px solid #316A50;
-    border-radius: 45.2802px;
+    border-radius: 45.2px;
   }
-}
+} */

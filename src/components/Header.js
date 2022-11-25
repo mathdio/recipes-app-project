@@ -14,11 +14,11 @@ function Header({ title, profile, search }) {
   };
 
   return (
-    <div className="div_header">
-      <header className="header__container">
+    <div className="Header__main-div">
+      <header className="Header__header-container">
         <h1
           data-testid="page-title"
-          className="title_container"
+          className="Header__title-container"
         >
           {title}
         </h1>
@@ -30,7 +30,7 @@ function Header({ title, profile, search }) {
                 src={ profileIcon }
                 alt=""
                 data-testid="profile-top-btn"
-                className="profile__icon"
+                className="Header__profile-icon"
                 width="30px"
               />
             </Link>)}
@@ -40,13 +40,13 @@ function Header({ title, profile, search }) {
             alt=""
             data-testid="search-top-btn"
             onClick={ handleSearchClick }
-            className="search__icon"
+            className="Header__icons-container"
             width="30px"
           />}
         </div>
       </header>
       {searchInput && (
-        <SearchBar className="search_bar_container" />
+        <SearchBar />
       )}
     </div>
   );

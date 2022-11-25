@@ -7,7 +7,7 @@ import './Footer.css';
 
 export default function Footer({ drink, meal }) {
   return (
-    <footer data-testid="footer" className="footer">
+    <footer data-testid="footer" className="Footer__footer-container">
       {drink && (
         <Link to="/drinks">
           <img
