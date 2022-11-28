@@ -1,44 +1,50 @@
 @media screen and (min-width: 360px) {
-  .search_container {
+  :root {
+    --green-color: #316A50;
+    --box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+  }
+
+  .SearchBar__container {
+    box-shadow: var(--box-shadow);
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 10px;
   }
 
-  .form__search__bar {
+  .SearchBar__form {
+    align-items: center;
+    background: var(--green-color);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 338px;
-    height: 88px;
-    background: #316A50;
-    border-radius: 10px;
-    padding-bottom: 33px;
-    gap: 3px;
-    /* margin-top: 10px; */
-    position: sticky;
+    height: 8rem;
+    /* position: sticky; */
+    width: 94%;
   }
 
-  .search__input {
-    width: 338px;
-    height: 40px;
+  .SearchBar__input {
     background: #FFFFFF;
     border: 1px solid #B1B1B1;
     border-radius: 5px;
+    height: 2.5rem;
+    margin-top: -1px;
+    padding: 0.7rem;
+    width: 100.11%;
   }
 
-  .radio_buttons_container {
-    display: flex;
-    justify-content: space-around;
+  .SearchBar__radio-btn-container {
     color: #FFFFFF;
-    gap: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0.6rem;
+    width: 100%;
   }
 
-  .button__search {
-    width: 208.16px;
-    height: 25px;
+  .SearchBar__search-btn {
     border-radius: 5px;
     border: solid white 1px;
-    /* background-color: purple; */
+    height: 2rem;
+    margin-top: 0.6rem;
+    width: 62%;
   }
 }

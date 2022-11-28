@@ -48,18 +48,18 @@ function SearchBar() {
   };
 
   return (
-    <div className="search_container">
-      <form className="form__search__bar">
+    <div className="SearchBar__container">
+      <form className="SearchBar__form">
         <input
           type="text"
-          className="search__input"
+          className="SearchBar__input"
           data-testid="search-input"
           placeholder="Search"
           id="search-input"
           value={ searchRecipe }
           onChange={ ({ target }) => setSearchRecipe(target.value) }
         />
-        <div className="radio_buttons_container">
+        <div className="SearchBar__radio-btn-container">
           <label htmlFor="ingredient-search-radio" className="radio_button">
             <input
               data-testid="ingredient-search-radio"
@@ -69,6 +69,7 @@ function SearchBar() {
               value="ingredient"
               onChange={ ({ target }) => setFilterValue(target.value) }
             />
+            {' '}
             Ingredient
           </label>
           <label htmlFor="name-search-radio" className="radio_button">
@@ -80,6 +81,7 @@ function SearchBar() {
               value="name"
               onChange={ ({ target }) => setFilterValue(target.value) }
             />
+            {' '}
             Name
           </label>
           <label htmlFor="first-letter-search-radio" className="radio_button">
@@ -91,12 +93,13 @@ function SearchBar() {
               value="first-letter"
               onChange={ ({ target }) => setFilterValue(target.value) }
             />
+            {' '}
             First letter
           </label>
         </div>
         <button
           type="button"
-          className="button__search"
+          className="SearchBar__search-btn"
           data-testid="exec-search-btn"
           onClick={ handleFetchAPI }
         >

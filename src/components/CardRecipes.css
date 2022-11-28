@@ -1,6 +1,5 @@
 @media screen and (min-width: 360px) {
   .CardRecipes__cards-container {
-    border: red solid 1px;
     margin-bottom: 52px;
     display: grid;
     grid-template-columns: auto auto; 
@@ -24,7 +23,6 @@
 
   .CardRecipes__title {
     font-weight: 700;
-    /* margin-top: 5px; */
   }
 
   a:link {
