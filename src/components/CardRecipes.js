@@ -38,7 +38,11 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
         ))}
       { dataDrinks
         && dataDrinks.map((drink, index) => (
-          <Link key={ index } to={ `/drinks/${drink.idDrink}` }>
+          <Link
+            key={ index }
+            to={ `/drinks/${drink.idDrink}` }
+            className="CardRecipes__card-link"
+          >
             <div
               data-testid={ `${index}-recipe-card` }
               className="CardRecipes__card"

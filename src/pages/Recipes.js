@@ -39,11 +39,13 @@ function Recipes({ title, history }) {
       setFirstRender(true);
       getDataMeals();
       getMealsCatogories();
+      setShowFirstRecipes(false);
     } else if (pathname === '/drinks') {
       setfirstRecipes([]);
       setFirstRender(true);
       getDataDrinks();
       getDrinksCatogories();
+      setShowFirstRecipes(false);
     }
   }, [pathname]);
 
@@ -76,7 +78,7 @@ function Recipes({ title, history }) {
         </div>)}
       {firstRender
         && (title === 'Meals' ? (
-          <div className="Recipes__category-recipes-container">
+          <div>
             <CardCategory
               mealsCategories={ mealsCategories }
               history={ history }
@@ -87,7 +89,7 @@ function Recipes({ title, history }) {
           </div>
         )
           : (
-            <div className="Recipes__category-recipes-container">
+            <div>
               <CardCategory
                 drinksCategories={ drinksCategories }
                 history={ history }

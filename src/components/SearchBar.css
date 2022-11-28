@@ -6,13 +6,13 @@
   }
 
   .SearchBar__container {
-    box-shadow: var(--box-shadow);
     display: flex;
     justify-content: center;
     margin-top: 10px;
   }
 
   .SearchBar__form {
+    box-shadow: var(--box-shadow);
     align-items: center;
     background: var(--green-color);
     border-radius: 10px;

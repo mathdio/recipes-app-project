@@ -1,13 +1,12 @@
 @media screen and (min-width: 360px) {
   .CardRecipes__cards-container {
+    border: red solid 1px;
     margin-bottom: 52px;
     display: grid;
-    grid-template-columns: auto auto; 
-    justify-content: center;
+    grid-template-columns: auto auto;
     width: 100%;
   }
   .CardRecipes__card-link {
-    align-self: center;
     background-color: white;
     border-radius: 10px 10px 10px 10px;
     color: black;
@@ -15,9 +14,10 @@
     flex-direction: column;
     justify-self: center;
     margin-bottom: 15px;
+    max-width: 90%;
     min-height: 275px;
+    min-width: 90%;
     text-align: center;
-    width: 90%;
     -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
   }
 
