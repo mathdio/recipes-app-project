@@ -117,30 +117,40 @@ function RecipeDetails({ match }) {
   };
 
   return (
-    <div className="container">
+    <main className="RecipeDetails__main-container">
       {ready && (
-        <div className="recipe__container">
-          <img
-            data-testid="recipe-photo"
-            src={ food[foodKeys[1]] }
-            alt={ food[foodKeys[0]] }
-            className="recipe-details-img"
-          />
-          <h1 data-testid="recipe-title">
-            {food[foodKeys[0]]}
-          </h1>
-          {foodKeys[0] === 'strDrink' ? (
-            <p data-testid="recipe-category">
-              Drink:
-              {' '}
-              {food.strAlcoholic}
-            </p>
-          ) : (
-            <p data-testid="recipe-category">
-              Category:
-              {' '}
-              { food[foodKeys[2]] }
-            </p>)}
+        <div className="RecipeDetails__recipe-container">
+          <div className="RecipeDetails__img-container">
+            <div className="RecipeDetails__title-container">
+              <p data-testid="recipe-title" className="RecipeDetails__recipe-title">
+                {food[foodKeys[0]]}
+              </p>
+            </div>
+            {foodKeys[0] === 'strDrink' ? (
+              <p
+                data-testid="recipe-category"
+                className="RecipeDetails__recipe-category"
+              >
+                Drink:
+                {' '}
+                {food.strAlcoholic}
+              </p>
+            ) : (
+              <p
+                data-testid="recipe-category"
+                className="RecipeDetails__recipe-category"
+              >
+                Category:
+                {' '}
+                { food[foodKeys[2]] }
+              </p>)}
+            <img
+              data-testid="recipe-photo"
+              src={ food[foodKeys[1]] }
+              alt={ food[foodKeys[0]] }
+              className="RecipeDetails__recipe-details-img"
+            />
+          </div>
           <ul>
             Ingredients:
             {' '}
@@ -163,21 +173,21 @@ function RecipeDetails({ match }) {
               title={ food[foodKeys[0]] }
               src={ food[foodKeys[4]] }
             />)}
-          <div className="recomendations-scroll">
+          <div className="RecipeDetails__recomendations-scroll">
             <p>Recomendations:</p>
             {' '}
             {recomendations.map((recomendation, index) => (
               <div
                 key={ uuid() }
                 data-testid={ `${index}-recommendation-card` }
-                className="recomendation-card"
+                className="RecipeDetails__recomendation-card"
               >
                 <p data-testid={ `${index}-recommendation-title` }>
                   {recomendation[recomendKey]}
                 </p>
               </div>))}
           </div>
-          <div className="icons__container">
+          <div className="RecipeDetails__icons-container">
             <input
               type="image"
               alt=""
@@ -199,13 +209,13 @@ function RecipeDetails({ match }) {
               <button
                 type="button"
                 data-testid="start-recipe-btn"
-                className="start-recipe-button"
+                className="RecipeDetails__start-button"
               >
                 {inProgress ? 'Continue Recipe' : 'Start Recipe'}
               </button>
             </Link>)}
         </div>)}
-    </div>
+    </main>
   );
 }
 RecipeDetails.propTypes = {
