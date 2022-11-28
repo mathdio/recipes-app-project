@@ -1,7 +1,8 @@
 @media screen and (min-width: 360px) {
   :root {
-    --green-color: #316A50;
     --box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+    --gray-color: #D1D0CE;
+    --green-color: #316A50;
   }
 
   .SearchBar__container {
@@ -35,16 +36,18 @@
   .SearchBar__radio-btn-container {
     color: #FFFFFF;
     display: flex;
+    font-size: 1.25rem;
     justify-content: space-evenly;
-    margin-top: 0.6rem;
+    margin-top: 0.4rem;
     width: 100%;
   }
 
   .SearchBar__search-btn {
+    background-color: var(--gray-color);
     border-radius: 5px;
-    border: solid white 1px;
+    border: solid var(--gray-color) 1px;
     height: 2rem;
-    margin-top: 0.6rem;
+    margin-top: 0.4rem;
     width: 62%;
   }
 }
