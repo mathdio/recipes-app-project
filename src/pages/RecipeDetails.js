@@ -144,6 +144,25 @@ function RecipeDetails({ match }) {
                 {' '}
                 { food[foodKeys[2]] }
               </p>)}
+            <div className="RecipeDetails__icons-container">
+              <input
+                type="image"
+                alt=""
+                data-testid="share-btn"
+                src={ shareIcon }
+                onClick={ handleShare }
+                className="RecipeDetails__icons"
+              />
+              <input
+                type="image"
+                alt=""
+                src={ favorited ? blackHeartIcon : whiteHeartIcon }
+                data-testid="favorite-btn"
+                onClick={ handleFavorite }
+                className="RecipeDetails__icons"
+              />
+              {linkCopied && <h3>Link copied!</h3>}
+            </div>
             <img
               data-testid="recipe-photo"
               src={ food[foodKeys[1]] }
@@ -186,23 +205,6 @@ function RecipeDetails({ match }) {
                   {recomendation[recomendKey]}
                 </p>
               </div>))}
-          </div>
-          <div className="RecipeDetails__icons-container">
-            <input
-              type="image"
-              alt=""
-              data-testid="share-btn"
-              src={ shareIcon }
-              onClick={ handleShare }
-            />
-            <input
-              type="image"
-              alt=""
-              src={ favorited ? blackHeartIcon : whiteHeartIcon }
-              data-testid="favorite-btn"
-              onClick={ handleFavorite }
-            />
-            {linkCopied && <h3>Link copied!</h3>}
           </div>
           {!done && (
             <Link to={ `${pathname}/in-progress` }>
