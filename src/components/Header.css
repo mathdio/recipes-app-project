@@ -16,12 +16,14 @@
     padding-top: 10px;
   }
 
-  .Header__profile-icon {
-    display: flex;
-  }
-
   .Header__icons-container {
     display: flex;
     gap: 10px;
+  }
+
+  .Header__icons {
+    display: flex;
+    height: 40px;
+    width: 40px;
   }
 }

@@ -22,7 +22,7 @@ function Header({ title, profile, search }) {
         >
           {title}
         </h1>
-        <div className="icons__container">
+        <div className="Header__icons-container">
           {profile && (
             <Link to="/profile">
               <input
@@ -30,8 +30,7 @@ function Header({ title, profile, search }) {
                 src={ profileIcon }
                 alt=""
                 data-testid="profile-top-btn"
-                className="Header__profile-icon"
-                width="30px"
+                className="Header__icons"
               />
             </Link>)}
           {search && <input
@@ -40,8 +39,7 @@ function Header({ title, profile, search }) {
             alt=""
             data-testid="search-top-btn"
             onClick={ handleSearchClick }
-            className="Header__icons-container"
-            width="30px"
+            className="Header__icons"
           />}
         </div>
       </header>
