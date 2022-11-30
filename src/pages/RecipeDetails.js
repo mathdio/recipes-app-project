@@ -28,6 +28,13 @@ function RecipeDetails({ match }) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
+    if (linkCopied) {
+      alert('Link copied!');
+      setLinkCopied(false);
+    }
+  }, [linkCopied]);
+
+  useEffect(() => {
     if (pathname.includes('/meals')) {
       fetchMeal({
         id,
@@ -161,7 +168,7 @@ function RecipeDetails({ match }) {
                 onClick={ handleFavorite }
                 className="RecipeDetails__icons"
               />
-              {linkCopied && <h3>Link copied!</h3>}
+              {/* {linkCopied && <h3>Link copied!</h3>} */}
             </div>
             <img
               data-testid="recipe-photo"
@@ -170,9 +177,8 @@ function RecipeDetails({ match }) {
               className="RecipeDetails__recipe-details-img"
             />
           </div>
-          <ul>
-            Ingredients:
-            {' '}
+          <h1 className="RecipeDetails__ingredients-title">Ingredients</h1>
+          <ul className="RecipeDetails__ingredients-container">
             {ingredientsArray.map((ingredient, index) => (
               <li
                 key={ uuid() }
