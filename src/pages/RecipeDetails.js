@@ -189,7 +189,8 @@ function RecipeDetails({ match }) {
                 {measuresArray[index] && measuresArray[index][1]}
               </li>))}
           </ul>
-          <p data-testid="instructions">
+          <h1 className="RecipeDetails__instructions-title">Instructions</h1>
+          <p data-testid="instructions" className="RecipeDetails__instructions-container">
             {food[foodKeys[3]]}
           </p>
           {foodKeys[0] === 'strMeal' && (
