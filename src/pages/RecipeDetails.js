@@ -199,28 +199,35 @@ function RecipeDetails({ match }) {
               title={ food[foodKeys[0]] }
               src={ food[foodKeys[4]] }
             />)}
-          <div className="RecipeDetails__recomendations-scroll">
-            <p>Recomendations:</p>
-            {' '}
+          <h1 className="RecipeDetails__recoommended-title">Recoommended</h1>
+          <div className="RecipeDetails__recoommended-container">
             {recomendations.map((recomendation, index) => (
               <div
                 key={ uuid() }
                 data-testid={ `${index}-recommendation-card` }
                 className="RecipeDetails__recomendation-card"
               >
+                <img
+                  alt={ recomendation[recomendKey[0]] }
+                  src={ recomendation[recomendKey[1]] }
+                  className="RecipeDetails__recomendation-img"
+                />
                 <p data-testid={ `${index}-recommendation-title` }>
-                  {recomendation[recomendKey]}
+                  {recomendation[recomendKey[0]]}
                 </p>
               </div>))}
           </div>
           {!done && (
-            <Link to={ `${pathname}/in-progress` }>
+            <Link
+              to={ `${pathname}/in-progress` }
+              className="RecipeDetails__start-button-link"
+            >
               <button
                 type="button"
                 data-testid="start-recipe-btn"
                 className="RecipeDetails__start-button"
               >
-                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+                {inProgress ? 'Continue Recipe' : 'START RECIPE'}
               </button>
             </Link>)}
         </div>)}

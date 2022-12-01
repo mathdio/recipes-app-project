@@ -56,7 +56,7 @@ const fetchRecomendationsMeals = async ({ setRecomendations, setRecomendKey }) =
   const sixRecomendations = dataRecomendation.meals
     .filter((meal, index) => index < recomendationsLimit);
   setRecomendations(sixRecomendations);
-  setRecomendKey('strMeal');
+  setRecomendKey(['strMeal', 'strMealThumb']);
 };
 
 const fetchRecomendationsDrinks = async ({ setRecomendations, setRecomendKey }) => {
@@ -67,7 +67,7 @@ const fetchRecomendationsDrinks = async ({ setRecomendations, setRecomendKey }) 
   const sixRecomendations = dataRecomendation.drinks
     .filter((drink, index) => index < recomendationsLimit);
   setRecomendations(sixRecomendations);
-  setRecomendKey('strDrink');
+  setRecomendKey(['strDrink', 'strDrinkThumb']);
 };
 
 export { fetchMeal, fetchDrink, fetchRecomendationsMeals, fetchRecomendationsDrinks };

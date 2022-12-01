@@ -63,7 +63,7 @@
     width: 30px;
   }
 
-  .RecipeDetails__ingredients-title, .RecipeDetails__instructions-title {
+  .RecipeDetails__ingredients-title, .RecipeDetails__instructions-title, .RecipeDetails__recoommended-title  {
     font-weight: 700;
     margin-left: 20px;
     margin-top: 30px;
@@ -84,28 +84,59 @@
     width: 90%;
   }
 
-  .RecipeDetails__recomendations-scroll {
+  .RecipeDetails__recoommended-container {
+    border: solid white 1px;
+    border-radius: 5px 5px 5px 5px;
     overflow-x: scroll;
     white-space: nowrap;
-    border-radius: 5px 5px 5px 5px;
-    -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
-    margin: 10px;
-    background-color: white;
-    text-align: center;
+    width: 90%;
+    /* -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0); */
   }
 
+/* abaixo o css para  manter o scroll sempre visível*/
+/* fonte: https://stackoverflow.com/questions/1202425/making-the-main-scrollbar-always-visible */
+
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 0px 0px 5px 5px;
+    background-color: rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  }
+
+  /* fonte: https://stackoverflow.com/questions/1202425/making-the-main-scrollbar-always-visible */
+
   .RecipeDetails__recomendation-card {
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
     display: inline-block;
-    margin: 5px;
-    width: 50%;
+    height: 80%;
+    margin: 4%;
+    text-align: center;
+    width: 40%;
+    -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+  }
+
+  .RecipeDetails__recomendation-img {
+    border-radius: 5px 5px 0px 0px;
+    width: 100%;
+  }
+
+  .RecipeDetails__start-button-link {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    width: 90%;
   }
 
   .RecipeDetails__start-button {
-    bottom: 3px;
-    left: 50%;
-    border: white solid 1px;
     background-color: #316A50;
-    padding: 10px;
-    border-radius: 45.2802px;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 700;
+    height: 40px;
+    width: 100%;
   }
 }
