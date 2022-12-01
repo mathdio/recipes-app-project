@@ -39,16 +39,18 @@ function Recipes({ title, history }) {
       setFirstRender(true);
       getDataMeals();
       getMealsCatogories();
+      setShowFirstRecipes(false);
     } else if (pathname === '/drinks') {
       setfirstRecipes([]);
       setFirstRender(true);
       getDataDrinks();
       getDrinksCatogories();
+      setShowFirstRecipes(false);
     }
   }, [pathname]);
 
   return (
-    <div>
+    <div className="Recipes__main-container">
       <Header
         title={ title }
         profile

@@ -50,13 +50,13 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
   };
 
   return (
-    <div className="card_category_container">
+    <div className="CardCategory__container">
       <input
         type="button"
         value="All"
         data-testid="All-category-filter"
         onClick={ removeAllFilters }
-        className="buttons__category"
+        className="CardCategory__button"
       />
       {mealsCategories && mealsCategories.map((categorie, index) => (
         <input
@@ -65,7 +65,7 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
           type="button"
           onClick={ () => sendMealsValue(categorie.strCategory) }
           value={ categorie.strCategory }
-          className="buttons__category"
+          className="CardCategory__button"
         />
       ))}
       {drinksCategories
@@ -76,7 +76,7 @@ export default function CardCategory({ drinksCategories, mealsCategories, histor
             type="button"
             onClick={ () => sendDrinksValue(categorie.strCategory) }
             value={ categorie.strCategory }
-            className="buttons__category"
+            className="CardCategory__button"
           />
         ))}
     </div>

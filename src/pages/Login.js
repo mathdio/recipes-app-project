@@ -13,35 +13,37 @@ function Login({ history }) {
   };
 
   return (
-    <div className="box">
-      <div className="container">
-        <span className="span-container"> </span>
+    <main className="Login__main-container">
+      <div className="Login__logo-container">
         <img
           src={ logo }
           alt="logo"
           className="logo-login"
         />
-        <form className="form">
-          {/* <label htmlFor="email" className="input__box">
+      </div>
+      <div className="Login__form-container">
+        <form className="Login__form">
+          <label htmlFor="email" className="Login__label-container">
             E-mail
             <input
+              className="input"
               data-testid="email-input"
               name="email"
               id="email"
               value={ email }
               onChange={ ({ target }) => setEmail(target.value) }
             />
-          </label> */}
-          <input
-            data-testid="email-input"
-            placeholder="E-mail"
-            className="input__box"
-            name="email"
-            id="email"
-            value={ email }
-            onChange={ ({ target }) => setEmail(target.value) }
-          />
-          {/* <label htmlFor="password" className="input__box">
+          </label>
+          {/* <input
+          data-testid="email-input"
+          placeholder="E-mail"
+          className="Login__label-container"
+          name="email"
+          id="email"
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
+        /> */}
+          <label htmlFor="password" className="Login__label-container">
             Senha
             <input
               data-testid="password-input"
@@ -50,18 +52,18 @@ function Login({ history }) {
               value={ password }
               onChange={ ({ target }) => setPassword(target.value) }
             />
-          </label> */}
-          <input
-            data-testid="password-input"
-            placeholder="Password"
-            className="input__box"
-            name="password"
-            id="password"
-            value={ password }
-            onChange={ ({ target }) => setPassword(target.value) }
-          />
+          </label>
+          {/* <input
+          data-testid="password-input"
+          placeholder="Password"
+          className="input__box"
+          name="password"
+          id="password"
+          value={ password }
+          onChange={ ({ target }) => setPassword(target.value) }
+        /> */}
           <button
-            className="login__button"
+            className="Login__button"
             type="button"
             data-testid="login-submit-btn"
             disabled={ submitDisabled }
@@ -71,7 +73,8 @@ function Login({ history }) {
           </button>
         </form>
       </div>
-    </div>
+
+    </main>
   );
 }
 

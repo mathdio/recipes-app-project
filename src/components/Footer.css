@@ -1,12 +1,12 @@
 @media screen and (min-width: 360px) {
-  .footer {
+  .Footer__footer-container {
+    align-items: center;
     background: #316A50;
-    position: fixed;
-    width: 100%;
-    height: 52px;
     bottom: 0px;
     display: flex;
+    height: 52px;
     justify-content: space-around;
-    align-items: center;
+    position: fixed;
+    width: 100%;
   }
 }

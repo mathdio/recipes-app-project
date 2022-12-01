@@ -8,8 +8,12 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
     <div className="CardRecipes__cards-container">
       {dataMeals
         && dataMeals.map((meal, index) => (
-          <Link key={ index } to={ `/meals/${meal.idMeal}` }>
-            <span
+          <Link
+            key={ index }
+            to={ `/meals/${meal.idMeal}` }
+            className="CardRecipes__card-link"
+          >
+            <div
               data-testid={ `${index}-recipe-card` }
               className="CardRecipes__card"
             >
@@ -29,13 +33,17 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
                 {' '}
                 {meal.strArea}
               </p>
-            </span>
+            </div>
           </Link>
         ))}
       { dataDrinks
         && dataDrinks.map((drink, index) => (
-          <Link key={ index } to={ `/drinks/${drink.idDrink}` }>
-            <span
+          <Link
+            key={ index }
+            to={ `/drinks/${drink.idDrink}` }
+            className="CardRecipes__card-link"
+          >
+            <div
               data-testid={ `${index}-recipe-card` }
               className="CardRecipes__card"
             >
@@ -55,7 +63,7 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
                 {' '}
                 {drink.strGlass}
               </p>
-            </span>
+            </div>
           </Link>
         ))}
     </div>

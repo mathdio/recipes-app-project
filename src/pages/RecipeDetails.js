@@ -28,6 +28,13 @@ function RecipeDetails({ match }) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
+    if (linkCopied) {
+      alert('Link copied!');
+      setLinkCopied(false);
+    }
+  }, [linkCopied]);
+
+  useEffect(() => {
     if (pathname.includes('/meals')) {
       fetchMeal({
         id,
@@ -117,33 +124,61 @@ function RecipeDetails({ match }) {
   };
 
   return (
-    <div className="container">
+    <main className="RecipeDetails__main-container">
       {ready && (
-        <div className="recipe__container">
-          <img
-            data-testid="recipe-photo"
-            src={ food[foodKeys[1]] }
-            alt={ food[foodKeys[0]] }
-            className="recipe-details-img"
-          />
-          <h1 data-testid="recipe-title">
-            {food[foodKeys[0]]}
-          </h1>
-          {foodKeys[0] === 'strDrink' ? (
-            <p data-testid="recipe-category">
-              Drink:
-              {' '}
-              {food.strAlcoholic}
-            </p>
-          ) : (
-            <p data-testid="recipe-category">
-              Category:
-              {' '}
-              { food[foodKeys[2]] }
-            </p>)}
-          <ul>
-            Ingredients:
-            {' '}
+        <div className="RecipeDetails__recipe-container">
+          <div className="RecipeDetails__img-container">
+            <div className="RecipeDetails__title-container">
+              <p data-testid="recipe-title" className="RecipeDetails__recipe-title">
+                {food[foodKeys[0]]}
+              </p>
+            </div>
+            {foodKeys[0] === 'strDrink' ? (
+              <p
+                data-testid="recipe-category"
+                className="RecipeDetails__recipe-category"
+              >
+                Drink:
+                {' '}
+                {food.strAlcoholic}
+              </p>
+            ) : (
+              <p
+                data-testid="recipe-category"
+                className="RecipeDetails__recipe-category"
+              >
+                Category:
+                {' '}
+                { food[foodKeys[2]] }
+              </p>)}
+            <div className="RecipeDetails__icons-container">
+              <input
+                type="image"
+                alt=""
+                data-testid="share-btn"
+                src={ shareIcon }
+                onClick={ handleShare }
+                className="RecipeDetails__icons"
+              />
+              <input
+                type="image"
+                alt=""
+                src={ favorited ? blackHeartIcon : whiteHeartIcon }
+                data-testid="favorite-btn"
+                onClick={ handleFavorite }
+                className="RecipeDetails__icons"
+              />
+              {/* {linkCopied && <h3>Link copied!</h3>} */}
+            </div>
+            <img
+              data-testid="recipe-photo"
+              src={ food[foodKeys[1]] }
+              alt={ food[foodKeys[0]] }
+              className="RecipeDetails__recipe-details-img"
+            />
+          </div>
+          <h1 className="RecipeDetails__ingredients-title">Ingredients</h1>
+          <ul className="RecipeDetails__ingredients-container">
             {ingredientsArray.map((ingredient, index) => (
               <li
                 key={ uuid() }
@@ -154,7 +189,8 @@ function RecipeDetails({ match }) {
                 {measuresArray[index] && measuresArray[index][1]}
               </li>))}
           </ul>
-          <p data-testid="instructions">
+          <h1 className="RecipeDetails__instructions-title">Instructions</h1>
+          <p data-testid="instructions" className="RecipeDetails__instructions-container">
             {food[foodKeys[3]]}
           </p>
           {foodKeys[0] === 'strMeal' && (
@@ -163,49 +199,39 @@ function RecipeDetails({ match }) {
               title={ food[foodKeys[0]] }
               src={ food[foodKeys[4]] }
             />)}
-          <div className="recomendations-scroll">
-            <p>Recomendations:</p>
-            {' '}
+          <h1 className="RecipeDetails__recoommended-title">Recoommended</h1>
+          <div className="RecipeDetails__recoommended-container">
             {recomendations.map((recomendation, index) => (
               <div
                 key={ uuid() }
                 data-testid={ `${index}-recommendation-card` }
-                className="recomendation-card"
+                className="RecipeDetails__recomendation-card"
               >
+                <img
+                  alt={ recomendation[recomendKey[0]] }
+                  src={ recomendation[recomendKey[1]] }
+                  className="RecipeDetails__recomendation-img"
+                />
                 <p data-testid={ `${index}-recommendation-title` }>
-                  {recomendation[recomendKey]}
+                  {recomendation[recomendKey[0]]}
                 </p>
               </div>))}
           </div>
-          <div className="icons__container">
-            <input
-              type="image"
-              alt=""
-              data-testid="share-btn"
-              src={ shareIcon }
-              onClick={ handleShare }
-            />
-            <input
-              type="image"
-              alt=""
-              src={ favorited ? blackHeartIcon : whiteHeartIcon }
-              data-testid="favorite-btn"
-              onClick={ handleFavorite }
-            />
-            {linkCopied && <h3>Link copied!</h3>}
-          </div>
           {!done && (
-            <Link to={ `${pathname}/in-progress` }>
+            <Link
+              to={ `${pathname}/in-progress` }
+              className="RecipeDetails__start-button-link"
+            >
               <button
                 type="button"
                 data-testid="start-recipe-btn"
-                className="start-recipe-button"
+                className="RecipeDetails__start-button"
               >
-                {inProgress ? 'Continue Recipe' : 'Start Recipe'}
+                {inProgress ? 'Continue Recipe' : 'START RECIPE'}
               </button>
             </Link>)}
         </div>)}
-    </div>
+    </main>
   );
 }
 RecipeDetails.propTypes = {
