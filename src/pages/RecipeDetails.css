@@ -31,6 +31,14 @@
     width: 100%;
   }
 
+  .RecipeDetails__black-filter {
+    height: 20vh;
+    object-fit: cover;
+    opacity: 0.4;
+    position: absolute;
+    width: 100%;
+  }
+
   .RecipeDetails__title-container {
     align-items: center;
     display: flex;
@@ -45,6 +53,7 @@
   .RecipeDetails__recipe-category {
     color: var(--green-color);
     font-size: 20px;
+    font-weight: 700;
     margin-left: 10px;
     margin-top: 10px;
     position: absolute;
@@ -84,7 +93,7 @@
     width: 90%;
   }
 
-  .RecipeDetails__recoommended-container {
+  .RecipeDetails__recommended-container {
     border: solid white 1px;
     border-radius: 5px 5px 5px 5px;
     overflow-x: scroll;

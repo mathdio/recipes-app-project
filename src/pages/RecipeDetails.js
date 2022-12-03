@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackFilter from '../images/black-filter.jpg';
 import { fetchMeal, fetchDrink, fetchRecomendationsMeals,
   fetchRecomendationsDrinks } from '../services/fetchFunctions';
 
@@ -128,8 +129,9 @@ function RecipeDetails({ match }) {
       {ready && (
         <div className="RecipeDetails__recipe-container">
           <div className="RecipeDetails__img-container">
+            <img src={ blackFilter } alt="" className="RecipeDetails__black-filter" />
             <div className="RecipeDetails__title-container">
-              <p data-testid="recipe-title" className="RecipeDetails__recipe-title">
+              <p data-testid="recipe-title">
                 {food[foodKeys[0]]}
               </p>
             </div>
@@ -168,7 +170,6 @@ function RecipeDetails({ match }) {
                 onClick={ handleFavorite }
                 className="RecipeDetails__icons"
               />
-              {/* {linkCopied && <h3>Link copied!</h3>} */}
             </div>
             <img
               data-testid="recipe-photo"
@@ -199,8 +200,8 @@ function RecipeDetails({ match }) {
               title={ food[foodKeys[0]] }
               src={ food[foodKeys[4]] }
             />)}
-          <h1 className="RecipeDetails__recoommended-title">Recoommended</h1>
-          <div className="RecipeDetails__recoommended-container">
+          <h1 className="RecipeDetails__recommended-title">Recommended</h1>
+          <div className="RecipeDetails__recommended-container">
             {recomendations.map((recomendation, index) => (
               <div
                 key={ uuid() }
