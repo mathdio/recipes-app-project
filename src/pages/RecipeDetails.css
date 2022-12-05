@@ -42,11 +42,12 @@
   .RecipeDetails__title-container {
     align-items: center;
     display: flex;
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 700;
     height: 20vh;
     justify-content: center;
     position: absolute;
+    text-align: center;
     width: 100%;
   }
 
@@ -72,7 +73,7 @@
     width: 30px;
   }
 
-  .RecipeDetails__ingredients-title, .RecipeDetails__instructions-title, .RecipeDetails__recoommended-title  {
+  .RecipeDetails__ingredients-title, .RecipeDetails__instructions-title, .RecipeDetails__recommended-title  {
     font-weight: 700;
     margin-left: 20px;
     margin-top: 30px;

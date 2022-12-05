@@ -88,6 +88,14 @@ function RecipeInProgress({ match }) {
     }
   }, []);
 
+  // const handleCheckbox = (index) => {
+  //   const inProgressRecipes = localStorage.getItem('inProgressRecipes')
+  //     ? JSON.parse(localStorage.getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
+  //   if (Object.keys(inProgressRecipes).some((idRecipe) => idRecipe === id)) {
+
+  //   }
+  // };
+
   const handleShare = () => {
     setLinkCopied(true);
     copy(`${window.location.href}`);
@@ -184,6 +192,7 @@ function RecipeInProgress({ match }) {
                   id={ index }
                   key={ uuid() }
                   className="RecipeInProgress__ingredient-checkbox"
+                  onChange={ () => handleCheckbox(index) }
                 />
                 {ingredient[1]}
                 {' '}
