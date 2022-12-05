@@ -3,7 +3,7 @@ import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -11,6 +11,7 @@ import blackFilter from '../images/black-filter.jpg';
 import {
   fetchMeal, fetchDrink,
 } from '../services/fetchFunctions';
+import handleCheckbox from '../services/handleCheckbox';
 import './RecipeInProgress.css';
 
 const copy = require('clipboard-copy');
@@ -23,7 +24,7 @@ function RecipeInProgress({ match }) {
   const [ingredientsArray, setIngredientsArray] = useState([]);
   const [measuresArray, setMeasuresArray] = useState([]);
   const [ready, setReady] = useState(false);
-  const [inProgress, setInProgress] = useState(false);
+  const [inProgress, setInProgress] = useState([]);
   const [linkCopied, setLinkCopied] = useState(false);
   const [favorited, setFavorited] = useState(false);
   const [done, setDone] = useState(false);
@@ -58,17 +59,21 @@ function RecipeInProgress({ match }) {
   }, [pathname]);
 
   useEffect(() => {
+    const numberID = Number(id);
     const inProgressRecipes = localStorage.getItem('inProgressRecipes')
-      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
+      ? JSON.parse(localStorage
+        .getItem('inProgressRecipes')) : { drinks: {}, meals: { 52977: [] } };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     if (pathname.includes('/meals')) {
       const keysInProgress = Object.keys(inProgressRecipes.meals);
       if (keysInProgress.some((idInProgress) => idInProgress === id)) {
-        setInProgress(true);
+        // inProgressRecipes.meals[id].push(0, 1, 2);
+        setInProgress(inProgressRecipes.meals[id]);
       }
     } else {
       const keysInProgress = Object.keys(inProgressRecipes.drinks);
       if (keysInProgress.some((idInProgress) => idInProgress === id)) {
-        setInProgress(true);
+        setInProgress(inProgressRecipes.drinks[id]);
       }
     }
   }, []);
@@ -87,14 +92,6 @@ function RecipeInProgress({ match }) {
       setFavorited(true);
     }
   }, []);
-
-  // const handleCheckbox = (index) => {
-  //   const inProgressRecipes = localStorage.getItem('inProgressRecipes')
-  //     ? JSON.parse(localStorage.getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
-  //   if (Object.keys(inProgressRecipes).some((idRecipe) => idRecipe === id)) {
-
-  //   }
-  // };
 
   const handleShare = () => {
     setLinkCopied(true);
@@ -192,12 +189,14 @@ function RecipeInProgress({ match }) {
                   id={ index }
                   key={ uuid() }
                   className="RecipeInProgress__ingredient-checkbox"
-                  onChange={ () => handleCheckbox(index) }
+                  defaultChecked={ inProgress.some((ingIndex) => ingIndex === index) }
+                  onChange={ () => handleCheckbox(index, id) }
                 />
                 {ingredient[1]}
                 {' '}
                 {measuresArray[index] && measuresArray[index][1]}
-              </label>))}
+              </label>
+            ))}
           </ul>
           <h1 className="RecipeInProgress__instructions-title">Instructions</h1>
           <p
