@@ -59,15 +59,13 @@ function RecipeInProgress({ match }) {
   }, [pathname]);
 
   useEffect(() => {
-    const numberID = Number(id);
     const inProgressRecipes = localStorage.getItem('inProgressRecipes')
       ? JSON.parse(localStorage
-        .getItem('inProgressRecipes')) : { drinks: {}, meals: { 52977: [] } };
+        .getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
     if (pathname.includes('/meals')) {
       const keysInProgress = Object.keys(inProgressRecipes.meals);
       if (keysInProgress.some((idInProgress) => idInProgress === id)) {
-        // inProgressRecipes.meals[id].push(0, 1, 2);
         setInProgress(inProgressRecipes.meals[id]);
       }
     } else {
@@ -190,7 +188,7 @@ function RecipeInProgress({ match }) {
                   key={ uuid() }
                   className="RecipeInProgress__ingredient-checkbox"
                   defaultChecked={ inProgress.some((ingIndex) => ingIndex === index) }
-                  onChange={ () => handleCheckbox(index, id) }
+                  onChange={ (event) => handleCheckbox(event, index, id, pathname) }
                 />
                 {ingredient[1]}
                 {' '}
