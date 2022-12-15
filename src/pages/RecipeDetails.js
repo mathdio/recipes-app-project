@@ -64,17 +64,14 @@ function RecipeDetails({ match }) {
   }, [pathname]);
 
   useEffect(() => {
-    const inProgressRecipes = localStorage.getItem('inProgressRecipes')
-      ? JSON.parse(localStorage.getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
-    if (pathname.includes('/meals')) {
-      const keysInProgress = Object.keys(inProgressRecipes.meals);
-      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const apiType = pathname.includes('/meals') ? 'meals' : 'drinks';
+
+      if (inProgressRecipes[apiType][id].length > 0) {
         setInProgress(true);
-      }
-    } else {
-      const keysInProgress = Object.keys(inProgressRecipes.drinks);
-      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
-        setInProgress(true);
+      } else {
+        setInProgress(false);
       }
     }
   }, []);
@@ -228,7 +225,7 @@ function RecipeDetails({ match }) {
                 data-testid="start-recipe-btn"
                 className="RecipeDetails__start-button"
               >
-                {inProgress ? 'Continue Recipe' : 'START RECIPE'}
+                {inProgress ? 'CONTINUE RECIPE' : 'START RECIPE'}
               </button>
             </Link>)}
         </div>)}
