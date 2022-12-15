@@ -59,20 +59,14 @@ function RecipeInProgress({ match }) {
   }, [pathname]);
 
   useEffect(() => {
+    const apiType = pathname.includes('/meals') ? 'meals' : 'drinks';
     const inProgressRecipes = localStorage.getItem('inProgressRecipes')
       ? JSON.parse(localStorage
         .getItem('inProgressRecipes')) : { drinks: {}, meals: {} };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    if (pathname.includes('/meals')) {
-      const keysInProgress = Object.keys(inProgressRecipes.meals);
-      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
-        setInProgress(inProgressRecipes.meals[id]);
-      }
-    } else {
-      const keysInProgress = Object.keys(inProgressRecipes.drinks);
-      if (keysInProgress.some((idInProgress) => idInProgress === id)) {
-        setInProgress(inProgressRecipes.drinks[id]);
-      }
+    const keysInProgress = Object.keys(inProgressRecipes[apiType]);
+    if (keysInProgress.some((idInProgress) => idInProgress === id)) {
+      setInProgress(inProgressRecipes[apiType][id]);
     }
   }, []);
 
@@ -90,6 +84,15 @@ function RecipeInProgress({ match }) {
       setFavorited(true);
     }
   }, []);
+
+  // const finishRecipe = () => {
+  //   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  //   if (!doneRecipes.some((recipe) => recipe.id === id)) {
+  //     const newDone = {
+  //       id,
+  //     };
+  //   }
+  // };
 
   const handleShare = () => {
     setLinkCopied(true);
