@@ -1,4 +1,5 @@
 const handleCheckbox = ({ target }, index, id, pathname) => {
+  const apiType = pathname.includes('/meals') ? 'meals' : 'drinks';
   const { checked } = target;
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
@@ -20,18 +21,17 @@ const handleCheckbox = ({ target }, index, id, pathname) => {
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
   }
 
-  if (pathname.includes('/meals')
-  && checked
-  && !inProgressRecipes.meals[id].some((usedIng) => usedIng === index)) {
-    inProgressRecipes.meals[id].push(index);
+  if (checked
+  && !inProgressRecipes[apiType][id].some((usedIng) => usedIng === index)) {
+    inProgressRecipes[apiType][id].push(index);
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    console.log('teste');
-  } else if (pathname.includes('/meals')
-  && !checked
-  && inProgressRecipes.meals[id].some((usedIng) => usedIng === index)) {
-    const newUsedIng = inProgressRecipes.meals[id].filter((usedIng) => usedIng !== index);
-    inProgressRecipes.meals = {
-      ...inProgressRecipes.meals,
+    console.log(pathname);
+  } else if (!checked
+  && inProgressRecipes[apiType][id].some((usedIng) => usedIng === index)) {
+    const newUsedIng = inProgressRecipes[apiType][id]
+      .filter((usedIng) => usedIng !== index);
+    inProgressRecipes[apiType] = {
+      ...inProgressRecipes[apiType],
       [id]: newUsedIng,
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
