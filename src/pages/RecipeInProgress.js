@@ -16,7 +16,7 @@ import './RecipeInProgress.css';
 
 const copy = require('clipboard-copy');
 
-function RecipeInProgress({ match }) {
+function RecipeInProgress({ match, history }) {
   const { params: { id } } = match;
   const { pathname } = useLocation();
   const [food, setFood] = useState();
@@ -27,7 +27,6 @@ function RecipeInProgress({ match }) {
   const [inProgress, setInProgress] = useState([]);
   const [linkCopied, setLinkCopied] = useState(false);
   const [favorited, setFavorited] = useState(false);
-  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (linkCopied) {
@@ -71,12 +70,6 @@ function RecipeInProgress({ match }) {
   }, []);
 
   useEffect(() => {
-    const doneRecipes = localStorage.getItem('doneRecipes')
-      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
-    const isDone = doneRecipes.some((recipe) => recipe.id === id);
-    if (isDone) {
-      setDone(true);
-    }
     const favoriteRecipes = localStorage.getItem('favoriteRecipes')
       ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
     const isFavorited = favoriteRecipes.some((recipe) => recipe.id === id);
@@ -85,14 +78,28 @@ function RecipeInProgress({ match }) {
     }
   }, []);
 
-  // const finishRecipe = () => {
-  //   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  //   if (!doneRecipes.some((recipe) => recipe.id === id)) {
-  //     const newDone = {
-  //       id,
-  //     };
-  //   }
-  // };
+  const finishRecipe = () => {
+    const date = new Date();
+    const currentDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    const apiType = pathname.includes('/meals') ? 'meals' : 'drinks';
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (!doneRecipes[apiType].some((recipe) => recipe.id === id)) {
+      const newDone = {
+        id,
+        type: apiType,
+        nationality: food.strArea ? food.strArea : '',
+        category: food.strCategory ? food.strCategory : '',
+        alcoholicOrNot: food.strAlcoholic ? food.strAlcoholic : '',
+        name: food.strMeal ? food.strMeal : food.strDrink,
+        image: food.strMealThumb ? food.strMealThumb : food.strDrinkThumb,
+        doneDate: currentDate,
+        tags: food.strTags ? food.strTags.split(',') : '',
+      };
+      doneRecipes[apiType].push(newDone);
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+    }
+    history.push('/done-recipes');
+  };
 
   const handleShare = () => {
     setLinkCopied(true);
@@ -137,7 +144,7 @@ function RecipeInProgress({ match }) {
             {foodKeys[0] === 'strDrink' ? (
               <p
                 data-testid="recipe-category"
-                RecipeInProgress__recipe-category
+                className="RecipeInProgress__recipe-category"
               >
                 Drink:
                 {' '}
@@ -216,6 +223,7 @@ function RecipeInProgress({ match }) {
             type="button"
             data-testid="finish-recipe-btn"
             className="RecipeInProgress__finish-button"
+            onClick={ () => finishRecipe() }
           >
             FINISH RECIPE
           </button>

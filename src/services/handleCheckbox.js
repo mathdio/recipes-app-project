@@ -3,8 +3,6 @@ const handleCheckbox = ({ target }, index, id, pathname) => {
   const { checked } = target;
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
-  console.log(checked);
-
   if (pathname.includes('/meals')
   && !Object.keys(inProgressRecipes.meals).some((key) => key === id)) {
     inProgressRecipes.meals = {
@@ -25,7 +23,6 @@ const handleCheckbox = ({ target }, index, id, pathname) => {
   && !inProgressRecipes[apiType][id].some((usedIng) => usedIng === index)) {
     inProgressRecipes[apiType][id].push(index);
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-    console.log(pathname);
   } else if (!checked
   && inProgressRecipes[apiType][id].some((usedIng) => usedIng === index)) {
     const newUsedIng = inProgressRecipes[apiType][id]
@@ -36,8 +33,6 @@ const handleCheckbox = ({ target }, index, id, pathname) => {
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
   }
-
-  console.log(inProgressRecipes);
 };
 
 export default handleCheckbox;

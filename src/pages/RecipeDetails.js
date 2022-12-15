@@ -68,7 +68,7 @@ function RecipeDetails({ match }) {
       const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
       const apiType = pathname.includes('/meals') ? 'meals' : 'drinks';
 
-      if (inProgressRecipes[apiType][id].length > 0) {
+      if (inProgressRecipes[apiType][id] && inProgressRecipes[apiType][id].length > 0) {
         setInProgress(true);
       } else {
         setInProgress(false);
@@ -78,11 +78,8 @@ function RecipeDetails({ match }) {
 
   useEffect(() => {
     const doneRecipes = localStorage.getItem('doneRecipes')
-      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
-    const isDone = doneRecipes.some((recipe) => recipe.id === id);
-    if (isDone) {
-      setDone(true);
-    }
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : { meals: [], drinks: [] };
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     const favoriteRecipes = localStorage.getItem('favoriteRecipes')
       ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
     const isFavorited = favoriteRecipes.some((recipe) => recipe.id === id);
