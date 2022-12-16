@@ -26,6 +26,7 @@ function Login({ history }) {
           <label htmlFor="email" className="Login__label-container">
             E-mail
             <input
+              type="text"
               className="input"
               data-testid="email-input"
               name="email"
@@ -34,18 +35,10 @@ function Login({ history }) {
               onChange={ ({ target }) => setEmail(target.value) }
             />
           </label>
-          {/* <input
-          data-testid="email-input"
-          placeholder="E-mail"
-          className="Login__label-container"
-          name="email"
-          id="email"
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-        /> */}
           <label htmlFor="password" className="Login__label-container">
             Senha
             <input
+              type="password"
               data-testid="password-input"
               name="password"
               id="password"
@@ -53,15 +46,6 @@ function Login({ history }) {
               onChange={ ({ target }) => setPassword(target.value) }
             />
           </label>
-          {/* <input
-          data-testid="password-input"
-          placeholder="Password"
-          className="input__box"
-          name="password"
-          id="password"
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
-        /> */}
           <button
             className="Login__button"
             type="button"

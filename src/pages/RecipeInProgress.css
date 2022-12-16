@@ -1,5 +1,6 @@
 @media screen and (min-width: 360px) {
   :root {
+    --darker-green-color: #30443B;
     --green-color: #316A50;
     --gray-color: #d1d0ce;
   }
@@ -102,7 +103,7 @@
   }
 
   .RecipeInProgress__finish-button {
-    background-color: #316A50;
+    background-color: var(--green-color);
     border: 0px;
     border-radius: 5px;
     color: white;
@@ -111,5 +112,9 @@
     margin-bottom: 15px;
     margin-top: 15px;
     width: 90%;
+  }
+  
+  .RecipeInProgress__finish-button:disabled {
+    background-color: var(--darker-green-color);
   }
 }

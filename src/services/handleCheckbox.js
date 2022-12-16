@@ -1,4 +1,12 @@
-const handleCheckbox = ({ target }, index, id, pathname) => {
+const handleCheckbox = (
+  { target },
+  index,
+  id,
+  { pathname,
+    setInProgress,
+    boxesAmount,
+    setFinishDisabled },
+) => {
   const apiType = pathname.includes('/meals') ? 'meals' : 'drinks';
   const { checked } = target;
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -23,6 +31,7 @@ const handleCheckbox = ({ target }, index, id, pathname) => {
   && !inProgressRecipes[apiType][id].some((usedIng) => usedIng === index)) {
     inProgressRecipes[apiType][id].push(index);
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    setInProgress(inProgressRecipes[apiType][id]);
   } else if (!checked
   && inProgressRecipes[apiType][id].some((usedIng) => usedIng === index)) {
     const newUsedIng = inProgressRecipes[apiType][id]
@@ -32,6 +41,13 @@ const handleCheckbox = ({ target }, index, id, pathname) => {
       [id]: newUsedIng,
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    setInProgress(inProgressRecipes[apiType][id]);
+  }
+
+  if (boxesAmount === inProgressRecipes[apiType][id].length) {
+    setFinishDisabled(false);
+  } else {
+    setFinishDisabled(true);
   }
 };
 

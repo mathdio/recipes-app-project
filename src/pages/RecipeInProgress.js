@@ -27,6 +27,7 @@ function RecipeInProgress({ match, history }) {
   const [inProgress, setInProgress] = useState([]);
   const [linkCopied, setLinkCopied] = useState(false);
   const [favorited, setFavorited] = useState(false);
+  const [finishDisabled, setFinishDisabled] = useState(true);
 
   useEffect(() => {
     if (linkCopied) {
@@ -198,7 +199,15 @@ function RecipeInProgress({ match, history }) {
                   key={ uuid() }
                   className="RecipeInProgress__ingredient-checkbox"
                   defaultChecked={ inProgress.some((ingIndex) => ingIndex === index) }
-                  onChange={ (event) => handleCheckbox(event, index, id, pathname) }
+                  onChange={ (event) => handleCheckbox(
+                    event,
+                    index,
+                    id,
+                    { pathname,
+                      setInProgress,
+                      boxesAmount: foodKeys[5],
+                      setFinishDisabled },
+                  ) }
                 />
                 {ingredient[1]}
                 {' '}
@@ -224,6 +233,7 @@ function RecipeInProgress({ match, history }) {
             data-testid="finish-recipe-btn"
             className="RecipeInProgress__finish-button"
             onClick={ () => finishRecipe() }
+            disabled={ finishDisabled }
           >
             FINISH RECIPE
           </button>
