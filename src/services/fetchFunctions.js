@@ -48,7 +48,7 @@ const fetchDrink = async ({
   setIngredientsArray(ingredients);
   setMeasuresArray(measures);
   setFoodKeys(['strDrink', 'strDrinkThumb', 'strCategory',
-    'strInstructions', 'strYoutube']);
+    'strInstructions', 'strYoutube', ingredients.length]);
   setReady(true);
 };
 
