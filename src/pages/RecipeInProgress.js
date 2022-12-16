@@ -3,7 +3,6 @@ import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import './RecipeDetails.css';
-// import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -67,6 +66,9 @@ function RecipeInProgress({ match, history }) {
     const keysInProgress = Object.keys(inProgressRecipes[apiType]);
     if (keysInProgress.some((idInProgress) => idInProgress === id)) {
       setInProgress(inProgressRecipes[apiType][id]);
+    }
+    if (inProgress.length === ingredientsArray.length) {
+      setFinishDisabled(false);
     }
   }, []);
 
@@ -147,8 +149,6 @@ function RecipeInProgress({ match, history }) {
                 data-testid="recipe-category"
                 className="RecipeInProgress__recipe-category"
               >
-                Drink:
-                {' '}
                 {food.strAlcoholic}
               </p>
             ) : (
@@ -156,8 +156,6 @@ function RecipeInProgress({ match, history }) {
                 data-testid="recipe-category"
                 className="RecipeInProgress__recipe-category"
               >
-                Category:
-                {' '}
                 {food[foodKeys[2]]}
               </p>)}
             <div className="RecipeInProgress__icons-container">
