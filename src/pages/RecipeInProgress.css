@@ -3,6 +3,7 @@
     --darker-green-color: #30443B;
     --green-color: #316A50;
     --gray-color: #d1d0ce;
+    --lighter-green-color: #2F9A6A;
   }
 
   .RecipeInProgress__main-container {
@@ -53,7 +54,7 @@
   }
 
   .RecipeInProgress__recipe-category {
-    color: var(--green-color);
+    color: var(--lighter-green-color);
     font-size: 20px;
     font-weight: 700;
     margin-left: 10px;

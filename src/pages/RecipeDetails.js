@@ -134,8 +134,6 @@ function RecipeDetails({ match }) {
                 data-testid="recipe-category"
                 className="RecipeDetails__recipe-category"
               >
-                Drink:
-                {' '}
                 {food.strAlcoholic}
               </p>
             ) : (
@@ -143,8 +141,6 @@ function RecipeDetails({ match }) {
                 data-testid="recipe-category"
                 className="RecipeDetails__recipe-category"
               >
-                Category:
-                {' '}
                 { food[foodKeys[2]] }
               </p>)}
             <div className="RecipeDetails__icons-container">

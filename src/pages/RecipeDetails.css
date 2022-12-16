@@ -1,6 +1,7 @@
 @media screen and (min-width: 360px) {
   :root {
     --green-color: #316A50;
+    --lighter-green-color: #2F9A6A;
   }
 
   .RecipeDetails__main-container {
@@ -52,7 +53,7 @@
   }
 
   .RecipeDetails__recipe-category {
-    color: var(--green-color);
+    color: var(--lighter-green-color);
     font-size: 20px;
     font-weight: 700;
     margin-left: 10px;
