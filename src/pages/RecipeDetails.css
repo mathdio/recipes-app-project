@@ -1,6 +1,7 @@
 @media screen and (min-width: 360px) {
   :root {
     --green-color: #316A50;
+    --lighter-green-color: #2F9A6A;
   }
 
   .RecipeDetails__main-container {
@@ -31,20 +32,30 @@
     width: 100%;
   }
 
-  .RecipeDetails__title-container {
-    align-items: center;
-    display: flex;
-    font-size: 40px;
-    font-weight: 700;
+  .RecipeDetails__black-filter {
     height: 20vh;
-    justify-content: center;
+    object-fit: cover;
+    opacity: 0.4;
     position: absolute;
     width: 100%;
   }
 
-  .RecipeDetails__recipe-category {
-    color: var(--green-color);
+  .RecipeDetails__title-container {
+    align-items: center;
+    display: flex;
     font-size: 20px;
+    font-weight: 700;
+    height: 20vh;
+    justify-content: center;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+  }
+
+  .RecipeDetails__recipe-category {
+    color: var(--lighter-green-color);
+    font-size: 20px;
+    font-weight: 700;
     margin-left: 10px;
     margin-top: 10px;
     position: absolute;
@@ -63,7 +74,7 @@
     width: 30px;
   }
 
-  .RecipeDetails__ingredients-title, .RecipeDetails__instructions-title, .RecipeDetails__recoommended-title  {
+  .RecipeDetails__ingredients-title, .RecipeDetails__instructions-title, .RecipeDetails__recommended-title  {
     font-weight: 700;
     margin-left: 20px;
     margin-top: 30px;
@@ -84,7 +95,7 @@
     width: 90%;
   }
 
-  .RecipeDetails__recoommended-container {
+  .RecipeDetails__recommended-container {
     border: solid white 1px;
     border-radius: 5px 5px 5px 5px;
     overflow-x: scroll;

@@ -12,14 +12,18 @@ const fetchMeal = async ({
   const entries = Object.entries(data.meals[0]);
   const ingredients = entries
     .filter((key) => key[0].includes('strIngredient'))
-    .filter((ingredient) => ingredient[1] !== '' && ingredient[1] !== null);
+    .filter((ingredient) => ingredient[1] !== ''
+      && ingredient[1] !== null
+      && ingredient[1] !== ' ');
   const measures = entries
     .filter((key) => key[0].includes('strMeasure'))
-    .filter((ingredient) => ingredient[1] !== '' && ingredient[1] !== null);
+    .filter((measure) => measure[1] !== ''
+      && measure[1] !== null
+      && measure[1] !== ' ');
   setIngredientsArray(ingredients);
   setMeasuresArray(measures);
   setFoodKeys(['strMeal', 'strMealThumb', 'strCategory',
-    'strInstructions', 'strYoutube']);
+    'strInstructions', 'strYoutube', ingredients.length]);
   setReady(true);
 };
 
@@ -44,7 +48,7 @@ const fetchDrink = async ({
   setIngredientsArray(ingredients);
   setMeasuresArray(measures);
   setFoodKeys(['strDrink', 'strDrinkThumb', 'strCategory',
-    'strInstructions', 'strYoutube']);
+    'strInstructions', 'strYoutube', ingredients.length]);
   setReady(true);
 };
 
