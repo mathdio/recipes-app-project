@@ -12,6 +12,9 @@ const copy = require('clipboard-copy');
 function DoneRecipes({ title }) {
   // const history = useHistory();
   const [done, setDone] = useState([]);
+  // const [allDone, setAllDone] = useState(true);
+  // const [mealsDone, setMealsDone] = useState(false);
+  // const [drinksDone, setDrinksDone] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
 
   useEffect(() => {
@@ -34,6 +37,19 @@ function DoneRecipes({ title }) {
     setDone(concatDone);
   }, []);
 
+  const filterDone = (type) => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
+    if (type === 'meals') {
+      setDone(doneRecipes.meals);
+    } else if (type === 'drinks') {
+      setDone(doneRecipes.drinks);
+    } else {
+      const concatDone = doneRecipes.drinks.concat(doneRecipes.meals);
+      setDone(concatDone);
+    }
+  };
+
   return (
     <div>
       <Header
@@ -45,7 +61,7 @@ function DoneRecipes({ title }) {
         <div className="DoneRecipes__filter-btn-container">
           <button
             className="DoneRecipes__filter-button"
-            onClick={ () => filterDoneRecipes('') }
+            onClick={ () => filterDone('') }
             type="button"
             data-testid="filter-by-all-btn"
           >
@@ -53,7 +69,7 @@ function DoneRecipes({ title }) {
           </button>
           <button
             className="DoneRecipes__filter-button"
-            onClick={ () => filterDoneRecipes('meal') }
+            onClick={ () => filterDone('meals') }
             type="button"
             data-testid="filter-by-meal-btn"
           >
@@ -61,7 +77,7 @@ function DoneRecipes({ title }) {
           </button>
           <button
             className="DoneRecipes__filter-button"
-            onClick={ () => filterDoneRecipes('drink') }
+            onClick={ () => filterDone('drinks') }
             type="button"
             data-testid="filter-by-drink-btn"
           >
