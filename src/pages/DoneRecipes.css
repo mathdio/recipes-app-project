@@ -57,6 +57,10 @@
     margin-bottom: 0;
   }
 
+  .DoneRecipes__name-link {
+    color: black;
+  }
+
   .DoneRecipes__name-recipe {
     font-size: 1rem;
     font-weight: 700;

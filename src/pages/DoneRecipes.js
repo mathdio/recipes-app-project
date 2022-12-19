@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import uuid from 'react-uuid';
-// import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
-// import copy from 'clipboard-copy';
+import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import './DoneRecipes.css';
 
-const copy = require('clipboard-copy');
-
 function DoneRecipes({ title }) {
-  // const history = useHistory();
   const [done, setDone] = useState([]);
-  // const [allDone, setAllDone] = useState(true);
-  // const [mealsDone, setMealsDone] = useState(false);
-  // const [drinksDone, setDrinksDone] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (linkCopied) {
@@ -35,9 +30,11 @@ function DoneRecipes({ title }) {
 
     const concatDone = doneRecipes.drinks.concat(doneRecipes.meals);
     setDone(concatDone);
+    setIsLoading(false);
   }, []);
 
   const filterDone = (type) => {
+    setIsLoading(true);
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
     if (type === 'meals') {
@@ -48,6 +45,7 @@ function DoneRecipes({ title }) {
       const concatDone = doneRecipes.drinks.concat(doneRecipes.meals);
       setDone(concatDone);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -85,74 +83,91 @@ function DoneRecipes({ title }) {
           </button>
         </div>
         <div className="DoneRecipes__done-recipes-container">
-          {done.map((recipe, index) => (
-            <div key={ uuid() } className="DoneRecipes__card-recipe">
-              <img
-                className="DoneRecipes__img-recipe"
-                alt={ recipe.name }
-                src={ recipe.image }
-                data-testid={ `${index}-horizontal-image` }
-              />
-              <div className="DoneRecipes__info-recipe">
-                <p
-                  data-testid={ `${index}-horizontal-name` }
-                  className="DoneRecipes__name-recipe"
+          {isLoading
+            ? (<h1>Loading...</h1>)
+            : done.map((recipe, index) => (
+              <div key={ uuid() } className="DoneRecipes__card-recipe">
+                <Link
+                  key={ uuid() }
+                  to={ `/${recipe.type}s/${recipe.id}` }
                 >
-                  {recipe.name}
-                </p>
-                {recipe.type === 'meal'
-                  ? (
+                  <img
+                    className="DoneRecipes__img-recipe"
+                    alt={ recipe.name }
+                    src={ recipe.image }
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                </Link>
+                <div className="DoneRecipes__info-recipe">
+                  <Link
+                    key={ uuid() }
+                    to={ `/${recipe.type}s/${recipe.id}` }
+                    className="DoneRecipes__name-link"
+                  >
                     <p
-                      data-testid={ `${index}-horizontal-top-text` }
-                      className="DoneRecipes__category-recipe"
+                      data-testid={ `${index}-horizontal-name` }
+                      className="DoneRecipes__name-recipe"
                     >
-                      {recipe.nationality}
-                      {' '}
-                      •
-                      {' '}
-                      {recipe.category}
-                    </p>)
-                  : (
-                    <p
-                      data-testid={ `${index}-horizontal-top-text` }
-                      className="DoneRecipes__category-recipe"
-                    >
-                      {recipe.alcoholicOrNot}
-                    </p>) }
-                <p
-                  data-testid={ `${index}-horizontal-done-date` }
-                  className="DoneRecipes__date-recipe"
-                >
-                  Done in:
-                  {' '}
-                  {recipe.doneDate}
-                </p>
-                <div className="DoneRecipes__tags-container">
-                  {recipe.tags.map((tag, tagIndex) => tagIndex < 2 && (
-                    <p
-                      key={ uuid() }
-                      data-testid={ `${index}-${tag}-horizontal-tag` }
-                      className="DoneRecipes__tag-recipe"
-                    >
-                      {tag}
+                      {recipe.name}
                     </p>
-                  ))}
+                  </Link>
+                  {recipe.type === 'meal'
+                    ? (
+                      <p
+                        data-testid={ `${index}-horizontal-top-text` }
+                        className="DoneRecipes__category-recipe"
+                      >
+                        {recipe.nationality}
+                        {' '}
+                        •
+                        {' '}
+                        {recipe.category}
+                      </p>)
+                    : (
+                      <p
+                        data-testid={ `${index}-horizontal-top-text` }
+                        className="DoneRecipes__category-recipe"
+                      >
+                        {recipe.alcoholicOrNot}
+                      </p>) }
+                  <p
+                    data-testid={ `${index}-horizontal-done-date` }
+                    className="DoneRecipes__date-recipe"
+                  >
+                    Done in:
+                    {' '}
+                    {recipe.doneDate}
+                  </p>
+                  <div className="DoneRecipes__tags-container">
+                    {recipe.tags.map((tag, tagIndex) => tagIndex < 2 && (
+                      <p
+                        key={ uuid() }
+                        data-testid={ `${index}-${tag}-horizontal-tag` }
+                        className="DoneRecipes__tag-recipe"
+                      >
+                        {tag}
+                      </p>
+                    ))}
+                  </div>
                 </div>
+                <input
+                  type="image"
+                  alt=""
+                  src={ shareIcon }
+                  className="DoneRecipes__share-icon"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  onClick={ () => handleShare(recipe.type, recipe.id) }
+                />
               </div>
-              <input
-                type="image"
-                alt=""
-                src={ shareIcon }
-                className="DoneRecipes__share-icon"
-                data-testid={ `${index}-horizontal-share-btn` }
-                onClick={ () => handleShare(recipe.type, recipe.id) }
-              />
-            </div>
-          ))}
+            ))}
         </div>
       </main>
     </div>
   );
 }
+
+DoneRecipes.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
 
 export default DoneRecipes;
