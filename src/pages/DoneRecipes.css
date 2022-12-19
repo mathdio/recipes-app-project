@@ -48,8 +48,9 @@
   }
 
   .DoneRecipes__info-recipe {
-    margin: 0.313rem;
+    margin: 0.625rem;
     max-height: 100%;
+    max-width: 50%;
   }
 
   .DoneRecipes__info-recipe p {
@@ -74,11 +75,17 @@
     margin-top: 10px;
   }
 
+  .DoneRecipes__tags-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .DoneRecipes__tag-recipe {
     background-color: var(--DoneRecipes-lighter-gray-color);
     border-radius: 0.625rem;
     font-size: 0.75rem;
     font-weight: 400;
+    margin-right: 5px;
     padding-left: 5px;
     padding-right: 5px;
     width: max-content;

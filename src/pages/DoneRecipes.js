@@ -7,13 +7,28 @@ import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import './DoneRecipes.css';
 
+const copy = require('clipboard-copy');
+
 function DoneRecipes({ title }) {
   // const history = useHistory();
   const [done, setDone] = useState([]);
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  useEffect(() => {
+    if (linkCopied) {
+      alert('Link copied!');
+      setLinkCopied(false);
+    }
+  }, [linkCopied]);
+
+  const handleShare = (recipeType, recipeId) => {
+    setLinkCopied(true);
+    copy(`${window.location.host}/${recipeType}s/${recipeId}`);
+  };
 
   useEffect(() => {
     const doneRecipes = localStorage.getItem('doneRecipes')
-      && JSON.parse(localStorage.getItem('doneRecipes'));
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : { meals: [], drinks: [] };
 
     const concatDone = doneRecipes.drinks.concat(doneRecipes.meals);
     setDone(concatDone);
@@ -69,12 +84,25 @@ function DoneRecipes({ title }) {
                 >
                   {recipe.name}
                 </p>
-                <p
-                  data-testid={ `${index}-horizontal-top-text` }
-                  className="DoneRecipes__category-recipe"
-                >
-                  {recipe.category}
-                </p>
+                {recipe.type === 'meal'
+                  ? (
+                    <p
+                      data-testid={ `${index}-horizontal-top-text` }
+                      className="DoneRecipes__category-recipe"
+                    >
+                      {recipe.nationality}
+                      {' '}
+                      •
+                      {' '}
+                      {recipe.category}
+                    </p>)
+                  : (
+                    <p
+                      data-testid={ `${index}-horizontal-top-text` }
+                      className="DoneRecipes__category-recipe"
+                    >
+                      {recipe.alcoholicOrNot}
+                    </p>) }
                 <p
                   data-testid={ `${index}-horizontal-done-date` }
                   className="DoneRecipes__date-recipe"
@@ -83,15 +111,17 @@ function DoneRecipes({ title }) {
                   {' '}
                   {recipe.doneDate}
                 </p>
-                {recipe.tags.map((tag) => (
-                  <p
-                    key={ uuid() }
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                    className="DoneRecipes__tag-recipe"
-                  >
-                    {tag}
-                  </p>
-                ))}
+                <div className="DoneRecipes__tags-container">
+                  {recipe.tags.map((tag, tagIndex) => tagIndex < 2 && (
+                    <p
+                      key={ uuid() }
+                      data-testid={ `${index}-${tag}-horizontal-tag` }
+                      className="DoneRecipes__tag-recipe"
+                    >
+                      {tag}
+                    </p>
+                  ))}
+                </div>
               </div>
               <input
                 type="image"
@@ -99,6 +129,7 @@ function DoneRecipes({ title }) {
                 src={ shareIcon }
                 className="DoneRecipes__share-icon"
                 data-testid={ `${index}-horizontal-share-btn` }
+                onClick={ () => handleShare(recipe.type, recipe.id) }
               />
             </div>
           ))}

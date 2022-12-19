@@ -89,7 +89,7 @@ function RecipeInProgress({ match, history }) {
     if (!doneRecipes[apiType].some((recipe) => recipe.id === id)) {
       const newDone = {
         id,
-        type: apiType,
+        type: apiType.split('').slice(0, apiType.length - 1).join(''),
         nationality: food.strArea ? food.strArea : '',
         category: food.strCategory ? food.strCategory : '',
         alcoholicOrNot: food.strAlcoholic ? food.strAlcoholic : '',
