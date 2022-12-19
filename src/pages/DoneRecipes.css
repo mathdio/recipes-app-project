@@ -1,0 +1,25 @@
+@media screen and (min-width: 360px) {
+  :root {
+    --green-color: #316A50;
+    --lighter-green-color: #2F9A6A;
+  }
+
+  .DoneRecipes__main-container {
+    width: 100%;
+  }
+
+  .DoneRecipes__filter-btn-container {
+    border: red solid 1px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  .DoneRecipes__filter-button {
+    border-radius: 4rem;
+    height: 4rem;
+    margin-bottom: 0.6rem;
+    margin-top: 0.6rem;
+    width: 4rem;
+  }
+}
