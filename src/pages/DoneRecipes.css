@@ -1,5 +1,7 @@
 @media screen and (min-width: 360px) {
   :root {
+    --DoneRecipes-gray-color: #4C505A;
+    --DoneRecipes-lighter-gray-color: #D9D9D9;
     --green-color: #316A50;
     --lighter-green-color: #2F9A6A;
   }
@@ -9,17 +11,85 @@
   }
 
   .DoneRecipes__filter-btn-container {
-    border: red solid 1px;
     display: flex;
     justify-content: space-evenly;
     width: 100%;
   }
 
   .DoneRecipes__filter-button {
+    border: 1.8px solid #316A50;
     border-radius: 4rem;
     height: 4rem;
-    margin-bottom: 0.6rem;
-    margin-top: 0.6rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
     width: 4rem;
+  }
+
+  .DoneRecipes__done-recipes-container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .DoneRecipes__card-recipe {
+    background-color: white;
+    border-radius: 0.3rem;
+    display: flex;
+    height: 8.4rem;
+    margin-bottom: 1.25rem;
+    width: 90%;
+    -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+  }
+
+  .DoneRecipes__img-recipe {
+    border-radius: 0.3rem 0 0 0.3rem;
+    height: 100%;
+  }
+
+  .DoneRecipes__info-recipe {
+    margin: 0.313rem;
+    max-height: 100%;
+  }
+
+  .DoneRecipes__info-recipe p {
+    margin-bottom: 0;
+  }
+
+  .DoneRecipes__name-recipe {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .DoneRecipes__category-recipe {
+    color: var(--DoneRecipes-gray-color);
+    font-size: 0.87rem;
+    font-weight: 300;
+  }
+
+  .DoneRecipes__date-recipe {
+    font-size: 0.87rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .DoneRecipes__tag-recipe {
+    background-color: var(--DoneRecipes-lighter-gray-color);
+    border-radius: 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: max-content;
+  }
+
+  .DoneRecipes__share-icon {
+    height: 1.25rem;
+    margin-right: 7%;
+    margin-top: 0.3rem;
+    position: absolute;
+    right: 0;
+    width: 1.25rem;
   }
 }

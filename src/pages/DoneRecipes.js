@@ -4,7 +4,7 @@ import uuid from 'react-uuid';
 // import { useHistory } from 'react-router-dom';
 // import copy from 'clipboard-copy';
 import Header from '../components/Header';
-// import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 import './DoneRecipes.css';
 
 function DoneRecipes({ title }) {
@@ -57,9 +57,48 @@ function DoneRecipes({ title }) {
           {done.map((recipe, index) => (
             <div key={ uuid() } className="DoneRecipes__card-recipe">
               <img
+                className="DoneRecipes__img-recipe"
                 alt={ recipe.name }
                 src={ recipe.image }
                 data-testid={ `${index}-horizontal-image` }
+              />
+              <div className="DoneRecipes__info-recipe">
+                <p
+                  data-testid={ `${index}-horizontal-name` }
+                  className="DoneRecipes__name-recipe"
+                >
+                  {recipe.name}
+                </p>
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                  className="DoneRecipes__category-recipe"
+                >
+                  {recipe.category}
+                </p>
+                <p
+                  data-testid={ `${index}-horizontal-done-date` }
+                  className="DoneRecipes__date-recipe"
+                >
+                  Done in:
+                  {' '}
+                  {recipe.doneDate}
+                </p>
+                {recipe.tags.map((tag) => (
+                  <p
+                    key={ uuid() }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                    className="DoneRecipes__tag-recipe"
+                  >
+                    {tag}
+                  </p>
+                ))}
+              </div>
+              <input
+                type="image"
+                alt=""
+                src={ shareIcon }
+                className="DoneRecipes__share-icon"
+                data-testid={ `${index}-horizontal-share-btn` }
               />
             </div>
           ))}

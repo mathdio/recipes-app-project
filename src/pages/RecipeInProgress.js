@@ -96,7 +96,7 @@ function RecipeInProgress({ match, history }) {
         name: food.strMeal ? food.strMeal : food.strDrink,
         image: food.strMealThumb ? food.strMealThumb : food.strDrinkThumb,
         doneDate: currentDate,
-        tags: food.strTags ? food.strTags.split(',') : '',
+        tags: food.strTags ? food.strTags.split(',') : [],
       };
       doneRecipes[apiType].push(newDone);
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
