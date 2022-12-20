@@ -89,14 +89,14 @@ function RecipeInProgress({ match, history }) {
     if (!doneRecipes[apiType].some((recipe) => recipe.id === id)) {
       const newDone = {
         id,
-        type: apiType,
+        type: apiType.split('').slice(0, apiType.length - 1).join(''),
         nationality: food.strArea ? food.strArea : '',
         category: food.strCategory ? food.strCategory : '',
         alcoholicOrNot: food.strAlcoholic ? food.strAlcoholic : '',
         name: food.strMeal ? food.strMeal : food.strDrink,
         image: food.strMealThumb ? food.strMealThumb : food.strDrinkThumb,
         doneDate: currentDate,
-        tags: food.strTags ? food.strTags.split(',') : '',
+        tags: food.strTags ? food.strTags.split(',') : [],
       };
       doneRecipes[apiType].push(newDone);
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));

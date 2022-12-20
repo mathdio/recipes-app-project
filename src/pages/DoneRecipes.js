@@ -1,56 +1,51 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
-
-const recipesDone = [
-  {
-    id: '52771',
-    type: 'meal',
-    nationality: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'http://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: ['Pasta', 'Curry'],
-  },
-  {
-    id: '178319',
-    type: 'drink',
-    nationality: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Aquamarine',
-    image: 'http://www.thecocktaildb.com/images/media/drinks/zvsre31572902738.jpg',
-    doneDate: '23/06/2020',
-    tags: [],
-  },
-
-];
+import './DoneRecipes.css';
 
 function DoneRecipes({ title }) {
-  const history = useHistory();
-  const [doneRecipes, setDoneRecipes] = useState([]);
-  const [recipeCurrent, setRecipeCurrent] = useState('');
-  const [message, setMessage] = useState(false);
+  const [done, setDone] = useState([]);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    localStorage.setItem('done-recipes', JSON.stringify(recipesDone));
-    // tests
+    if (linkCopied) {
+      alert('Link copied!');
+      setLinkCopied(false);
+    }
+  }, [linkCopied]);
 
-    const recipes = JSON.parse(localStorage.getItem('done-recipes'));
-    console.log(recipes);
-    setDoneRecipes(recipes);
+  const handleShare = (recipeType, recipeId) => {
+    setLinkCopied(true);
+    copy(`${window.location.host}/${recipeType}s/${recipeId}`);
+  };
+
+  useEffect(() => {
+    const doneRecipes = localStorage.getItem('doneRecipes')
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : { meals: [], drinks: [] };
+
+    const concatDone = doneRecipes.drinks.concat(doneRecipes.meals);
+    setDone(concatDone);
+    setIsLoading(false);
   }, []);
 
-  const filterDoneRecipes = (recipes) => setRecipeCurrent(recipes);
+  const filterDone = (type) => {
+    setIsLoading(true);
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
-  const redirect = (recipe, id) => {
-    const path = `/${recipe}/${id}`;
-    history.push(path);
+    if (type === 'meals') {
+      setDone(doneRecipes.meals);
+    } else if (type === 'drinks') {
+      setDone(doneRecipes.drinks);
+    } else {
+      const concatDone = doneRecipes.drinks.concat(doneRecipes.meals);
+      setDone(concatDone);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -60,94 +55,113 @@ function DoneRecipes({ title }) {
         profile
         search={ false }
       />
-      <button
-        onClick={ () => filterDoneRecipes('') }
-        type="button"
-        data-testid="filter-by-all-btn"
-      >
-        All
-      </button>
-      <button
-        onClick={ () => filterDoneRecipes('meal') }
-        type="button"
-        data-testid="filter-by-meal-btn"
-      >
-        Meals
-      </button>
-      <button
-        onClick={ () => filterDoneRecipes('drink') }
-        type="button"
-        data-testid="filter-by-drink-btn"
-      >
-        Drinks
-      </button>
-
-      {
-        doneRecipes.filter((item) => item.type.includes(recipeCurrent))
-          .map((item, index) => (
-            <div key={ item.id }>
-              <label htmlFor="meal">
+      <main className="DoneRecipes__main-container">
+        <div className="DoneRecipes__filter-btn-container">
+          <button
+            className="DoneRecipes__filter-button"
+            onClick={ () => filterDone('') }
+            type="button"
+            data-testid="filter-by-all-btn"
+          >
+            All
+          </button>
+          <button
+            className="DoneRecipes__filter-button"
+            onClick={ () => filterDone('meals') }
+            type="button"
+            data-testid="filter-by-meal-btn"
+          >
+            Meals
+          </button>
+          <button
+            className="DoneRecipes__filter-button"
+            onClick={ () => filterDone('drinks') }
+            type="button"
+            data-testid="filter-by-drink-btn"
+          >
+            Drinks
+          </button>
+        </div>
+        <div className="DoneRecipes__done-recipes-container">
+          {isLoading
+            ? (<h1>Loading...</h1>)
+            : done.map((recipe, index) => (
+              <div key={ uuid() } className="DoneRecipes__card-recipe">
+                <Link
+                  key={ uuid() }
+                  to={ `/${recipe.type}s/${recipe.id}` }
+                >
+                  <img
+                    className="DoneRecipes__img-recipe"
+                    alt={ recipe.name }
+                    src={ recipe.image }
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                </Link>
+                <div className="DoneRecipes__info-recipe">
+                  <Link
+                    key={ uuid() }
+                    to={ `/${recipe.type}s/${recipe.id}` }
+                    className="DoneRecipes__name-link"
+                  >
+                    <p
+                      data-testid={ `${index}-horizontal-name` }
+                      className="DoneRecipes__name-recipe"
+                    >
+                      {recipe.name}
+                    </p>
+                  </Link>
+                  {recipe.type === 'meal'
+                    ? (
+                      <p
+                        data-testid={ `${index}-horizontal-top-text` }
+                        className="DoneRecipes__category-recipe"
+                      >
+                        {recipe.nationality}
+                        {' '}
+                        •
+                        {' '}
+                        {recipe.category}
+                      </p>)
+                    : (
+                      <p
+                        data-testid={ `${index}-horizontal-top-text` }
+                        className="DoneRecipes__category-recipe"
+                      >
+                        {recipe.alcoholicOrNot}
+                      </p>) }
+                  <p
+                    data-testid={ `${index}-horizontal-done-date` }
+                    className="DoneRecipes__date-recipe"
+                  >
+                    Done in:
+                    {' '}
+                    {recipe.doneDate}
+                  </p>
+                  <div className="DoneRecipes__tags-container">
+                    {recipe.tags.map((tag, tagIndex) => tagIndex < 2 && (
+                      <p
+                        key={ uuid() }
+                        data-testid={ `${index}-${tag}-horizontal-tag` }
+                        className="DoneRecipes__tag-recipe"
+                      >
+                        {tag}
+                      </p>
+                    ))}
+                  </div>
+                </div>
                 <input
                   type="image"
-                  onClick={ item.type === 'meal'
-                    ? () => redirect('meals', item.id)
-                    : () => redirect('drinks', item.id) }
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ item.image }
-                  alt={ item.name }
-                  width="200"
-                />
-              </label>
-              <h4
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { item.type === 'meal'
-                  ? `${item.nationality} - ${item.category}`
-                  : item.alcoholicOrNot}
-              </h4>
-              <button
-                type="button"
-                onClick={ item.type === 'meal'
-                  ? () => redirect('meals', item.id)
-                  : () => redirect('drinks', item.id) }
-                data-testid={ `${index}-horizontal-name` }
-              >
-                {item.name}
-              </button>
-              <h4 data-testid={ `${index}-horizontal-done-date` }>
-                {item.doneDate}
-              </h4>
-              <label
-                htmlFor="image"
-              >
-                <input
-                  type="image"
-                  onClick={ () => {
-                    setMessage(true);
-                    if (item.type === 'meal') {
-                      copy(`http://localhost:3000/meals/${item.id}`);
-                    } else {
-                      copy(`http://localhost:3000/drinks/${item.id}`);
-                    }
-                  } }
-                  data-testid={ `${index}-horizontal-share-btn` }
+                  alt=""
                   src={ shareIcon }
-                  alt={ item.name }
-                  width="20"
+                  className="DoneRecipes__share-icon"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  onClick={ () => handleShare(recipe.type, recipe.id) }
                 />
-              </label>
-
-              {message && <p>Link copied!</p>}
-
-              {item.tags.map((tag) => (
-                <li key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
-                  {tag}
-                </li>
-              ))}
-
-            </div>
-          ))
-      }
+              </div>
+            ))}
+        </div>
+      </main>
     </div>
   );
 }

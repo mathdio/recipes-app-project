@@ -22,17 +22,21 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
                 alt={ meal.strMeal }
                 data-testid={ `${index}-card-img` }
               />
-              <p
-                data-testid={ `${index}-card-name` }
-                className="CardRecipes__title"
-              >
-                {meal.strMeal}
-              </p>
-              <p>
-                Nationality:
-                {' '}
-                {meal.strArea}
-              </p>
+              <div className="CardRecipes__card-text">
+                <p
+                  data-testid={ `${index}-card-name` }
+                  className="CardRecipes__title"
+                >
+                  {meal.strMeal}
+                </p>
+                {meal.strArea && (
+                  <p className="CardRecipes__info">
+                    Nationality:
+                    {' '}
+                    {meal.strArea}
+                  </p>
+                )}
+              </div>
             </div>
           </Link>
         ))}
@@ -52,17 +56,21 @@ export default function CardRecipes({ dataMeals, dataDrinks }) {
                 alt={ drink.strDrink }
                 data-testid={ `${index}-card-img` }
               />
-              <p
-                data-testid={ `${index}-card-name` }
-                className="CardRecipes__title"
-              >
-                {drink.strDrink}
-              </p>
-              <p>
-                Cup:
-                {' '}
-                {drink.strGlass}
-              </p>
+              <div className="CardRecipes__card-text">
+                <p
+                  data-testid={ `${index}-card-name` }
+                  className="CardRecipes__title"
+                >
+                  {drink.strDrink}
+                </p>
+                {drink.strGlass && (
+                  <p className="CardRecipes__info">
+                    Cup:
+                    {' '}
+                    {drink.strGlass}
+                  </p>
+                )}
+              </div>
             </div>
           </Link>
         ))}

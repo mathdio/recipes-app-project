@@ -19,6 +19,7 @@ function Recipes({ title, history }) {
   const [firstRecipes, setfirstRecipes] = useState([]);
   const [firstRender, setFirstRender] = useState(true);
   const [showFirstRecipes, setShowFirstRecipes] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (resultsData.length === 1) {
@@ -40,12 +41,14 @@ function Recipes({ title, history }) {
       getDataMeals();
       getMealsCatogories();
       setShowFirstRecipes(false);
+      setIsLoading(false);
     } else if (pathname === '/drinks') {
       setfirstRecipes([]);
       setFirstRender(true);
       getDataDrinks();
       getDrinksCatogories();
       setShowFirstRecipes(false);
+      setIsLoading(false);
     }
   }, [pathname]);
 
@@ -76,7 +79,8 @@ function Recipes({ title, history }) {
             </div>
           ))}
         </div>)}
-      {firstRender
+      {isLoading ? <h1>Loading...</h1>
+        : firstRender
         && (title === 'Meals' ? (
           <div>
             <CardCategory
