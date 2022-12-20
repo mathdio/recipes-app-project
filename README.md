@@ -1,4 +1,3 @@
-# :construction: README em construção ! :construction:
 # 👩‍🍳 A recipes app developed as a [Trybe](https://www.betrybe.com/) Project
 
 ## 💻 About this project
@@ -20,7 +19,7 @@ This app's database uses 2 distincts APIs, one for meals and another one for dri
 - [Anderson Reges](https://github.com/Anderson-Reges)
 - [Gustavo Cunha](https://github.com/llGustavoCunhall)
 
-## Getting started
+## 🏁 Getting started
 To run the app, follow the next steps:
 
 #### ⬇️ Dependencies
@@ -29,7 +28,7 @@ To run the app, follow the next steps:
 npm install
 ``` 
 
-####  Running the Aplication
+#### 👨‍💻 Running the Aplication
 
 ```
 npm start
