@@ -12,23 +12,25 @@ This app's database uses 2 distincts APIs, one for meals and another one for dri
 <a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" /></a>
 
 ## 🎯 Used skills
-- state management with React's Context API
+- state management with React's Context API;
+- use of React Hooks: useState, useContext, useEffect and custom Hooks.
 
+## 👥 Developed in group with:
+- [André Gross](https://github.com/andreugross)
+- [Anderson Reges](https://github.com/Anderson-Reges)
+- [Gustavo Cunha](https://github.com/llGustavoCunhall)
 
+## Getting started
+To run the app, follow the next steps:
 
+#### ⬇️ Dependencies
 
-## Project developed in group with:
-[André Gross](https://github.com/andreugross)
+```
+npm install
+``` 
 
-[Anderson Reges](https://github.com/Anderson-Reges)
+####  Running the Aplication
 
-[Gustavo Cunha](https://github.com/llGustavoCunhall)
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+```
+npm start
+``` 

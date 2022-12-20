@@ -6,17 +6,13 @@
     "node": "16"
   },
   "dependencies": {
-    "bootstrap": "^5.2.0",
     "clipboard-copy": "^4.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
-    "react-uuid": "^2.0.0",
-    "uuid": "^9.0.0"
+    "react-uuid": "^2.0.0"
   },
   "scripts": {
     "cy": "env CY_CLI=true cypress run",
