@@ -14,14 +14,25 @@
     justify-self: center;
     margin-bottom: 15px;
     max-width: 90%;
-    min-height: 275px;
+    min-height: 14.688rem;
     min-width: 90%;
     text-align: center;
     -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
   }
 
+  .CardRecipes__card-text {
+    margin: 0.625rem;
+  }
+
   .CardRecipes__title {
+    font-size: 0.875rem;
     font-weight: 700;
+    margin-bottom: 0;
+  }
+
+  .CardRecipes__info {
+    font-size: 0.75rem;
+    margin-bottom: 0;
   }
 
   a:link {
