@@ -26,7 +26,6 @@ function RecipeDetails({ match }) {
   const [inProgress, setInProgress] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
   const [favorited, setFavorited] = useState(false);
-  const [done, setDone] = useState(false);
 
   useEffect(() => {
     if (linkCopied) {
@@ -208,19 +207,18 @@ function RecipeDetails({ match }) {
                 </p>
               </div>))}
           </div>
-          {!done && (
-            <Link
-              to={ `${pathname}/in-progress` }
-              className="RecipeDetails__start-button-link"
+          <Link
+            to={ `${pathname}/in-progress` }
+            className="RecipeDetails__start-button-link"
+          >
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="RecipeDetails__start-button"
             >
-              <button
-                type="button"
-                data-testid="start-recipe-btn"
-                className="RecipeDetails__start-button"
-              >
-                {inProgress ? 'CONTINUE RECIPE' : 'START RECIPE'}
-              </button>
-            </Link>)}
+              {inProgress ? 'CONTINUE RECIPE' : 'START RECIPE'}
+            </button>
+          </Link>
         </div>)}
     </main>
   );
