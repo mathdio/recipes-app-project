@@ -1,4 +1,15 @@
 # :construction: README em construção ! :construction:
+# 👩‍🍳 A recipes app developed as a [Trybe](https://www.betrybe.com/) Project
+
+## 💻 About this project
+In this application, the user can see, search, filter, favorite and keep up with the progress of recipes' preparation.
+This application database uses 2 distincts APIs, one for meals and another one for drinks.
+
+## 🛠️ Built with
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" /></a>
+
+
+
 ## Project developed in group with:
 [André Gross](https://github.com/andreugross)
 
