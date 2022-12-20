@@ -7,6 +7,8 @@ function Provider({ children }) {
   const [dataDrinks, setDataDrinks] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidPassword, setInvalidPassword] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState('true');
   const [searchRecipe, setSearchRecipe] = useState('');
   const [filterValue, setFilterValue] = useState('');
@@ -64,6 +66,8 @@ function Provider({ children }) {
     setEmail,
     password,
     setPassword,
+    invalidEmail,
+    invalidPassword,
     submitDisabled,
     setSubmitDisabled,
     searchRecipe,
@@ -78,7 +82,7 @@ function Provider({ children }) {
     getDataDrinks,
   }), [mealsCategories, drinksCategories, getDrinksCatogories,
     getMealsCatogories, dataMeals, dataDrinks,
-    email, password, submitDisabled, searchRecipe,
+    email, password, invalidEmail, invalidPassword, submitDisabled, searchRecipe,
     filterValue, resultKey, resultsData, getDataMeals, getDataDrinks]);
 
   useEffect(() => {
@@ -88,6 +92,17 @@ function Provider({ children }) {
       setSubmitDisabled(false);
     } else {
       setSubmitDisabled(true);
+    }
+    // condições aqui para enviar estado
+    if (email.length > 0 && !RegEx.test(email)) {
+      setInvalidEmail(true);
+    } else {
+      setInvalidEmail(false);
+    }
+    if (password.length > 0 && password.length <= passwordLength) {
+      setInvalidPassword(true);
+    } else {
+      setInvalidPassword(false);
     }
   }, [email, getDataDrinks,
     getDataMeals, getDrinksCatogories,
