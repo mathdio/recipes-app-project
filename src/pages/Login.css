@@ -80,4 +80,10 @@
   .Login__button:enabled {
     background-color: var(--green-color);
   }
+
+  .Login__form-warning {
+    color: red;
+    font-size: 12px;
+    font-weight: 400;
+  }
 }

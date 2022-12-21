@@ -5,9 +5,11 @@ import './Login.css';
 import logo from '../images/default_transparent_1000x1000.png';
 
 function Login({ history }) {
-  const { email, setEmail, password, setPassword, submitDisabled } = useContext(Context);
+  const { email, setEmail,
+    password, setPassword, submitDisabled,
+    invalidEmail, invalidPassword } = useContext(Context);
 
-  const handleClickSubmit = async () => {
+  const handleClickSubmit = () => {
     localStorage.setItem('user', email);
     history.push('/meals');
   };
@@ -34,6 +36,8 @@ function Login({ history }) {
               value={ email }
               onChange={ ({ target }) => setEmail(target.value) }
             />
+            {invalidEmail
+          && <p className="Login__form-warning">E-mail&apos;s format must be valid.</p>}
           </label>
           <label htmlFor="password" className="Login__label-container">
             Senha
@@ -45,6 +49,10 @@ function Login({ history }) {
               value={ password }
               onChange={ ({ target }) => setPassword(target.value) }
             />
+            {invalidPassword && (
+              <p className="Login__form-warning">
+                Password must have at least 7 characters.
+              </p>)}
           </label>
           <button
             className="Login__button"
