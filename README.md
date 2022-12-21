@@ -11,6 +11,7 @@ This app's database uses 2 distincts APIs, one for meals and another one for dri
 <a href="https://www.w3.org/TR/CSS/#css" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" /></a>
 
 ## 🎯 Used skills
+- React Function Components
 - state management with React's Context API;
 - use of React Hooks: useState, useContext, useEffect and custom Hooks.
 
