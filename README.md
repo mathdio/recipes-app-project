@@ -22,13 +22,13 @@ This app's database uses 2 distincts APIs, one for meals and another one for dri
 ## 🏁 Getting started
 To run the app, follow the next steps:
 
-#### ⬇️ Dependencies
+#### ⬇️ Installing the dependencies
 
 ```
 npm install
 ``` 
 
-#### 👨‍💻 Running the Aplication
+#### 👨‍💻 Running the application
 
 ```
 npm start
