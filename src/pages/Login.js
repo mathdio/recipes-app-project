@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../context/Context';
 import './Login.css';
@@ -8,6 +8,22 @@ function Login({ history }) {
   const { email, setEmail,
     password, setPassword, submitDisabled,
     invalidEmail, invalidPassword } = useContext(Context);
+
+  const [passwordClasses, setPasswordClasses] = useState('');
+  const [buttonClasses, setButtonClasses] = useState('');
+
+  useEffect(() => {
+    if (invalidEmail) {
+      setPasswordClasses('Login__label-container Login__password-label');
+    } else {
+      setPasswordClasses('Login__label-container');
+    }
+    if (invalidPassword) {
+      setButtonClasses('Login__button Login__btn-invalid-warnings');
+    } else {
+      setButtonClasses('Login__button');
+    }
+  }, [invalidEmail, invalidPassword]);
 
   const handleClickSubmit = () => {
     localStorage.setItem('user', email);
@@ -25,7 +41,10 @@ function Login({ history }) {
       </div>
       <div className="Login__form-container">
         <form className="Login__form">
-          <label htmlFor="email" className="Login__label-container">
+          <label
+            htmlFor="email"
+            className="Login__label-container Login__email-label"
+          >
             E-mail
             <input
               type="text"
@@ -39,7 +58,10 @@ function Login({ history }) {
             {invalidEmail
           && <p className="Login__form-warning">E-mail&apos;s format must be valid.</p>}
           </label>
-          <label htmlFor="password" className="Login__label-container">
+          <label
+            htmlFor="password"
+            className={ passwordClasses }
+          >
             Senha
             <input
               type="password"
@@ -55,7 +77,7 @@ function Login({ history }) {
               </p>)}
           </label>
           <button
-            className="Login__button"
+            className={ buttonClasses }
             type="button"
             data-testid="login-submit-btn"
             disabled={ submitDisabled }
