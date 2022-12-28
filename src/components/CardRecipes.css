@@ -22,6 +22,7 @@
 
   .CardRecipes__card-text {
     margin: 0.625rem;
+    border: red solid 1px;
   }
 
   .CardRecipes__title {
@@ -41,7 +42,6 @@
 
   .CardRecipes__card img {
     border-radius: 10px 10px 0px 0px;
-    margin-bottom: 10px;
     width: 100%;
   }
 
