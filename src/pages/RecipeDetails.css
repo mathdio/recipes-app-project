@@ -123,11 +123,18 @@
     background-color: white;
     border-radius: 5px 5px 5px 5px;
     display: inline-block;
-    height: 80%;
+    height: 85%;
     margin: 4%;
     text-align: center;
     width: 40%;
     -webkit-box-shadow: -2px 18px 23px -23px rgb(0 0 0);
+  }
+
+  .RecipeDetails__recomendation-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
   }
 
   .RecipeDetails__recomendation-img {

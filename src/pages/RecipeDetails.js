@@ -197,14 +197,16 @@ function RecipeDetails({ match }) {
                 data-testid={ `${index}-recommendation-card` }
                 className="RecipeDetails__recomendation-card"
               >
-                <img
-                  alt={ recomendation[recomendKey[0]] }
-                  src={ recomendation[recomendKey[1]] }
-                  className="RecipeDetails__recomendation-img"
-                />
-                <p data-testid={ `${index}-recommendation-title` }>
-                  {recomendation[recomendKey[0]]}
-                </p>
+                <div className="RecipeDetails__recomendation-container">
+                  <img
+                    alt={ recomendation[recomendKey[0]] }
+                    src={ recomendation[recomendKey[1]] }
+                    className="RecipeDetails__recomendation-img"
+                  />
+                  <p data-testid={ `${index}-recommendation-title` }>
+                    {recomendation[recomendKey[0]]}
+                  </p>
+                </div>
               </div>))}
           </div>
           <Link

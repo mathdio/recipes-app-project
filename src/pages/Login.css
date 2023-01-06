@@ -20,7 +20,7 @@
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: center;
-    height: 50%;
+    height: 40%;
     width: 100%;
   }
   .Login__form-container {
