@@ -5,6 +5,8 @@ In this application, the user can see, search, filter, favorite and keep up with
 
 This app's database uses 2 distincts APIs, one for meals and another one for drinks, and the layout focus on mobile devices, thus the app was developed for smaller screens (recommmended resolution: 360 x 800).
 
+Application's deploy: https://recipes-app-project-orpin.vercel.app
+
 ## 🛠️ Built with
 <a href="https://reactjs.org/docs/getting-started.html" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /></a>
 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" /></a>
