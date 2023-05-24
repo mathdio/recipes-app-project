@@ -1,4 +1,5 @@
-# 👩‍🍳 A recipes app developed as a [Trybe](https://www.betrybe.com/) Project
+# 👩‍🍳 Recipes App 
+A recipes-mobile-app-like webpage developed as a [Trybe](https://www.betrybe.com/) Project
 
 ## 💻 About this project
 In this application, the user can see, search, filter, favorite and keep up with the progress of recipes' preparation.
